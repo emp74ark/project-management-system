@@ -1,5 +1,8 @@
 {
   "editor.fontFamily": "'Hack','Droid Sans Mono', 'monospace', monospace",
   "editor.minimap.autohide": true,
-  "window.autoDetectColorScheme": false
+  "window.autoDetectColorScheme": false,
+  "cSpell.words": [
+    "devkit"
+  ]
 }
