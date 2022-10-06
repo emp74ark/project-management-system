@@ -1,2 +1,25 @@
-<h1>Common layout</h1>
-<router-outlet></router-outlet>
+<header>
+  <h1>Project management</h1>
+  <nav>
+    <ul>
+      <li><a 
+        [routerLink]="['/']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        >Home</a></li>
+      <li><a 
+        [routerLink]="['about']"
+        routerLinkActive="active"
+        >About</a></li>
+      <li><a [routerLink]="['user/login']">Login</a></li>
+      <li><a [routerLink]="['user/signup']">Sign up</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+<footer>
+  <span class="footer__item">Github</span>
+  <span class="footer__item">UpSkill Me!</span>
+</footer>
