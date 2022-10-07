@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -8,25 +8,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
 
-  form!: FormGroup
+  LogInForm!: FormGroup
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this._createForm()
+   }
+  
+  ngOnInit() {}
 
-  ngOnInit() {
-    this.form = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.email
-      ]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(6)
-      ])
+  private _createForm() {
+    this.LogInForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]]
     })
   }
 
   submit() {
-    if (this.form.invalid) {
+    if (this.LogInForm.invalid) {
       return
     }
   }
