@@ -8,6 +8,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { DashboardPageComponent } from './user/dashboard-page/dashboard-page.component';
 import { ProjectPageComponent } from './user/project-page/project-page.component';
 import { CommonLayoutComponent } from './shared/components/common-layout/common-layout.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CommonLayoutComponent } from './shared/components/common-layout/common-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

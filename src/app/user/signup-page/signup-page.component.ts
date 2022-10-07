@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/shared/interfaces';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-signup-page',
@@ -11,7 +14,9 @@ export class SignupPageComponent implements OnInit {
   SignUpForm!: FormGroup
   
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
     ) {
       this._createForm()
     }
@@ -29,5 +34,14 @@ export class SignupPageComponent implements OnInit {
     if (this.SignUpForm.invalid) {
       return
     }
+
+    const user: User = {
+      email: this.SignUpForm.value.email,
+      password: this.SignUpForm.value.password
+    }
+
+    this.auth.signup(user).subscribe(() => {
+      this.router.navigate(['dashboard'])
+    })
   }
 }
