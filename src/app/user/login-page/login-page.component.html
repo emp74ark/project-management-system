@@ -1,20 +1,46 @@
 <h2>Login</h2>
 <div class="login">
-  <form>
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-control">
       <label for="login__email">Email</label>
-      <input type="email" id="login__email" placeholder="Email">
-      <div class="validation">
-        <small>errors description</small>
+      <input
+        type="email" 
+        id="login__email" 
+        placeholder="Email"
+        formControlName="email">
+        <div
+          *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+          class="validation">
+          <small *ngIf="form.get('email')?.errors?.['required']">
+            Email is required
+          </small>
+          <small *ngIf="form.get('email')?.errors?.['email']">
+            Type correct email address
+          </small>
+        </div>
       </div>
-    </div>
     <div class="form-control">
       <label for="login__password">Password</label>
-      <input type="password" id="login__password" placeholder="Password">
-      <div class="validation">
-        <small>errors description</small>
+      <input
+        type="password" 
+        id="login__password" 
+        placeholder="Password"
+        formControlName="password">
+        <div
+          *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+          class="validation"
+          >
+          <small *ngIf="form.get('password')?.errors?.['required']">
+            Password is required.
+          </small>
+          <small *ngIf="form.get('password')?.errors?.['minlength']">
+            Minimum password length is 6 symbols.
+          </small>
+        </div>
       </div>
-    </div>
-    <button type="submit">Login</button>
+    <button 
+      type="submit"
+      [disabled]="form.invalid"
+      >Login</button>
   </form>
 </div>
