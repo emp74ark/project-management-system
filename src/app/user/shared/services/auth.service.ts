@@ -33,8 +33,8 @@ export class AuthService {
       .pipe(
         tap<any>(
           response => {
-            localStorage.setItem('item', response.token)
             this.authenticated = true
+            localStorage.setItem('item', response.token)
           }
         ),
         catchError<any, any>(this.errorHandle.bind(this))
