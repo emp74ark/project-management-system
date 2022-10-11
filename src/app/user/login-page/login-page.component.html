@@ -42,5 +42,8 @@
       type="submit"
       [disabled]="LogInForm.invalid"
       >Login</button>
-  </form>
+    <div class="form-control">
+      <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+    </div>
+    </form>
 </div>

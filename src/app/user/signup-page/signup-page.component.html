@@ -64,7 +64,11 @@
     <button 
       type="submit"
       [disabled]="SignUpForm.invalid"
-      >Sing up</button>
+      >Sing up
+    </button>
+    <div class="form-control">
+      <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+    </div>
   </form>
   <div *ngIf="displayGreeting">
     <div class="modal__wrapper">

@@ -16,7 +16,7 @@ export class SignupPageComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    public auth: AuthService,
     private router: Router
     ) {
       this._createForm()
