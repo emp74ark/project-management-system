@@ -11,7 +11,8 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class SignupPageComponent implements OnInit {
   
-  SignUpForm!: FormGroup
+  SignUpForm!: FormGroup;
+  displayGreeting: boolean;
   
   constructor(
     private fb: FormBuilder,
@@ -19,15 +20,22 @@ export class SignupPageComponent implements OnInit {
     private router: Router
     ) {
       this._createForm()
+      this.displayGreeting = false;
     }
   
   ngOnInit(): void {}
   
   private _createForm() {
     this.SignUpForm = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(2)]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(6)]]
     })
+  }
+  
+  hideGreeting(){
+    this.displayGreeting = false;
+    this.router.navigate(['/user', 'login'])
   }
   
   submit() {
@@ -36,12 +44,13 @@ export class SignupPageComponent implements OnInit {
     }
 
     const user: User = {
-      email: this.SignUpForm.value.email,
+      name: this.SignUpForm.value.name,
+      login: this.SignUpForm.value.email,
       password: this.SignUpForm.value.password
     }
 
     this.auth.signup(user).subscribe(() => {
-      this.router.navigate(['dashboard'])
+      this.displayGreeting = true;
     })
   }
 }

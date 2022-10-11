@@ -2,45 +2,76 @@
 <div class="login">
   <form [formGroup]="SignUpForm" (ngSubmit)="submit()">
     <div class="form-control">
-      <label for="login__email">Email</label>
+      <label for="signup__name">
+        Name
+      </label>
+      <input type="text" 
+        id="signup__name" 
+        placeholder="Name" 
+        formControlName="name">
+      <div
+        *ngIf="SignUpForm.get('name')?.touched && SignUpForm.get('name')?.invalid"
+        class="validation">
+        <small *ngIf="SignUpForm.get('name')?.errors?.['required']">
+          Name is required
+        </small>
+        <small *ngIf="SignUpForm.get('name')?.errors?.['minlength']">
+          Your name is too short
+        </small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="signup__email">
+        Email
+      </label>
       <input
         type="email" 
-        id="login__email" 
+        id="signup__email" 
         placeholder="Email"
         formControlName="email">
-        <div
-          *ngIf="SignUpForm.get('email')?.touched && SignUpForm.get('email')?.invalid"
-          class="validation">
-          <small *ngIf="SignUpForm.get('email')?.errors?.['required']">
-            Email is required
-          </small>
-          <small *ngIf="SignUpForm.get('email')?.errors?.['email']">
-            Type correct email address
-          </small>
-        </div>
+      <div
+        *ngIf="SignUpForm.get('email')?.touched && SignUpForm.get('email')?.invalid"
+        class="validation">
+        <small *ngIf="SignUpForm.get('email')?.errors?.['required']">
+          Email is required
+        </small>
+        <small *ngIf="SignUpForm.get('email')?.errors?.['email']">
+          Type correct email address
+        </small>
       </div>
+    </div>
     <div class="form-control">
-      <label for="login__password">Password</label>
+      <label for="signup__password">
+        Password
+      </label>
       <input
         type="password" 
-        id="login__password" 
+        id="signup__password" 
         placeholder="Password"
         formControlName="password">
-        <div
-          *ngIf="SignUpForm.get('password')?.touched && SignUpForm.get('password')?.invalid"
-          class="validation"
-          >
-          <small *ngIf="SignUpForm.get('password')?.errors?.['required']">
-            Password is required.
-          </small>
-          <small *ngIf="SignUpForm.get('password')?.errors?.['minlength']">
-            Minimum password length is 6 symbols.
-          </small>
-        </div>
+      <div
+        *ngIf="SignUpForm.get('password')?.touched && SignUpForm.get('password')?.invalid"
+        class="validation"
+        >
+        <small *ngIf="SignUpForm.get('password')?.errors?.['required']">
+          Password is required.
+        </small>
+        <small *ngIf="SignUpForm.get('password')?.errors?.['minlength']">
+          Minimum password length is 6 symbols.
+        </small>
       </div>
+    </div>
     <button 
       type="submit"
       [disabled]="SignUpForm.invalid"
-      >Login</button>
+      >Sing up</button>
   </form>
+  <div *ngIf="displayGreeting">
+    <div class="modal__wrapper">
+    </div>
+    <div class="modal__message">
+      <h2>Registration successful!</h2>
+      <button (click)="hideGreeting()">Close</button>
+    </div>
+  </div>
 </div>

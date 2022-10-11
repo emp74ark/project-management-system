@@ -36,11 +36,11 @@ export class LoginPageComponent implements OnInit {
     }
 
     const user: User = {
-      email: this.LogInForm.value.email,
+      login: this.LogInForm.value.email,
       password: this.LogInForm.value.password
     }
     this.auth.login(user).subscribe(() => {
-      this.router.navigate(['dashboard'])
+      this.router.navigate(['/user', 'dashboard'])
     })
   }
 }

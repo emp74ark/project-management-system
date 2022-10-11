@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
-import { User } from "src/app/shared/interfaces";
+import { AuthResponse, User } from "src/app/shared/interfaces";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -9,37 +10,31 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
-  authenticated!: false
+  authenticated = false
 
-  get token(): string {
-    return '' // TODO: get token from server & check it
-  }
-
-  private setToken() {
-    // TODO: modify token
-  }
-
-  login(user: User): Observable<any> {
-    return this.http.post('', user)
+  login(user: User): Observable<AuthResponse> { // FIXME check types
+    return this.http.post(`${environment.base_url}/signin`, user)
       .pipe(
         tap<any>(
-          data => console.log(data)
+          response => {
+            localStorage.setItem('item', response.token)
+            this.authenticated = true
+          }
         )
       )
    }
 
-  logout() {}
-
-  signup(user: User): Observable<any> {
-    return this.http.post('', user)
-      .pipe(
-        tap<any>(
-          data => console.log(data)
-        )
-      )
+  logout() {
+    localStorage.clear()
+    this.authenticated = false
   }
 
-  authenticatedToggle(): boolean {
-    return !this.authenticated //TODO: replace by !!this.token
+  signup(user: User): Observable<any> {
+    return this.http.post(`${environment.base_url}/signup`, user)
+      .pipe(
+        tap<any>(
+          data => console.log(data) // FIXME: for debug only
+        )
+      )
   }
 }
