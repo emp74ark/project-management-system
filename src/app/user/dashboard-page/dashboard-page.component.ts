@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/shared/interfaces';
+import { Board } from 'src/app/shared/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardService } from '../shared/services/boards.service';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class DashboardPageComponent implements OnInit {
   
   DashboardForm!: FormGroup;
-  boardList$!: Observable<Project[]>
+  boardList$!: Observable<Board[]>
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +39,7 @@ export class DashboardPageComponent implements OnInit {
       return
     }
 
-    const project: Project = {
+    const project: Board = {
       title: this.DashboardForm.value.title,
       description: this.DashboardForm.value.description
     }

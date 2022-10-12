@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Project } from "src/app/shared/interfaces";
+import { Board } from "src/app/shared/interfaces";
 import { map, tap } from 'rxjs'
 import { environment } from "src/environments/environment";
 
@@ -14,8 +14,8 @@ export class BoardService {
       'Authorization': `Bearer ${localStorage.getItem('token')}` // TODO: move to auth.interceptor.ts
     })
 
-  create(project: Project) {
-    return this.http.post<Project>(`${environment.base_url}/boards`, project, {headers: this.headers})
+  create(project: Board) {
+    return this.http.post<Board>(`${environment.base_url}/boards`, project, {headers: this.headers})
       .pipe(
         map((response) => {
           return {

@@ -1,14 +1,14 @@
 <h2>Dashboard</h2>
 <form [formGroup]="DashboardForm" (ngSubmit)="create()">
   <div class="form-control">
-    <h3>Create new project</h3>
+    <h3>Create new board</h3>
     <label for="dashboard__new">
       Title
     </label>
     <input 
       type="text" 
       id="dashboard__new-title" 
-      placeholder="New project title"
+      placeholder="New board title"
       formControlName="title">
     <small *ngIf="DashboardForm.get('title')?.touched && DashboardForm.get('title')?.errors?.['required']">
       Title is required
@@ -21,7 +21,7 @@
     <input 
       type="text" 
       id="dashboard__new-description" 
-      placeholder="New project description"
+      placeholder="New board description"
       formControlName="description">
   </div>
   <button type="submit" [disabled]="DashboardForm.invalid">Create</button>
