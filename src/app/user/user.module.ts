@@ -1,7 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { NgModule, Provider } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { AuthInterceptor } from "../shared/auth.interceptor";
 import { SharedModule } from "../shared/shared.module";
 
 import { DashboardPageComponent } from "./dashboard-page/dashboard-page.component";
@@ -11,6 +13,12 @@ import { UserLayoutComponent } from "./shared/components/user-layout/user-layout
 import { AuthGuard } from "./shared/services/auth.guard";
 import { BoardService } from "./shared/services/boards.service";
 import { SignupPageComponent } from './signup-page/signup-page.component';
+
+const AUTH_INTERCEPTOR: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+}
 
 @NgModule({
   declarations: [
@@ -40,7 +48,8 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
   exports: [RouterModule],
   providers: [
     AuthGuard, 
-    BoardService
+    BoardService,
+    AUTH_INTERCEPTOR
   ],
 })
 

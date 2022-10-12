@@ -15,7 +15,6 @@ export class DashboardPageComponent implements OnInit {
   DashboardForm!: FormGroup;
   boardList$!: Observable<Board[]>
   boardEditable = false;
-  title!: string
 
   constructor(
     private fb: FormBuilder,

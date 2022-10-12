@@ -14,12 +14,8 @@ export class BoardService {
     private http: HttpClient,
   ){}
 
-  private headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('token')}` // TODO: move to interceptor https://angular.io/guide/http#http-interceptor-use-cases
-    })
-
   create(board: Board) {
-    return this.http.post<Board>(`${environment.base_url}/boards`, board, {headers: this.headers})
+    return this.http.post<Board>(`${environment.base_url}/boards`, board)
       .pipe(
         map((response) => {
           return {
@@ -31,7 +27,7 @@ export class BoardService {
   }
   
   delete(id: string) {
-    return this.http.delete(`${environment.base_url}/boards/${id}`, {headers: this.headers})
+    return this.http.delete(`${environment.base_url}/boards/${id}`)
   }
 
   edit(board: Board) {
@@ -39,12 +35,11 @@ export class BoardService {
       {
         title: board.title,
         description: board.description,
-      },
-      {headers: this.headers})
+      })
   }
 
   getList(){
-    return this.http.get(`${environment.base_url}/boards`, {headers: this.headers})
+    return this.http.get(`${environment.base_url}/boards`)
       .pipe(
         tap<any>(
           response => this.listSubject.next(response)

@@ -10,12 +10,6 @@ import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-const AUTH_INTERCEPTOR: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  multi: true,
-  useClass: AuthInterceptor
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +22,7 @@ const AUTH_INTERCEPTOR: Provider = {
     AppRoutingModule,
     SharedModule
   ],
-  providers: [AUTH_INTERCEPTOR],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
