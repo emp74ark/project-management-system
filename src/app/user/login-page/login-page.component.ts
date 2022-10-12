@@ -40,7 +40,7 @@ export class LoginPageComponent implements OnInit {
       password: this.LogInForm.value.password
     }
     this.auth.login(user).subscribe(() => {
-      this.router.navigate(['/user', 'dashboard'])
+      this.router.navigate(['/user', 'dashboard']) // TODO: wait login animation and block button
     })
   }
 }

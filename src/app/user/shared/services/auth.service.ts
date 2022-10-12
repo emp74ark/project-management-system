@@ -34,7 +34,7 @@ export class AuthService {
         tap<any>(
           response => {
             this.authenticated = true
-            localStorage.setItem('item', response.token)
+            localStorage.setItem('token', response.token)
           }
         ),
         catchError<any, any>(this.errorHandle.bind(this))

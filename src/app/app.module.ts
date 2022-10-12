@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
-import { DashboardPageComponent } from './user/dashboard-page/dashboard-page.component';
-import { ProjectPageComponent } from './user/project-page/project-page.component';
 import { CommonLayoutComponent } from './shared/components/common-layout/common-layout.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -15,8 +13,6 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     WelcomePageComponent,
     AboutPageComponent,
-    DashboardPageComponent,
-    ProjectPageComponent,
     CommonLayoutComponent
   ],
   imports: [

@@ -1,0 +1,13 @@
+form {
+  margin: auto;
+  max-width: 30rem;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: .5rem;
+}
+small {
+  color: red;
+}

@@ -1,20 +1,40 @@
 <h2>Dashboard</h2>
-<form>
-  <label for="dashboard__item">
-    Create new project
-    <input type="text" id="dashboard__item" placeholder="New project name">
-  </label>
-  <button type="submit">Save</button>
+<form [formGroup]="DashboardForm" (ngSubmit)="create()">
+  <div class="form-control">
+    <h3>Create new project</h3>
+    <label for="dashboard__new">
+      Title
+    </label>
+    <input 
+      type="text" 
+      id="dashboard__new-title" 
+      placeholder="New project title"
+      formControlName="title">
+    <small *ngIf="DashboardForm.get('title')?.touched && DashboardForm.get('title')?.errors?.['required']">
+      Title is required
+    </small>
+  </div>
+  <div class="form-control">
+    <label for="dashboard__new-description">
+      Description
+    </label>
+    <input 
+      type="text" 
+      id="dashboard__new-description" 
+      placeholder="New project description"
+      formControlName="description">
+  </div>
+  <button type="submit" [disabled]="DashboardForm.invalid">Create</button>
 </form>
 <div class="dashboard">
-  <div class="dashboard__item">
+  <div class="dashboard__item" *ngFor="let board of boardList$ | async">
     <div class="project__title">
-      <h3>Project 1</h3>
+      <h3>{{board.title}}</h3>
     </div>
     <div class="project__description">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, dolores?
+      {{board.description}}
     </div>
-    <button [routerLink]="['../project', 111]">Open</button>
-    <button>Remove</button>
+    <button (click)="open(board.id!)">Open</button>
+    <button (click)="delete(board.id!)">Delete</button>
   </div>
 </div>
