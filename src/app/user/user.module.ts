@@ -8,7 +8,7 @@ import { SharedModule } from "../shared/shared.module";
 
 import { DashboardPageComponent } from "./dashboard-page/dashboard-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
-import { ProjectPageComponent } from "./project-page/project-page.component";
+import { BoardPageComponent } from "./board-page/board-page.component";
 import { UserLayoutComponent } from "./shared/components/user-layout/user-layout.component";
 import { AuthGuard } from "./shared/services/auth.guard";
 import { BoardService } from "./shared/services/boards.service";
@@ -26,7 +26,7 @@ const AUTH_INTERCEPTOR: Provider = {
     LoginPageComponent,
     SignupPageComponent,
     DashboardPageComponent,
-    ProjectPageComponent,
+    BoardPageComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +40,7 @@ const AUTH_INTERCEPTOR: Provider = {
           {path: 'login', component: LoginPageComponent},
           {path: 'signup', component: SignupPageComponent},
           {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
-          {path: 'project/:id', component: ProjectPageComponent, canActivate: [AuthGuard]}
+          {path: 'board/:id', component: BoardPageComponent, canActivate: [AuthGuard]}
         ]
       }
     ])

@@ -53,7 +53,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   open(id: string) {
-    this.router.navigate(['/user/project', id])
+    this.router.navigate(['/user/board', id])
   }
   
   delete(id: string) {
