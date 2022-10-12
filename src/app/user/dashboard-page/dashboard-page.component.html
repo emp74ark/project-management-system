@@ -29,12 +29,14 @@
 <div class="dashboard">
   <div class="dashboard__item" *ngFor="let board of boardList$ | async">
     <div class="project__title">
-      <h3>{{board.title}}</h3>
+      <h3 [contentEditable]="boardEditable" #title>{{board.title}}</h3>
     </div>
-    <div class="project__description">
+    <div class="project__description" [contentEditable]="boardEditable" #description>
       {{board.description}}
     </div>
     <button (click)="open(board.id!)">Open</button>
+    <button (click)="edit()" *ngIf="!boardEditable">Edit</button>
+    <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">Save</button>
     <button (click)="delete(board.id!)">Delete</button>
   </div>
 </div>

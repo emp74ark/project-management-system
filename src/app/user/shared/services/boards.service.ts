@@ -1,53 +1,53 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Board } from "src/app/shared/interfaces";
-import { map, tap } from 'rxjs'
+import { BehaviorSubject, map, Observable, tap } from 'rxjs'
 import { environment } from "src/environments/environment";
 
 @Injectable()
 export class BoardService {
+  
+  private listSubject: BehaviorSubject<Board[]> = new BehaviorSubject([] as Board[])
+  listStream: Observable<Board[]> = this.listSubject.asObservable()  
+
   constructor(
     private http: HttpClient,
   ){}
 
   private headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}` // TODO: move to auth.interceptor.ts
+      Authorization: `Bearer ${localStorage.getItem('token')}` // TODO: move to interceptor https://angular.io/guide/http#http-interceptor-use-cases
     })
 
-  create(project: Board) {
-    return this.http.post<Board>(`${environment.base_url}/boards`, project, {headers: this.headers})
+  create(board: Board) {
+    return this.http.post<Board>(`${environment.base_url}/boards`, board, {headers: this.headers})
       .pipe(
         map((response) => {
           return {
-            ...project,
+            ...board,
             id: response.id
           }
-        }),
-        tap<any>(
-          response => {
-            console.log(response)
-          }
-        )
+        })
       )
   }
   
   delete(id: string) {
-    this.getList();
     return this.http.delete(`${environment.base_url}/boards/${id}`, {headers: this.headers})
-    .pipe(
-      tap<any>(
-        response => {
-          console.log(response)
-        }
-      )
-    )
+  }
+
+  edit(board: Board) {
+    return this.http.put(`${environment.base_url}/boards/${board.id}`, 
+      {
+        title: board.title,
+        description: board.description,
+      },
+      {headers: this.headers})
   }
 
   getList(){
     return this.http.get(`${environment.base_url}/boards`, {headers: this.headers})
       .pipe(
         tap<any>(
-          response => console.log(response)
+          response => this.listSubject.next(response)
         )
       )
   }

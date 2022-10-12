@@ -3,7 +3,7 @@ import { Board } from 'src/app/shared/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardService } from '../shared/services/boards.service';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,17 +14,19 @@ export class DashboardPageComponent implements OnInit {
   
   DashboardForm!: FormGroup;
   boardList$!: Observable<Board[]>
+  boardEditable = false;
+  title!: string
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private boardService: BoardService
-  ) {
-    this._createForm()
-   }
-
+  ) {}
+  
   ngOnInit(): void {
-    this.boardList$ = this.boardService.getList()
+    this._createForm()
+    this.boardService.getList().subscribe()
+    this.boardList$ = this.boardService.listStream
   }
 
   private _createForm(){
@@ -39,12 +41,14 @@ export class DashboardPageComponent implements OnInit {
       return
     }
 
-    const project: Board = {
+    const board: Board = {
       title: this.DashboardForm.value.title,
       description: this.DashboardForm.value.description
     }
 
-    this.boardService.create(project).subscribe(() => {
+    this.boardService.create(board)
+      .pipe(switchMap(() => this.boardService.getList()))
+      .subscribe(() => {
       this.DashboardForm.reset()
     })
   }
@@ -54,7 +58,26 @@ export class DashboardPageComponent implements OnInit {
   }
   
   delete(id: string) {
-    this.boardService.delete(id).subscribe()
+    this.boardService.delete(id)
+      .pipe(switchMap(() => this.boardService.getList()))
+      .subscribe()
+    
+  }
+
+  edit(){
+    this.boardEditable = true
+  }
+
+  save(id: string, title: string, description: string){
+    const board: Board = {
+      id: id,
+      title: title,
+      description: description
+    }
+    this.boardEditable = false
+    this.boardService.edit(board)
+      .pipe(switchMap(() => this.boardService.getList()))
+      .subscribe()
   }
 
   getList(){
