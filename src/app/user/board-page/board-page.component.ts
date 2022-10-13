@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Board, List } from 'src/app/shared/interfaces';
+import { ListService } from '../shared/services/lists.service';
+import { BoardService } from '../shared/services/boards.service';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-board-page',
@@ -7,9 +13,75 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardPageComponent implements OnInit {
 
-  constructor() { }
+  BoardForm!: FormGroup
+  board$!: Observable<Board>
+  boardEditable = false;
+  boardId!: string
+  
+  lists$!: Observable<List[]>
+
+  constructor(
+    private fb: FormBuilder,
+    private boardService: BoardService,
+    private listService: ListService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this._createForm()
+
+    this.board$ = this.activeRoute.params
+      .pipe(
+        switchMap((params: Params) => {
+          return this.boardService.getById(params['id'])
+        })       
+      )
+
+    this.activeRoute.params.subscribe(
+      (params: Params) => {
+        this.boardId = params['id']
+      }
+    )
+
+    this.listService.getAll(this.boardId).subscribe()
+    this.lists$ = this.listService.listStream
+  }
+
+  private _createForm() {
+    this.BoardForm = this.fb.group({
+      title: [null, [Validators.required]],
+    })
+  }
+
+  create() {
+    if(this.BoardForm.invalid) {
+      return
+    }
+
+    const list: List = {
+      title: this.BoardForm.value.title
+    }
+
+    this.listService.create(this.boardId, list)
+      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
+      .subscribe()
+    this.BoardForm.reset()
+  }
+
+  edit(){
+    this.boardEditable = true
+  }
+
+  save(id: string, title: string, description: string){
+    const board: Board = {
+      id: id,
+      title: title,
+      description: description
+    }
+    this.boardEditable = false
+    this.boardService.edit(board)
+      .pipe(switchMap(() => this.boardService.getList()))
+      .subscribe()
   }
 
 }

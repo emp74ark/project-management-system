@@ -78,9 +78,4 @@ export class DashboardPageComponent implements OnInit {
       .pipe(switchMap(() => this.boardService.getList()))
       .subscribe()
   }
-
-  getList(){
-    this.boardService.getList().subscribe()
-  }
-
 }

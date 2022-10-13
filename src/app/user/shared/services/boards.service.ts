@@ -38,6 +38,15 @@ export class BoardService {
       })
   }
 
+  getById(id: string){
+    return this.http.get(`${environment.base_url}/boards/${id}`)
+      .pipe(
+        tap<any>(
+          (board: Board) => board
+        )
+      )
+  }
+
   getList(){
     return this.http.get(`${environment.base_url}/boards`)
       .pipe(

@@ -1,103 +1,19 @@
-<h2>Board 1</h2>
-<button [routerLink]="['../../dashboard']">Go to dashboard</button>
-<form>
-  <label for="board__list">Create new list
-    <input type="text" id="board__list" placeholder="New list name">
-  </label>
-  <button type="submit">Create</button>
-</form>
-<div class="board">
-  <div class="board__list">
-    <div class="board__list-title">Todo</div>
-    <form>
-      <input type="text" id="board__list-item" placeholder="New task name">
-      <button type="submit">Save</button>
-    </form>
-    <div class="board__list-items">
-      <ul>
-        <li>
-          Item 1
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 2
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 3
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 4
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 5
-          <button>Remove</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="board__list">
-    <div class="board__list-title">In progress</div>
-    <form>
-      <input type="text" id="board__list-item" placeholder="New task name">
-      <button type="submit">Save</button>
-    </form>
-    <div class="board__list-items">
-      <ul>
-        <li>
-          Item 1
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 2
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 3
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 4
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 5
-          <button>Remove</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="board__list">
-    <div class="board__list-title">Done</div>
-    <form>
-      <input type="text" id="board__list-item" placeholder="New task name">
-      <button type="submit">Save</button>
-    </form>
-    <div class="board__list-items">
-      <ul>
-        <li>
-          Item 1
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 2
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 3
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 4
-          <button>Remove</button>
-        </li>
-        <li>
-          Item 5
-          <button>Remove</button>
-        </li>
-      </ul>
-    </div>
+<div *ngIf="board$ | async as board">
+  <h2 [contentEditable]="boardEditable" #title >{{board.title}}</h2>
+  <p [contentEditable]="boardEditable" #description >{{board.description}}</p>
+  <button (click)="edit()" *ngIf="!boardEditable">Edit</button>
+  <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">Save</button>
+  <button [routerLink]="['../../dashboard']">Go to dashboard</button>
+  <form [formGroup]="BoardForm" (ngSubmit)="create()">
+    <label for="board__list">Create new list</label>
+    <input type="text" id="board__list" placeholder="New list name" formControlName="title">
+    <button type="submit" [disabled]="BoardForm.invalid">Create</button>
+  </form>
+  <div class="board" >
+    <app-board-list 
+      *ngFor="let list of lists$ | async" 
+      [list]="list"
+      >
+    </app-board-list>
   </div>
 </div>

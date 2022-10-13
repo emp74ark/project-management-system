@@ -1,20 +1,7 @@
 .board {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin: 1rem;
-}
-.board__list {
-  padding: 2rem 1rem;
-  border: .1rem dashed #ccc;
-  ul {
-    padding: 0;
-  }
-  li {
-    list-style: none;
-    padding: .5rem 1rem;
-    margin: .5rem;
-    background: #ccc;
-    display: flex;
-    justify-content: space-between;
-  }
 }

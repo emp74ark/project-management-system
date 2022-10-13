@@ -13,3 +13,9 @@ export interface Board {
   title: string,
   description: string
 }
+
+export interface List {
+  id?: string,
+  order?: number,
+  title: string,
+}
