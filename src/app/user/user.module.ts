@@ -15,6 +15,9 @@ import { BoardService } from "./shared/services/boards.service";
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { BoardListComponent } from './board-list/board-list.component';
 import { ListService } from "./shared/services/lists.service";
+import { TaskService } from "./shared/services/tasks.service";
+import { UserService } from "./shared/services/users.service";
+import { BoardTasksComponent } from './board-tasks/board-tasks.component';
 
 const AUTH_INTERCEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -30,6 +33,7 @@ const AUTH_INTERCEPTOR: Provider = {
     DashboardPageComponent,
     BoardPageComponent,
     BoardListComponent,
+    BoardTasksComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +57,9 @@ const AUTH_INTERCEPTOR: Provider = {
     AuthGuard, 
     BoardService,
     AUTH_INTERCEPTOR,
-    ListService
+    ListService,
+    TaskService,
+    UserService
   ],
 })
 

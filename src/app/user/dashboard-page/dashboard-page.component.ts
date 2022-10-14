@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardService } from '../shared/services/boards.service';
 import { Observable, switchMap } from 'rxjs';
+import { UserService } from '../shared/services/users.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -19,13 +20,19 @@ export class DashboardPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private boardService: BoardService
+    private boardService: BoardService,
+    private userService: UserService
   ) {}
   
   ngOnInit(): void {
     this._createForm()
     this.boardService.getList().subscribe()
     this.boardList$ = this.boardService.listStream
+    this.userService.getByLogin(localStorage.getItem('login')!).subscribe(
+      user => {
+        localStorage.setItem('userId', user.id!)
+      }
+    )
   }
 
   private _createForm(){

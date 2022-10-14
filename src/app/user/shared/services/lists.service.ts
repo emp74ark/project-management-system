@@ -21,8 +21,7 @@ export class ListService {
             ...list,
             id: response.id
           }
-        }),
-        tap<any>((response) => console.log(response)) // TODO: remove
+        })
       )
   }
 

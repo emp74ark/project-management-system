@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, Subject, tap, throwError } from "rxjs";
+import { catchError, Observable, Subject, tap, throwError} from "rxjs";
 import { AuthResponse, User } from "src/app/shared/interfaces";
 import { environment } from "src/environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   public authenticated = false
@@ -34,10 +34,12 @@ export class AuthService {
         tap<any>(
           response => {
             this.authenticated = true
+            localStorage.setItem('login', user.login)
             localStorage.setItem('token', response.token)
           }
         ),
-        catchError<any, any>(this.errorHandle.bind(this))
+        catchError<any, any>(this.errorHandle.bind(this)),
+
       )
    }
 

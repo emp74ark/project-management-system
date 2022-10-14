@@ -16,14 +16,14 @@ export class BoardService {
 
   create(board: Board) {
     return this.http.post<Board>(`${environment.base_url}/boards`, board)
-      .pipe(
-        map((response) => {
-          return {
-            ...board,
-            id: response.id
-          }
-        })
-      )
+      // .pipe(
+      //   map((response) => {
+      //     return {
+      //       ...board,
+      //       id: response.id
+      //     }
+      //   })
+      // )
   }
   
   delete(id: string) {

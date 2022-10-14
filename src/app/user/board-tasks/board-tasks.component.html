@@ -1,0 +1,21 @@
+<div class="task__container">
+  <div class="task__title">
+    <h3 [contentEditable]="taskEditable" #title>{{task.title}}</h3>
+  </div>
+  <div class="task__description" #description>
+    <p [contentEditable]="taskEditable">{{task.description}}</p>
+  </div>
+  <div class="task__author">
+    <!-- <small>Fake task__author</small> -->
+    <small>{{user.login}}</small>
+    <!-- FIXME: user login return errors -->
+  </div>
+  <button (click)="edit()" *ngIf="!taskEditable">Edit</button>
+  <button
+    (click)="save(task.id!, title.innerText, description.innerText, task.userId)"
+    *ngIf="taskEditable"
+    >Save
+  </button>
+  <button (click)="delete()">Delete</button>
+  
+</div>
