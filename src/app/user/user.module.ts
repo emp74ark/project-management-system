@@ -1,9 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule, Provider } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { AuthInterceptor } from "../shared/auth.interceptor";
 import { SharedModule } from "../shared/shared.module";
 
 import { DashboardPageComponent } from "./dashboard-page/dashboard-page.component";
@@ -18,12 +16,7 @@ import { ListService } from "./shared/services/lists.service";
 import { TaskService } from "./shared/services/tasks.service";
 import { UserService } from "./shared/services/users.service";
 import { BoardTasksComponent } from './board-tasks/board-tasks.component';
-
-const AUTH_INTERCEPTOR: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  multi: true,
-  useClass: AuthInterceptor
-}
+import { AUTH_INTERCEPTOR } from "./shared/interceptors";
 
 @NgModule({
   declarations: [
