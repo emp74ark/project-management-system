@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { User, Task } from 'src/app/shared/interfaces';
+import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
 
@@ -24,13 +25,14 @@ export class BoardTasksComponent implements OnInit {
   boardId!: string
 
   constructor(
+    private listService: ListService,
     private taskService: TaskService,
     private userService: UserService,
     private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.users$ = this.userService.listStream
+    this.users$ = this.userService.getAll()
     
     this.activeRoute.params.subscribe(
       (params: Params) => {
@@ -43,6 +45,7 @@ export class BoardTasksComponent implements OnInit {
 
   delete() {
     this.taskService.delete(this.boardId, this.task)
+      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
       .subscribe()
   }
 
@@ -65,4 +68,13 @@ export class BoardTasksComponent implements OnInit {
       .subscribe()
   }
 
+  taskDragStartHandler(e: DragEvent) {
+    e.dataTransfer!.setData('text', JSON.stringify(this.task))
+    const dragObject = e.target as HTMLElement
+    dragObject.classList.add('task__container_drag')
+  }
+
+  taskDragEndHandler(e: DragEvent) {
+    e.dataTransfer?.clearData()
+  }
 }

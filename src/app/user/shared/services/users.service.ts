@@ -6,8 +6,8 @@ import { User } from "src/app/shared/interfaces";
 
 @Injectable()
 export class UserService {
-  private listSubject: BehaviorSubject<User[]> = new BehaviorSubject([] as User[])
-  listStream: Observable<User[]> = this.listSubject.asObservable()
+  // private listSubject: BehaviorSubject<User[]> = new BehaviorSubject([] as User[])
+  // listStream: Observable<User[]> = this.listSubject.asObservable()
 
   constructor(
     private http: HttpClient
@@ -18,10 +18,7 @@ export class UserService {
   }
 
   getAll() {
-    return this.http.get(`${environment.base_url}/users`)
-      .pipe(
-        tap<any>(response => this.listSubject.next(response))
-      )
+    return this.http.get<User[]>(`${environment.base_url}/users`)
   }
 
   getByLogin(login: string) {

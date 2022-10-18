@@ -106,4 +106,35 @@ export class BoardListComponent implements OnInit {
       .subscribe()
     this.listEditable = false
   }
+
+  taskDragOverHandler(e: DragEvent) {
+    e.preventDefault();
+  }
+
+  taskDragEnterHandler(e: DragEvent) {
+    const dropZone = e.currentTarget as HTMLDivElement
+    dropZone.classList.add('board__list_drop')
+  }
+
+  taskDragLeaveHandler(e: DragEvent) {
+    const dropZone = e.currentTarget as HTMLDivElement
+    dropZone.classList.remove('board__list_drop')
+  }
+
+  taskDropHandler(e: DragEvent) {
+    e.preventDefault();
+    const oldTask: Task = JSON.parse(e.dataTransfer!.getData('text'))
+    const dropZone = e.currentTarget as HTMLDivElement
+    const dragObject = e.target as HTMLElement
+    dragObject.classList.remove('task__container_drag')
+    const newTask: Task = {
+      ...oldTask,
+      columnId: dropZone.id,
+    }
+    this.taskService.delete(this.boardId, oldTask)
+      .subscribe(() => console.log('delete old'))
+    this.taskService.create(this.boardId, newTask)
+      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
+      .subscribe(() => console.log('create new'))
+  }
 }

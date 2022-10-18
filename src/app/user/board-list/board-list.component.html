@@ -1,4 +1,10 @@
-<div class="board__list">
+<div class="board__list"
+  id={{list.id}}
+  (dragover)="taskDragOverHandler($event)" 
+  (drop)="taskDropHandler($event)"
+  (dragenter)="taskDragEnterHandler($event)"
+  (dragleave)="taskDragLeaveHandler($event)">
+
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
   <button (click)="editList()" *ngIf="!listEditable" >Edit</button>
   <button (click)="saveList(title.innerText)" *ngIf="listEditable">Save</button>

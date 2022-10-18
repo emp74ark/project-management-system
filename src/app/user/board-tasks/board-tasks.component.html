@@ -1,4 +1,8 @@
-<div class="task__container">
+<div 
+  class="task__container"
+  draggable="true"
+  (dragstart)="taskDragStartHandler($event)"
+  (dragend)="taskDragEndHandler($event)">
   <div class="task__title">
     <h3 [contentEditable]="taskEditable" #title>{{task.title}}</h3>
   </div>
@@ -15,5 +19,4 @@
     >Save
   </button>
   <button (click)="delete()">Delete</button>
-  
 </div>
