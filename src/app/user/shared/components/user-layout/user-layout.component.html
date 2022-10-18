@@ -1,8 +1,9 @@
 <header>
   <h1><a [routerLink]="['/']">Project management</a></h1>
   <nav>
-    <ul>
-      <li><a href="#" (click)="logout($event)" *ngIf="isAuthenticated()">Logout</a></li>
+    <ul *ngIf="isAuthenticated()">
+      <li>{{getLogin()}}</li>
+      <li><a href="#" (click)="logout($event)">Logout</a></li>
     </ul>
   </nav>
 </header>

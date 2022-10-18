@@ -9,6 +9,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserLayoutComponent implements OnInit {
 
+  login!: string;
+
   constructor(
     private router: Router,
     private auth: AuthService
@@ -18,6 +20,10 @@ export class UserLayoutComponent implements OnInit {
   
   isAuthenticated(){
     return this.auth.authenticated
+  }
+
+  getLogin() {
+    return localStorage.getItem('login')
   }
 
   logout(event: Event) {
