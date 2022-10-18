@@ -34,9 +34,9 @@ export class BoardTasksComponent implements OnInit {
       }
     )
 
-    this.userService.getUserById(this.task.userId).subscribe(
-      user => {this.user = user}
-    )
+    // this.userService.getUserById(this.task.userId).subscribe(
+    //   user => {this.user = user}
+    // )
   }
 
   delete() {

@@ -1,5 +1,8 @@
 <div class="board__list">
-  <div class="board__list-title">{{list.title}}</div>
+  <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
+  <button (click)="editList()" *ngIf="!listEditable" >Edit</button>
+  <button (click)="saveList(title.innerText)" *ngIf="listEditable">Save</button>
+  <button (click)="deleteList()">Delete</button>
   <button 
     (click)="createFormOpen()" 
     *ngIf="!createFormVisibility"

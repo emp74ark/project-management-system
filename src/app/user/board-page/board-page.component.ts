@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Board, List } from 'src/app/shared/interfaces';
 import { ListService } from '../shared/services/lists.service';
 import { BoardService } from '../shared/services/boards.service';
-import { Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
+import { TaskService } from '../shared/services/tasks.service';
 
 @Component({
   selector: 'app-board-page',
@@ -24,6 +25,7 @@ export class BoardPageComponent implements OnInit {
     private fb: FormBuilder,
     private boardService: BoardService,
     private listService: ListService,
+    private taskService: TaskService,
     private activeRoute: ActivatedRoute
   ) {}
 
@@ -45,6 +47,24 @@ export class BoardPageComponent implements OnInit {
 
     this.listService.getAll(this.boardId).subscribe()
     this.lists$ = this.listService.listStream
+
+    /* // this.listService.getAll(this.boardId)
+    this.listService.listStream
+      .pipe(
+        tap(pre => {
+          pre.map(
+            el => {
+              // this.taskService.getAll(this.boardId, el.id!)
+              this.taskService.listStream
+                .pipe(
+                  tap(res => console.log(res))
+                )
+                .subscribe()
+            }
+          )
+        })
+      )
+      .subscribe() */
   }
 
   private _createForm() {

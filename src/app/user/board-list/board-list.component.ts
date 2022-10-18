@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
 import { List, User } from 'src/app/shared/interfaces';
 import { Task } from "src/app/shared/interfaces";
+import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
 
@@ -14,12 +15,14 @@ import { UserService } from '../shared/services/users.service';
 })
 
 export class BoardListComponent implements OnInit {
-  @Input()
-  list!: List
+  @Input() // FIXME: list input not needed
+  list!: List // TODO: have to create multiple lists with stream for each other
   tasks$!: Observable<Task[]>
   boardId!: string
 
   TaskForm!: FormGroup
+
+  listEditable = false
 
   createFormVisibility = false
   
@@ -27,6 +30,7 @@ export class BoardListComponent implements OnInit {
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private userService: UserService,
+    private listService: ListService,
     private taskService: TaskService
   ) {}
 
@@ -37,6 +41,7 @@ export class BoardListComponent implements OnInit {
         this.boardId = params['id']
       }
     )
+    
     this.taskService.getAll(this.boardId, this.list.id!).subscribe()
     // this.tasks$ = this.taskService.listStream
     this.tasks$ = this.taskService.getAll(this.boardId, this.list.id!)
@@ -74,11 +79,33 @@ export class BoardListComponent implements OnInit {
     }
 
     this.taskService.create(this.boardId, task)
-      // .pipe(switchMap(() => this.taskService.getAll(this.boardId, this.list.id!)))
+      .pipe(switchMap(() => this.taskService.getAll(this.boardId, this.list.id!)))
       .subscribe(
         () => {
           this.TaskForm.reset()
         }
       )    
+  }
+
+  deleteList() {
+    this.listService.delete(this.boardId, this.list.id!)
+      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
+      .subscribe()
+  }
+
+  editList() {
+    this.listEditable = true
+  }
+
+  saveList(title: string) {
+    const list: List = {
+      id: this.list.id,
+      order: 1,
+      title: title,
+    }
+    this.listService.edit(this.boardId, list)
+      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
+      .subscribe()
+    this.listEditable = false
   }
 }

@@ -6,8 +6,8 @@
     <p [contentEditable]="taskEditable">{{task.description}}</p>
   </div>
   <div class="task__author">
-    <!-- <small>Fake task__author</small> -->
-    <small>{{user.login}}</small>
+    <small>Fake task__author</small>
+    <!-- <small>{{user.login}}</small> -->
     <!-- FIXME: user login return errors -->
   </div>
   <button (click)="edit()" *ngIf="!taskEditable">Edit</button>

@@ -13,7 +13,7 @@ export class ListService {
     private http: HttpClient
   ){}
 
-  create(boardId: string, list: List) {
+  create(boardId: string, list: List): Observable<List> {
     return this.http.post<List>(`${environment.base_url}/boards/${boardId}/columns`, list)
       .pipe(
         map((response) => {
@@ -25,19 +25,19 @@ export class ListService {
       )
   }
 
-  delete(boardId: string, listId: string){
-    return this.http.delete(`${environment.base_url}/boards/${boardId}/${listId}`)
+  delete(boardId: string, listId: string) {
+    return this.http.delete(`${environment.base_url}/boards/${boardId}/columns/${listId}`)
   }
 
-  edit(boardId: string, list: List){
-    return this.http.put(`${environment.base_url}/boards/${boardId}/${list.id}`,
+  edit(boardId: string, list: List) {
+    return this.http.put(`${environment.base_url}/boards/${boardId}/columns/${list.id}`,
       {
         title: list.title,
         order: list.order
       })
   }
 
-  getById(boardId: string, listId: string){
+  getById(boardId: string, listId: string): Observable<List>{
     return this.http.delete(`${environment.base_url}/boards/${boardId}/${listId}`)
       .pipe(
         tap<any>(
@@ -46,7 +46,7 @@ export class ListService {
       )
   }
 
-  getAll(boardId: string) {
+  getAll(boardId: string): Observable<List[]> {
     return this.http.get(`${environment.base_url}/boards/${boardId}/columns`)
     .pipe(
       tap<any>(
