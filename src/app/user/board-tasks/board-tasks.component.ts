@@ -14,10 +14,13 @@ export class BoardTasksComponent implements OnInit {
 
   @Input()
 
-  task!: Task
+  task!: Task // get from board-list.component (is, title, order, description, userId)
+
   taskEditable = false;
+
   users$!: Observable<User[]> // TODO: add ability to change or assign user
-  user!: User
+  user$!: Observable<User>
+
   boardId!: string
 
   constructor(
@@ -28,15 +31,14 @@ export class BoardTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.users$ = this.userService.listStream
+    
     this.activeRoute.params.subscribe(
       (params: Params) => {
         this.boardId = params['id']
       }
     )
-
-    this.userService.getUserById(this.task.userId).subscribe(
-      user => {this.user = user}
-    )
+    
+    this.user$ = this.userService.getUserById(this.task.userId)
   }
 
   delete() {

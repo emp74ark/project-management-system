@@ -13,11 +13,8 @@ export class UserService {
     private http: HttpClient
   ){}
   
-  getUserById(id: string): Observable<any> {
-    return this.http.get(`${environment.base_url}/users/${id}`)
-      // .pipe(
-      //   tap<any>(response => console.log('getUserById: ',response))
-      // )
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${environment.base_url}/users/${id}`)
   }
 
   getAll() {
