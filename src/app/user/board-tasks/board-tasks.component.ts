@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable, Subscription, switchMap } from 'rxjs';
-import { User, Task, List } from 'src/app/shared/interfaces';
+import { Observable, switchMap } from 'rxjs';
+import { User, Task } from 'src/app/shared/interfaces';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
 
@@ -34,16 +34,13 @@ export class BoardTasksComponent implements OnInit {
       }
     )
 
-    // this.userService.getUserById(this.task.userId).subscribe(
-    //   user => {this.user = user}
-    // )
+    this.userService.getUserById(this.task.userId).subscribe(
+      user => {this.user = user}
+    )
   }
 
   delete() {
     this.taskService.delete(this.boardId, this.task)
-      .pipe(
-        switchMap(() => this.taskService.getAll(this.boardId, this.task.columnId!))
-      )
       .subscribe()
   }
 

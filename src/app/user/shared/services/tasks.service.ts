@@ -6,8 +6,6 @@ import { BehaviorSubject, map, Observable, tap } from "rxjs";
 
 @Injectable()
 export class TaskService {
-  private listSubject: BehaviorSubject<Task[]> = new BehaviorSubject([] as Task[])
-  listStream: Observable<Task[]> = this.listSubject.asObservable()
 
   constructor(
     private http: HttpClient
@@ -55,14 +53,9 @@ export class TaskService {
       )
   }
 
-  getAll(boardId: string, listId: string) {
+  getAll(boardId: string, listId: string): Observable<any> { // FIXME: Type ANY
     return this.http.get(
       `${environment.base_url}/boards/${boardId}/columns/${listId}/tasks`
       )
-    .pipe(
-      tap<any>(
-        response => this.listSubject.next(response)
-      )
-    )
   }
 }

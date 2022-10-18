@@ -2,11 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
-import { List, User } from 'src/app/shared/interfaces';
+import { List } from 'src/app/shared/interfaces';
 import { Task } from "src/app/shared/interfaces";
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
-import { UserService } from '../shared/services/users.service';
 
 @Component({
   selector: 'app-board-list',
@@ -15,8 +14,9 @@ import { UserService } from '../shared/services/users.service';
 })
 
 export class BoardListComponent implements OnInit {
-  @Input() // FIXME: list input not needed
-  list!: List // TODO: have to create multiple lists with stream for each other
+  @Input()
+  list!: List
+  
   tasks$!: Observable<Task[]>
   boardId!: string
 
@@ -29,7 +29,6 @@ export class BoardListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private userService: UserService,
     private listService: ListService,
     private taskService: TaskService
   ) {}
@@ -43,7 +42,6 @@ export class BoardListComponent implements OnInit {
     )
     
     this.taskService.getAll(this.boardId, this.list.id!).subscribe()
-    // this.tasks$ = this.taskService.listStream
     this.tasks$ = this.taskService.getAll(this.boardId, this.list.id!)
   }
 
@@ -79,12 +77,12 @@ export class BoardListComponent implements OnInit {
     }
 
     this.taskService.create(this.boardId, task)
-      .pipe(switchMap(() => this.taskService.getAll(this.boardId, this.list.id!)))
+      .pipe(switchMap(() => this.tasks$ = this.taskService.getAll(this.boardId, this.list.id!)))
       .subscribe(
         () => {
           this.TaskForm.reset()
         }
-      )    
+      )
   }
 
   deleteList() {
