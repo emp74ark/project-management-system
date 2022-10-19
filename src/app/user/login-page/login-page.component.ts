@@ -52,6 +52,7 @@ export class LoginPageComponent implements OnInit {
 
   hideGreeting(){
     this.displayGreeting = false;
+    this.authMode = true;
     this.router.navigate(['/user', 'login'])
   }
 
@@ -60,12 +61,15 @@ export class LoginPageComponent implements OnInit {
       return
     }
 
+    this.displayGreeting = true
+
     const user: User = {
       login: this.LogInForm.value.loginEmail,
       password: this.LogInForm.value.loginPassword
     }
     this.auth.login(user).subscribe(() => {
-      this.router.navigate(['/user', 'dashboard']) // TODO: wait login animation and block button
+      this.displayGreeting = false
+      this.router.navigate(['/user', 'dashboard'])
     })
   }
 

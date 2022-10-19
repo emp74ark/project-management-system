@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http'
 import { environment } from "src/environments/environment";
 import { Task } from "src/app/shared/interfaces";
-import { BehaviorSubject, map, Observable, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 
 @Injectable()
 export class TaskService {
@@ -43,18 +43,13 @@ export class TaskService {
   }
 
   getById(boardId: string, task: Task){
-    return this.http.delete(
+    return this.http.delete<Task>(
       `${environment.base_url}/boards/${boardId}/columns/${task.columnId}/tasks/${task.id}`
-      )
-      .pipe(
-        tap<any>(
-          (task: Task) => task
-        )
       )
   }
 
-  getAll(boardId: string, listId: string): Observable<any> { // FIXME: Type ANY
-    return this.http.get(
+  getAll(boardId: string, listId: string): Observable<Task[]> {
+    return this.http.get<Task[]>(
       `${environment.base_url}/boards/${boardId}/columns/${listId}/tasks`
       )
   }

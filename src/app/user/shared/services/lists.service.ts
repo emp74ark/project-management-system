@@ -26,11 +26,11 @@ export class ListService {
   }
 
   delete(boardId: string, listId: string) {
-    return this.http.delete(`${environment.base_url}/boards/${boardId}/columns/${listId}`)
+    return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/columns/${listId}`)
   }
 
   edit(boardId: string, list: List) {
-    return this.http.put(`${environment.base_url}/boards/${boardId}/columns/${list.id}`,
+    return this.http.put<List>(`${environment.base_url}/boards/${boardId}/columns/${list.id}`,
       {
         title: list.title,
         order: list.order
@@ -38,18 +38,13 @@ export class ListService {
   }
 
   getById(boardId: string, listId: string): Observable<List>{
-    return this.http.delete(`${environment.base_url}/boards/${boardId}/${listId}`)
-      .pipe(
-        tap<any>(
-          (list: List) => list
-        )
-      )
+    return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/${listId}`)
   }
 
   getAll(boardId: string): Observable<List[]> {
-    return this.http.get(`${environment.base_url}/boards/${boardId}/columns`)
+    return this.http.get<List[]>(`${environment.base_url}/boards/${boardId}/columns`)
     .pipe(
-      tap<any>(
+      tap(
         response => this.listSubject.next(response)
       )
     )

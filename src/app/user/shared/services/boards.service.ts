@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Board } from "src/app/shared/interfaces";
-import { BehaviorSubject, map, Observable, tap } from 'rxjs'
+import { BehaviorSubject, Observable, tap } from 'rxjs'
 import { environment } from "src/environments/environment";
 
 @Injectable()
@@ -16,22 +16,14 @@ export class BoardService {
 
   create(board: Board) {
     return this.http.post<Board>(`${environment.base_url}/boards`, board)
-      // .pipe(
-      //   map((response) => {
-      //     return {
-      //       ...board,
-      //       id: response.id
-      //     }
-      //   })
-      // )
   }
   
   delete(id: string) {
-    return this.http.delete(`${environment.base_url}/boards/${id}`)
+    return this.http.delete<Board>(`${environment.base_url}/boards/${id}`)
   }
 
   edit(board: Board) {
-    return this.http.put(`${environment.base_url}/boards/${board.id}`, 
+    return this.http.put<Board>(`${environment.base_url}/boards/${board.id}`, 
       {
         title: board.title,
         description: board.description,
@@ -39,18 +31,13 @@ export class BoardService {
   }
 
   getById(id: string){
-    return this.http.get(`${environment.base_url}/boards/${id}`)
-      .pipe(
-        tap<any>(
-          (board: Board) => board
-        )
-      )
+    return this.http.get<Board>(`${environment.base_url}/boards/${id}`)
   }
 
   getList(){
-    return this.http.get(`${environment.base_url}/boards`)
+    return this.http.get<Board[]>(`${environment.base_url}/boards`)
       .pipe(
-        tap<any>(
+        tap(
           response => this.listSubject.next(response)
         )
       )

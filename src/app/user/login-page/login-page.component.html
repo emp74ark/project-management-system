@@ -49,6 +49,13 @@
       <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
   </form>
+  <div *ngIf="displayGreeting">
+    <div class="modal__wrapper">
+    </div>
+    <div class="modal__message">
+      <h2>Loading</h2>
+    </div>
+  </div>
 </div>
 <div class="signup" *ngIf="!authMode">
   <form [formGroup]="SignUpForm" (ngSubmit)="signUpSubmit()">

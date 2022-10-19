@@ -28,7 +28,7 @@ export class AuthService {
     return throwError(error)
   }
 
-  login(user: User): Observable<AuthResponse> { // FIXME check types
+  login(user: User): Observable<AuthResponse> {
     return this.http.post(`${environment.base_url}/signin`, user)
       .pipe(
         tap<any>(
