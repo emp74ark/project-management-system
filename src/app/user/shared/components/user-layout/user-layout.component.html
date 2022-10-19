@@ -1,9 +1,24 @@
 <header>
   <h1><a [routerLink]="['/']">Project management</a></h1>
   <nav>
-    <ul *ngIf="isAuthenticated()">
-      <li>{{getLogin()}}</li>
-      <li><a href="#" (click)="logout($event)">Logout</a></li>
+    <ul>
+      <li><a 
+        [routerLink]="['/']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        >Home</a></li>
+      <li><a 
+        [routerLink]="['/about']"
+        routerLinkActive="active"
+        >About</a></li>
+      <li *ngIf="isAuthenticated()"><a 
+        [routerLink]="['dashboard']"
+        routerLinkActive="active"
+        >{{getLogin()}}</a></li>
+      <li *ngIf="isAuthenticated()"><a 
+        href="#" 
+        (click)="logout($event)"
+        >Logout</a></li>
     </ul>
   </nav>
 </header>

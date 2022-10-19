@@ -11,8 +11,18 @@
         [routerLink]="['about']"
         routerLinkActive="active"
         >About</a></li>
-      <li><a [routerLink]="['user/login']">Login</a></li>
-      <li><a [routerLink]="['user/signup']">Sign up</a></li>
+      <li *ngIf="!isAuthenticated()">
+        <a [routerLink]="['user/login']">Login</a></li>
+      <li *ngIf="!isAuthenticated()">
+        <a [routerLink]="['user/signup']">Sign up</a></li>
+      <li *ngIf="isAuthenticated()"><a 
+        [routerLink]="['user', 'dashboard']"
+        routerLinkActive="active"
+        >{{getLogin()}}</a></li>
+      <li *ngIf="isAuthenticated()"><a 
+        href="#" 
+        (click)="logout($event)"
+        >Logout</a></li>
     </ul>
   </nav>
 </header>
