@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -9,12 +10,31 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class CommonLayoutComponent implements OnInit {
 
+  SearchForm!: FormGroup;
+  
   constructor(
+    private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    @Inject(LOCALE_ID) private localeId: string
   ) { }
+  
+  public selectedLocale: string=this.localeId
+  public locales: any = [
+    {name: "English", code: "en-US"},
+    {name: "Russian", code: "ru-RU"},
+  ]
+    
+  ngOnInit(): void {
+    console.log(this.selectedLocale)
+    this._createForm()
+  }
 
-  ngOnInit(): void {}
+  private _createForm() {
+    this.SearchForm = this.fb.group({
+      search: [null]
+    })
+  }
 
   isAuthenticated(){
     return this.auth.authenticated
@@ -22,6 +42,11 @@ export class CommonLayoutComponent implements OnInit {
 
   getLogin() {
     return localStorage.getItem('login')
+  }
+
+  changePath(code: string) {
+    location.replace(`/${code}/`)
+    console.log(code)
   }
 
   logout(event: Event) {

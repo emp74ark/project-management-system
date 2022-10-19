@@ -6,12 +6,13 @@
   (dragleave)="taskDragLeaveHandler($event)">
 
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
-  <button (click)="editList()" *ngIf="!listEditable" >Edit</button>
-  <button (click)="saveList(title.innerText)" *ngIf="listEditable">Save</button>
-  <button (click)="deleteList()">Delete</button>
+  <button (click)="editList()" *ngIf="!listEditable" i18n>Edit</button>
+  <button (click)="saveList(title.innerText)" *ngIf="listEditable" i18n>Save</button>
+  <button (click)="deleteList()" i18n>Delete</button>
   <button 
     (click)="createFormOpen()" 
     *ngIf="!createFormVisibility"
+    i18n
     >New task 
   </button>
   <form 
@@ -19,23 +20,25 @@
     [formGroup]="TaskForm"
     (ngSubmit)="create()">
     <div class="form-control">
-      <label for="task__name">Title</label>
+      <label for="task__name" i18n>Title</label>
       <input 
         type="text" 
         id="task__name" 
         placeholder="New task title"
+        i18n-placeholder
         formControlName="title">
     </div>
     <div class="form-control">
-      <label for="task__description">Description</label>
+      <label for="task__description" i18n>Description</label>
       <input 
         type="text" 
         id="task__description" 
         placeholder="New task description"
+        i18n-placeholder
         formControlName="description">
     </div>
-    <button type="submit" [disabled]="TaskForm.invalid">Save</button>
-    <button (click)="createFormClose()" *ngIf="createFormVisibility">Cancel</button>
+    <button type="submit" [disabled]="TaskForm.invalid" i18n>Save</button>
+    <button (click)="createFormClose()" *ngIf="createFormVisibility" i18n>Cancel</button>
   </form>
   <div class="board__list-items">
     <app-board-tasks *ngFor="let task of tasks$ | async" [task]="task"></app-board-tasks>

@@ -1,32 +1,58 @@
 <header>
-  <h1><a [routerLink]="['/']">Project management</a></h1>
+  <h1><a [routerLink]="['/']">PMA</a></h1>
   <nav>
     <ul>
       <li><a 
+        i18n
         [routerLink]="['/']"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}"
         >Home</a></li>
       <li><a 
+        i18n
         [routerLink]="['/about']"
         routerLinkActive="active"
         >About</a></li>
       <li
         *ngIf="!isAuthenticated()"
         routerLinkActive="active">
-        <a [routerLink]="['/user/login']">Login</a></li>
+        <a [routerLink]="['/user/login']" i18n>Login</a></li>
       <li *ngIf="isAuthenticated()"><a 
         [routerLink]="['/user', 'dashboard']"
-        routerLinkActive="active"
-        >{{getLogin()}}</a></li>
-      <li *ngIf="isAuthenticated()"><a 
+        routerLinkActive="active">
+          {{getLogin()}}
+          </a>
+      </li>
+      <li *ngIf="isAuthenticated()"><a
+        i18n
         href="#" 
-        (click)="logout($event)"
-        >Logout</a></li>
+        (click)="logout($event)">
+          Logout
+          </a>
+      </li>
+      <li>
+        <select 
+          name="selectedLocale" 
+          id="selectedLocale"
+          (change)="changePath(selectedLocale)"
+          [(ngModel)]="selectedLocale">
+          <option [value]="locale.code" *ngFor="let locale of locales">{{locale.name}}</option>
+        </select>
+      </li>
     </ul>
   </nav>
 </header>
 <div class="container">
+  <form [formGroup]="SearchForm" *ngIf="isAuthenticated()">
+    <label for="serach" i18n>
+      Search
+    </label>
+    <input 
+      type="search"
+      formControlName="search"
+      placeholder="Search in tasks"
+      i18n-placeholder>
+  </form>
   <router-outlet></router-outlet>
 </div>
 <footer>

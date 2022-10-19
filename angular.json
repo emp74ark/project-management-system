@@ -13,6 +13,19 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ru": {
+            "translation": "src/locale/messages.ru.xlf",
+            "baseHref": "/ru-RU/"
+          },
+          "en": {
+            "translation": "src/locale/messages.en.xlf",
+            "baseHref": "/en-US/"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -23,6 +36,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "i18nMissingTranslation": "warning",
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -33,6 +48,14 @@
             "scripts": []
           },
           "configurations": {
+            "ru": {
+              "localize": ["ru"],
+              "baseHref": "/ru-RU/"
+            },
+            "en": {
+              "localize": ["en"],
+              "baseHref": "/en-US/"
+            },
             "production": {
               "budgets": [
                 {
@@ -68,6 +91,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "ru": {
+              "browserTarget": "project-management-system:build:development,ru"
+            },
+            "en": {
+              "browserTarget": "project-management-system:build:development,en"
+            },
             "production": {
               "browserTarget": "project-management-system:build:production"
             },

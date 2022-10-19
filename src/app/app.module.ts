@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,12 +19,17 @@ import { AuthGuard } from './shared/services/auth.guard';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ],
   providers: [
-    AuthGuard, 
-    // AUTH_INTERCEPTOR,
+    AuthGuard,
+    {
+      provide: LOCALE_ID,
+      useValue: 'en-US'
+    }
   ],
   bootstrap: [AppComponent]
 })

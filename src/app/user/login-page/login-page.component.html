@@ -1,42 +1,44 @@
 <div class="auth__mode">
-  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode}" (click)="authModeToggle()">Login</h2>
-  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode}" (click)="authModeToggle()">Sign up</h2>
+  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode}" (click)="authModeToggle()" i18n>Login</h2>
+  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode}" (click)="authModeToggle()" i18n>Sign up</h2>
 </div>
 <div class="login" *ngIf="authMode">
   <form [formGroup]="LogInForm" (ngSubmit)="loginSubmit()">
     <div class="form-control">
-      <label for="login__email">Email</label>
+      <label for="login__email" i18n>Email</label>
       <input
         type="email" 
-        id="login__email" 
+        id="login__email"
         placeholder="Email"
+        i18n-placeholder
         formControlName="loginEmail">
       <div
         *ngIf="LogInForm.get('loginEmail')?.touched && LogInForm.get('loginEmail')?.invalid"
         class="validation">
-        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['required']">
+        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['required']" i18n>
           Email is required
         </small>
-        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['email']">
+        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['email']" i18n>
           Type correct email address
         </small>
       </div>
     </div>
     <div class="form-control">
-      <label for="login__password">Password</label>
+      <label for="login__password" i18n>Password</label>
       <input
         type="password" 
         id="login__password" 
         placeholder="Password"
+        i18n-placeholder
         formControlName="loginPassword">
       <div
         *ngIf="LogInForm.get('loginPassword')?.touched && LogInForm.get('loginPassword')?.invalid"
         class="validation"
         >
-        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['required']">
+        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['required']" i18n>
           Password is required.
         </small>
-        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['minlength']">
+        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['minlength']" i18n>
           Minimum password length is 6 symbols.
         </small>
       </div>
@@ -44,6 +46,7 @@
     <button 
       type="submit"
       [disabled]="LogInForm.invalid"
+      i18n
       >Login</button>
     <div class="form-control">
       <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
@@ -53,68 +56,71 @@
     <div class="modal__wrapper">
     </div>
     <div class="modal__message">
-      <h2>Loading</h2>
+      <h2 i18n>Wait please...</h2>
     </div>
   </div>
 </div>
 <div class="signup" *ngIf="!authMode">
   <form [formGroup]="SignUpForm" (ngSubmit)="signUpSubmit()">
     <div class="form-control">
-      <label for="signup__name">
+      <label for="signup__name" i18n>
         Name
       </label>
       <input type="text" 
         id="signup__name" 
-        placeholder="Name" 
+        placeholder="Name"
+        i18n-placeholder
         formControlName="signupName">
       <div
         *ngIf="SignUpForm.get('signupName')?.touched && SignUpForm.get('signupName')?.invalid"
         class="validation">
-        <small *ngIf="SignUpForm.get('signupName')?.errors?.['required']">
+        <small *ngIf="SignUpForm.get('signupName')?.errors?.['required']" i18n>
           Name is required
         </small>
-        <small *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']">
+        <small *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']" i18n>
           Your name is too short
         </small>
       </div>
     </div>
     <div class="form-control">
-      <label for="signup__email">
+      <label for="signup__email" i18n>
         Email
       </label>
       <input
         type="email" 
         id="signup__email" 
         placeholder="Email"
+        i18n-placeholder
         formControlName="signupEmail">
       <div
         *ngIf="SignUpForm.get('signupEmail')?.touched && SignUpForm.get('signupEmail')?.invalid"
         class="validation">
-        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['required']">
+        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['required']" i18n>
           Email is required
         </small>
-        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['email']">
+        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['email']" i18n>
           Type correct email address
         </small>
       </div>
     </div>
     <div class="form-control">
-      <label for="signup__password">
+      <label for="signup__password" i18n>
         Password
       </label>
       <input
         type="password" 
         id="signup__password" 
         placeholder="Password"
+        i18n-placeholder
         formControlName="signupPassword">
       <div
         *ngIf="SignUpForm.get('signupPassword')?.touched && SignUpForm.get('signupPassword')?.invalid"
         class="validation"
         >
-        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['required']">
+        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['required']" i18n>
           Password is required.
         </small>
-        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['minlength']">
+        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['minlength']" i18n>
           Minimum password length is 6 symbols.
         </small>
       </div>
@@ -122,6 +128,7 @@
     <button 
       type="submit"
       [disabled]="SignUpForm.invalid"
+      i18n
       >Sing up
     </button>
     <div class="form-control">
@@ -132,8 +139,8 @@
     <div class="modal__wrapper">
     </div>
     <div class="modal__message">
-      <h2>Registration successful!</h2>
-      <button (click)="hideGreeting()">Close</button>
+      <h2 i18n>Registration successful!</h2>
+      <button (click)="hideGreeting()" i18n>Close</button>
     </div>
   </div>
 </div>

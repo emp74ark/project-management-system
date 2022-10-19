@@ -4,7 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-ru": "ng serve --configuration=ru",
+    "start-en": "ng serve --configuration=en",
     "build": "ng build",
+    "build-ru": "ng build --configuration=production,ru",
+    "build-en": "ng build --configuration=production,en",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -26,6 +30,7 @@
     "@angular-devkit/build-angular": "^14.2.3",
     "@angular/cli": "~14.2.3",
     "@angular/compiler-cli": "^14.2.0",
+    "@angular/localize": "^14.2.5",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
