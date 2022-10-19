@@ -11,3 +11,12 @@ form {
 small {
   color: red;
 }
+.auth__mode {
+  display: flex;
+}
+.auth__mode_active {
+  color: #000;
+}
+.auth__mode_unactive {
+  color: #ccc;
+}

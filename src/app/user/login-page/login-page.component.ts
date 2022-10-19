@@ -11,36 +11,77 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  authMode!: boolean
+
   LogInForm!: FormGroup
+  SignUpForm!: FormGroup;
+  
+  displayGreeting: boolean;
 
   constructor(
     private fb: FormBuilder,
     public auth: AuthService,
     private router: Router
   ) {
-    this._createForm()
+    this._createLoginForm()
+    this._createSignUpForm()
+    this.authMode = true;
+    this.displayGreeting = false;
    }
   
   ngOnInit() {}
 
-  private _createForm() {
+  private _createLoginForm() {
     this.LogInForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(6)]]
+      loginEmail: [null, [Validators.required, Validators.email]],
+      loginPassword: [null, [Validators.required, Validators.minLength(6)]]
     })
   }
 
-  submit() {
+  private _createSignUpForm() {
+    this.SignUpForm = this.fb.group({
+      signupName: [null, [Validators.required, Validators.minLength(2)]],
+      signupEmail: [null, [Validators.required, Validators.email]],
+      signupPassword: [null, [Validators.required, Validators.minLength(6)]]
+    })
+  }
+
+  authModeToggle() {
+    this.authMode = !this.authMode
+  }
+
+  hideGreeting(){
+    this.displayGreeting = false;
+    this.router.navigate(['/user', 'login'])
+  }
+
+  loginSubmit() {
     if (this.LogInForm.invalid) {
       return
     }
 
     const user: User = {
-      login: this.LogInForm.value.email,
-      password: this.LogInForm.value.password
+      login: this.LogInForm.value.loginEmail,
+      password: this.LogInForm.value.loginPassword
     }
     this.auth.login(user).subscribe(() => {
       this.router.navigate(['/user', 'dashboard']) // TODO: wait login animation and block button
+    })
+  }
+
+  signUpSubmit() {
+    if (this.SignUpForm.invalid) {
+      return
+    }
+
+    const user: User = {
+      name: this.SignUpForm.value.signupName,
+      login: this.SignUpForm.value.signupEmail,
+      password: this.SignUpForm.value.signupPassword
+    }
+
+    this.auth.signup(user).subscribe(() => {
+      this.displayGreeting = true;
     })
   }
 }

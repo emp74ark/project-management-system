@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { NgModule, Provider } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
@@ -10,7 +10,6 @@ import { BoardPageComponent } from "./board-page/board-page.component";
 import { UserLayoutComponent } from "./shared/components/user-layout/user-layout.component";
 import { AuthGuard } from "./shared/services/auth.guard";
 import { BoardService } from "./shared/services/boards.service";
-import { SignupPageComponent } from './signup-page/signup-page.component';
 import { BoardListComponent } from './board-list/board-list.component';
 import { ListService } from "./shared/services/lists.service";
 import { TaskService } from "./shared/services/tasks.service";
@@ -22,7 +21,6 @@ import { AUTH_INTERCEPTOR } from "./shared/interceptors";
   declarations: [
     UserLayoutComponent,
     LoginPageComponent,
-    SignupPageComponent,
     DashboardPageComponent,
     BoardPageComponent,
     BoardListComponent,
@@ -38,7 +36,6 @@ import { AUTH_INTERCEPTOR } from "./shared/interceptors";
         path: '', component: UserLayoutComponent, children: [
           {path: '', redirectTo: '/user/login', pathMatch: 'full'},
           {path: 'login', component: LoginPageComponent},
-          {path: 'signup', component: SignupPageComponent},
           {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
           {path: 'board/:id', component: BoardPageComponent, canActivate: [AuthGuard]}
         ]

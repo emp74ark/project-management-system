@@ -1,20 +1,23 @@
-<h2>Login</h2>
-<div class="login">
-  <form [formGroup]="LogInForm" (ngSubmit)="submit()">
+<div class="auth__mode">
+  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode}" (click)="authModeToggle()">Login</h2>
+  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode}" (click)="authModeToggle()">Sign up</h2>
+</div>
+<div class="login" *ngIf="authMode">
+  <form [formGroup]="LogInForm" (ngSubmit)="loginSubmit()">
     <div class="form-control">
       <label for="login__email">Email</label>
       <input
         type="email" 
         id="login__email" 
         placeholder="Email"
-        formControlName="email">
+        formControlName="loginEmail">
       <div
-        *ngIf="LogInForm.get('email')?.touched && LogInForm.get('email')?.invalid"
+        *ngIf="LogInForm.get('loginEmail')?.touched && LogInForm.get('loginEmail')?.invalid"
         class="validation">
-        <small *ngIf="LogInForm.get('email')?.errors?.['required']">
+        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['required']">
           Email is required
         </small>
-        <small *ngIf="LogInForm.get('email')?.errors?.['email']">
+        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['email']">
           Type correct email address
         </small>
       </div>
@@ -25,15 +28,15 @@
         type="password" 
         id="login__password" 
         placeholder="Password"
-        formControlName="password">
+        formControlName="loginPassword">
       <div
-        *ngIf="LogInForm.get('password')?.touched && LogInForm.get('password')?.invalid"
+        *ngIf="LogInForm.get('loginPassword')?.touched && LogInForm.get('loginPassword')?.invalid"
         class="validation"
         >
-        <small *ngIf="LogInForm.get('password')?.errors?.['required']">
+        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['required']">
           Password is required.
         </small>
-        <small *ngIf="LogInForm.get('password')?.errors?.['minlength']">
+        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['minlength']">
           Minimum password length is 6 symbols.
         </small>
       </div>
@@ -45,5 +48,85 @@
     <div class="form-control">
       <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
-    </form>
+  </form>
+</div>
+<div class="signup" *ngIf="!authMode">
+  <form [formGroup]="SignUpForm" (ngSubmit)="signUpSubmit()">
+    <div class="form-control">
+      <label for="signup__name">
+        Name
+      </label>
+      <input type="text" 
+        id="signup__name" 
+        placeholder="Name" 
+        formControlName="signupName">
+      <div
+        *ngIf="SignUpForm.get('signupName')?.touched && SignUpForm.get('signupName')?.invalid"
+        class="validation">
+        <small *ngIf="SignUpForm.get('signupName')?.errors?.['required']">
+          Name is required
+        </small>
+        <small *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']">
+          Your name is too short
+        </small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="signup__email">
+        Email
+      </label>
+      <input
+        type="email" 
+        id="signup__email" 
+        placeholder="Email"
+        formControlName="signupEmail">
+      <div
+        *ngIf="SignUpForm.get('signupEmail')?.touched && SignUpForm.get('signupEmail')?.invalid"
+        class="validation">
+        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['required']">
+          Email is required
+        </small>
+        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['email']">
+          Type correct email address
+        </small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="signup__password">
+        Password
+      </label>
+      <input
+        type="password" 
+        id="signup__password" 
+        placeholder="Password"
+        formControlName="signupPassword">
+      <div
+        *ngIf="SignUpForm.get('signupPassword')?.touched && SignUpForm.get('signupPassword')?.invalid"
+        class="validation"
+        >
+        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['required']">
+          Password is required.
+        </small>
+        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['minlength']">
+          Minimum password length is 6 symbols.
+        </small>
+      </div>
+    </div>
+    <button 
+      type="submit"
+      [disabled]="SignUpForm.invalid"
+      >Sing up
+    </button>
+    <div class="form-control">
+      <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+    </div>
+  </form>
+  <div *ngIf="displayGreeting">
+    <div class="modal__wrapper">
+    </div>
+    <div class="modal__message">
+      <h2>Registration successful!</h2>
+      <button (click)="hideGreeting()">Close</button>
+    </div>
+  </div>
 </div>

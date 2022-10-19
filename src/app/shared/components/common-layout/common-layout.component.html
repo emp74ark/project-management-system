@@ -13,8 +13,6 @@
         >About</a></li>
       <li *ngIf="!isAuthenticated()">
         <a [routerLink]="['user/login']">Login</a></li>
-      <li *ngIf="!isAuthenticated()">
-        <a [routerLink]="['user/signup']">Sign up</a></li>
       <li *ngIf="isAuthenticated()"><a 
         [routerLink]="['user', 'dashboard']"
         routerLinkActive="active"
