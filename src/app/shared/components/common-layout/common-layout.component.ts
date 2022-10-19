@@ -14,8 +14,7 @@ export class CommonLayoutComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   isAuthenticated(){
     return this.auth.authenticated

@@ -8,13 +8,15 @@
         [routerLinkActiveOptions]="{exact: true}"
         >Home</a></li>
       <li><a 
-        [routerLink]="['about']"
+        [routerLink]="['/about']"
         routerLinkActive="active"
         >About</a></li>
-      <li *ngIf="!isAuthenticated()">
-        <a [routerLink]="['user/login']">Login</a></li>
+      <li
+        *ngIf="!isAuthenticated()"
+        routerLinkActive="active">
+        <a [routerLink]="['/user/login']">Login</a></li>
       <li *ngIf="isAuthenticated()"><a 
-        [routerLink]="['user', 'dashboard']"
+        [routerLink]="['/user', 'dashboard']"
         routerLinkActive="active"
         >{{getLogin()}}</a></li>
       <li *ngIf="isAuthenticated()"><a 
@@ -28,6 +30,6 @@
   <router-outlet></router-outlet>
 </div>
 <footer>
-  <span class="footer__item">Github</span>
-  <span class="footer__item">UpSkill Me!</span>
+  <span class="footer__item"><a href="https://github.com/emp74ark" target="_blank">Github</a></span>
+  <span class="footer__item"><a href="https://learn.epam.com/start" target="_blank">UpSkill Me!</a></span>
 </footer>
