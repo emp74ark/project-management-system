@@ -23,6 +23,13 @@
         href="#" 
         (click)="logout($event)"
         >Logout</a></li>
+      <li>
+        <select
+          [(ngModel)]="selectedLocale"
+          (change)="changeLocale()">
+          <option [value]="locale.code" *ngFor="let locale of locales">{{locale.label}}</option>
+        </select>
+      </li>
     </ul>
   </nav>
 </header>

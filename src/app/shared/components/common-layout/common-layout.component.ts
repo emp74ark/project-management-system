@@ -7,7 +7,15 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './common-layout.component.html',
   styleUrls: ['./common-layout.component.scss']
 })
+
 export class CommonLayoutComponent implements OnInit {
+
+  locales = [
+    {label: 'English', code: 'en'},
+    {label: 'Русский', code: 'ru'}
+  ]
+
+  selectedLocale!: 'en'
 
   constructor(
     private auth: AuthService,
@@ -28,5 +36,9 @@ export class CommonLayoutComponent implements OnInit {
     event.preventDefault()
     this.auth.logout()
     this.router.navigate(['/user', 'login'])
+  }
+
+  changeLocale() {
+    console.log(this.selectedLocale)
   }
 }
