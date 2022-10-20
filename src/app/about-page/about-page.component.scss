@@ -1,3 +1,7 @@
 .about {
   display: flex;
+  gap: 1rem;
+}
+.about__item {
+  width: 50%;
 }

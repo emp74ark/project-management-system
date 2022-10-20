@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Board } from 'src/app/shared/interfaces';
+import { Board, Dictionary } from 'src/app/shared/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardService } from '../shared/services/boards.service';
 import { Observable, switchMap } from 'rxjs';
 import { UserService } from '../shared/services/users.service';
+import { TranslateService } from 'src/app/shared/services/translate.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -17,11 +18,28 @@ export class DashboardPageComponent implements OnInit {
   boardList$!: Observable<Board[]>
   boardEditable = false;
 
+  dic = [
+    'dashboard_title',
+    'dashboard_new',
+    "title",
+    "description",
+    "create",
+    "open",
+    "close",
+    "edit",
+    "save",
+    "delete",
+    "required",
+  ]
+  i18n: Dictionary = this.translate.get(this.dic)
+
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private boardService: BoardService,
-    private userService: UserService
+    private userService: UserService,
+    private translate: TranslateService
   ) {}
   
   ngOnInit(): void {
@@ -31,6 +49,11 @@ export class DashboardPageComponent implements OnInit {
     this.userService.getByLogin(localStorage.getItem('login')!).subscribe(
       user => {
         localStorage.setItem('userId', user.id!)
+      }
+    )
+    this.translate.locale.subscribe(
+      lang => {
+        this.i18n = this.translate.get(this.dic, lang)
       }
     )
   }

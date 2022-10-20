@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
-import { List } from 'src/app/shared/interfaces';
+import { Dictionary, List } from 'src/app/shared/interfaces';
 import { Task } from "src/app/shared/interfaces";
+import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 
@@ -25,12 +26,25 @@ export class BoardListComponent implements OnInit {
   listEditable = false
 
   createFormVisibility = false
+
+  dic = [
+    "task_new",
+    "title",
+    "description",
+    "edit",
+    "create",
+    "save",
+    "delete",
+    "cancel",
+  ]
+  i18n: Dictionary = this.translate.get(this.dic)
   
   constructor(
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private listService: ListService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +57,12 @@ export class BoardListComponent implements OnInit {
     
     this.taskService.getAll(this.boardId, this.list.id!).subscribe()
     this.tasks$ = this.taskService.getAll(this.boardId, this.list.id!)
+
+    this.translate.locale.subscribe(
+      lang => {
+        this.i18n = this.translate.get(this.dic, lang)
+      }
+    )
   }
 
   private _createForm() {

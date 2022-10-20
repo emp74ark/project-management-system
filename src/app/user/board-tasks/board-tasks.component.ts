@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { User, Task } from 'src/app/shared/interfaces';
+import { User, Task, Dictionary } from 'src/app/shared/interfaces';
+import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
@@ -24,11 +25,19 @@ export class BoardTasksComponent implements OnInit {
 
   boardId!: string
 
+  dic = [
+    "edit",
+    "save",
+    "delete"
+  ]
+  i18n: Dictionary = this.translate.get(this.dic)
+
   constructor(
     private listService: ListService,
     private taskService: TaskService,
     private userService: UserService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +50,12 @@ export class BoardTasksComponent implements OnInit {
     )
     
     this.user$ = this.userService.getUserById(this.task.userId)
+
+    this.translate.locale.subscribe(
+      lang => {
+        this.i18n = this.translate.get(this.dic, lang)
+      }
+    )
   }
 
   delete() {

@@ -1,9 +1,9 @@
-<h2>Dashboard</h2>
+<h2>{{i18n['dashboard_title']}}</h2>
 <form [formGroup]="DashboardForm" (ngSubmit)="create()">
   <div class="form-control">
-    <h3>Create new board</h3>
+    <h3>{{i18n['dashboard_new']}}</h3>
     <label for="dashboard__new">
-      Title
+      {{i18n['title']}}
     </label>
     <input 
       type="text" 
@@ -11,12 +11,12 @@
       placeholder="New board title"
       formControlName="title">
     <small *ngIf="DashboardForm.get('title')?.touched && DashboardForm.get('title')?.errors?.['required']">
-      Title is required
+      {{i18n['title']}} {{i18n['required']}}
     </small>
   </div>
   <div class="form-control">
     <label for="dashboard__new-description">
-      Description
+      {{i18n['description']}}
     </label>
     <input 
       type="text" 
@@ -24,7 +24,7 @@
       placeholder="New board description"
       formControlName="description">
   </div>
-  <button type="submit" [disabled]="DashboardForm.invalid">Create</button>
+  <button type="submit" [disabled]="DashboardForm.invalid">{{i18n['create']}}</button>
 </form>
 <div class="dashboard">
   <div class="dashboard__item" *ngFor="let board of boardList$ | async">
@@ -34,9 +34,9 @@
     <div class="project__description" [contentEditable]="boardEditable" #description>
       {{board.description}}
     </div>
-    <button (click)="open(board.id!)">Open</button>
-    <button (click)="edit()" *ngIf="!boardEditable">Edit</button>
-    <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">Save</button>
-    <button (click)="delete(board.id!)">Delete</button>
+    <button (click)="open(board.id!)">{{i18n['open']}}</button>
+    <button (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
+    <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
+    <button (click)="delete(board.id!)">{{i18n['delete']}}</button>
   </div>
 </div>

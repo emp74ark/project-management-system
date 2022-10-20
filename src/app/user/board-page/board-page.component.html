@@ -1,13 +1,13 @@
 <div *ngIf="board$ | async as board">
   <h2 [contentEditable]="boardEditable" #title >{{board.title}}</h2>
   <p [contentEditable]="boardEditable" #description >{{board.description}}</p>
-  <button (click)="edit()" *ngIf="!boardEditable">Edit</button>
-  <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">Save</button>
-  <button [routerLink]="['../../dashboard']">Go to dashboard</button>
+  <button (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
+  <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
+  <button [routerLink]="['../../dashboard']">{{i18n['board_back']}}</button>
   <form [formGroup]="BoardForm" (ngSubmit)="create()">
-    <label for="board__list">Create new list</label>
+    <label for="board__list">{{i18n['board_new']}}</label>
     <input type="text" id="board__list" placeholder="New list name" formControlName="title">
-    <button type="submit" [disabled]="BoardForm.invalid">Create</button>
+    <button type="submit" [disabled]="BoardForm.invalid">{{i18n['create']}}</button>
   </form>
   <div class="board" >
     <app-board-list 

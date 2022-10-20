@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/shared/interfaces';
+import { Dictionary, User } from 'src/app/shared/interfaces';
+import { TranslateService } from 'src/app/shared/services/translate.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -18,10 +19,28 @@ export class LoginPageComponent implements OnInit {
   
   displayGreeting: boolean;
 
+  dic = [
+    'email',
+    'name',
+    'password',
+    'login',
+    'signup',
+    'required',
+    'short',
+    'correct_email',
+    'correct_password',
+    'close',
+    'modal_registration',
+    'modal_loading',
+  ]
+
+  i18n: Dictionary = this.translate.get(this.dic)
+
   constructor(
     private fb: FormBuilder,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this._createLoginForm()
     this._createSignUpForm()
@@ -29,7 +48,13 @@ export class LoginPageComponent implements OnInit {
     this.displayGreeting = false;
    }
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.translate.locale.subscribe(
+      lang => {
+        this.i18n = this.translate.get(this.dic, lang)
+      }
+    )
+  }
 
   private _createLoginForm() {
     this.LogInForm = this.fb.group({
