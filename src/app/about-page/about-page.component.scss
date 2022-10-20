@@ -1,7 +1,15 @@
+@import '../shared/scss/variables.scss';
+
 .about {
+  margin: auto;
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
 }
 .about__item {
   width: 50%;
+  p {
+    img {
+      width: 100%;
+    }
+  }
 }

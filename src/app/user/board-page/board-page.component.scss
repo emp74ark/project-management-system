@@ -1,7 +1,24 @@
 .board {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form {
+  margin: auto;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lists {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
   margin: 1rem;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }

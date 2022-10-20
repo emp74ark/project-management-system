@@ -3,20 +3,21 @@
   draggable="true"
   (dragstart)="taskDragStartHandler($event)"
   (dragend)="taskDragEndHandler($event)">
-  <div class="task__title">
-    <h3 [contentEditable]="taskEditable" #title>{{task.title}}</h3>
-  </div>
+  <div class="task__title" [contentEditable]="taskEditable" #title>{{task.title}}</div>
   <div class="task__description" #description>
     <p [contentEditable]="taskEditable">{{task.description}}</p>
   </div>
   <div class="task__author">
     <small *ngIf="user$ | async as user">{{user.login}}</small>
   </div>
-  <button (click)="edit()" *ngIf="!taskEditable">{{i18n['edit']}}</button>
-  <button
-    (click)="save(task.id!, title.innerText, description.innerText, task.userId)"
-    *ngIf="taskEditable"
-    >{{i18n['save']}}
-  </button>
-  <button (click)="delete()">{{i18n['delete']}}</button>
+  <div class="buttons">
+    <button class="button" (click)="edit()" *ngIf="!taskEditable">{{i18n['edit']}}</button>
+    <button
+    class="button"
+      (click)="save(task.id!, title.innerText, description.innerText, task.userId)"
+      *ngIf="taskEditable"
+      >{{i18n['save']}}
+    </button>
+    <button class="button button-danger" (click)="delete()">{{i18n['delete']}}</button>
+  </div>
 </div>

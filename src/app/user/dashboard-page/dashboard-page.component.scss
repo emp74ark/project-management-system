@@ -1,13 +1,51 @@
+@import '../../shared/scss/variables.scss';
 form {
   margin: auto;
-  max-width: 30rem;
-}
-.form-control {
+  width: 30rem;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  gap: .5rem;
+  align-items: center;
+
+  h3 {
+    text-align: center;
+  }
 }
-small {
-  color: red;
+.form-control {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.dashboard__item {
+  margin: auto;
+  border: .1rem dashed $border-dark;
+  border-radius: .3rem;
+  width: 30rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+
+.project__title {
+  background: $background-dark;
+  padding: .5rem;
+  border-radius: .3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.project__description {
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
 }

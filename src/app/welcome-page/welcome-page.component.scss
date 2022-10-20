@@ -1,0 +1,17 @@
+@import '../shared/scss/variables.scss';
+
+.welcome {
+  margin: auto;
+  max-width: 60rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome__description {
+  img {
+    margin: auto;
+    display: block;
+    max-width: 50%;
+  }
+}
