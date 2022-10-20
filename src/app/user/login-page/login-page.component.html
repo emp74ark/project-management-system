@@ -14,10 +14,10 @@
       <div
         *ngIf="LogInForm.get('loginEmail')?.touched && LogInForm.get('loginEmail')?.invalid"
         class="validation">
-        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['required']">
+        <small class="danger" *ngIf="LogInForm.get('loginEmail')?.errors?.['required']">
           {{i18n['email']}} {{i18n['required']}}
         </small>
-        <small *ngIf="LogInForm.get('loginEmail')?.errors?.['email']">
+        <small class="danger" *ngIf="LogInForm.get('loginEmail')?.errors?.['email']">
           {{i18n['correct_email']}}
         </small>
       </div>
@@ -33,10 +33,10 @@
         *ngIf="LogInForm.get('loginPassword')?.touched && LogInForm.get('loginPassword')?.invalid"
         class="validation"
         >
-        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['required']">
+        <small class="danger" *ngIf="LogInForm.get('loginPassword')?.errors?.['required']">
           {{i18n['password']}} {{i18n['required']}}
         </small>
-        <small *ngIf="LogInForm.get('loginPassword')?.errors?.['minlength']">
+        <small class="danger" *ngIf="LogInForm.get('loginPassword')?.errors?.['minlength']">
           {{i18n['correct_password']}}
         </small>
       </div>
@@ -44,9 +44,10 @@
     <button 
       type="submit"
       [disabled]="LogInForm.invalid"
+      class="button button-auth"
       >{{i18n['login']}}</button>
     <div class="form-control">
-      <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+      <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
   </form>
   <div *ngIf="displayGreeting">
@@ -70,10 +71,10 @@
       <div
         *ngIf="SignUpForm.get('signupName')?.touched && SignUpForm.get('signupName')?.invalid"
         class="validation">
-        <small *ngIf="SignUpForm.get('signupName')?.errors?.['required']">
+        <small class="danger" *ngIf="SignUpForm.get('signupName')?.errors?.['required']">
           {{i18n['name']}}{{i18n['required']}}
         </small>
-        <small *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']">
+        <small class="danger" *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']">
           {{i18n['name']}} {{i18n['short']}}
         </small>
       </div>
@@ -90,10 +91,10 @@
       <div
         *ngIf="SignUpForm.get('signupEmail')?.touched && SignUpForm.get('signupEmail')?.invalid"
         class="validation">
-        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['required']">
+        <small class="danger" *ngIf="SignUpForm.get('signupEmail')?.errors?.['required']">
           {{i18n['email']}} {{i18n['required']}}
         </small>
-        <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['email']">
+        <small class="danger" *ngIf="SignUpForm.get('signupEmail')?.errors?.['email']">
           {{i18n['correct_email']}}
         </small>
       </div>
@@ -111,21 +112,22 @@
         *ngIf="SignUpForm.get('signupPassword')?.touched && SignUpForm.get('signupPassword')?.invalid"
         class="validation"
         >
-        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['required']">
+        <small class="danger" *ngIf="SignUpForm.get('signupPassword')?.errors?.['required']">
           {{i18n['password']}} {{i18n['required']}}
         </small>
-        <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['minlength']">
+        <small class="danger" *ngIf="SignUpForm.get('signupPassword')?.errors?.['minlength']">
           {{i18n['correct_password']}}
         </small>
       </div>
     </div>
     <button 
+      class="button button-auth"
       type="submit"
       [disabled]="SignUpForm.invalid"
       >{{i18n['signup']}}
     </button>
     <div class="form-control">
-      <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+      <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
   </form>
   <div *ngIf="displayGreeting">

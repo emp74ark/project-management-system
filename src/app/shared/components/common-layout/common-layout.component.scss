@@ -1,31 +1,41 @@
+@import '../../scss/variables.scss';
+
 header {
-  height: 4rem;
-  background: #ccc;
+  height: 5rem;
+  background: $background-dark;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 1rem 2rem;
+  border-radius: .5rem .5rem 0 0;
 }
 nav {
+  font-size: 2rem;
   ul {
     li {
       display: inline-block;
       margin: 1rem;
+      a {
+        color: $font-accent;
+      }
     }
   }
 }
 footer {
-  height: 3rem;
-  background: #ccc;
+  height: 5rem;
+  background: $background-dark;
   display: flex;
   align-items: center;
   justify-content: center;
   .footer__item {
     margin: 1rem;
+    font-size: 2rem;
   }
+  padding: 1rem 2rem;
+  border-radius: 0 0 .5rem .5rem;
 }
 .container {
-  min-height: calc(100vh - 10rem);
+  min-height: calc(100vh - 18rem);
   padding: 1rem;
 }
 .active {

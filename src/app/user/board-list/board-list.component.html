@@ -6,14 +6,17 @@
   (dragleave)="taskDragLeaveHandler($event)">
 
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
-  <button (click)="editList()" *ngIf="!listEditable" >{{i18n['edit']}}</button>
-  <button (click)="saveList(title.innerText)" *ngIf="listEditable">{{i18n['save']}}</button>
-  <button (click)="deleteList()">{{i18n['delete']}}</button>
-  <button 
-    (click)="createFormOpen()" 
-    *ngIf="!createFormVisibility"
-    >{{i18n['task_new']}}
-  </button>
+  <div class="buttons">
+    <button  class="button" (click)="editList()" *ngIf="!listEditable" >{{i18n['edit']}}</button>
+    <button  class="button" (click)="saveList(title.innerText)" *ngIf="listEditable">{{i18n['save']}}</button>
+    <button  class="button button-danger" (click)="deleteList()">{{i18n['delete']}}</button>
+    <button
+      class="button"
+      (click)="createFormOpen()" 
+      *ngIf="!createFormVisibility"
+      >{{i18n['task_new']}}
+    </button>
+  </div>
   <form 
     *ngIf="createFormVisibility"
     [formGroup]="TaskForm"

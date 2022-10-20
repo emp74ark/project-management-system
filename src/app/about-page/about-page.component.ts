@@ -9,7 +9,7 @@ import { TranslateService } from '../shared/services/translate.service';
 })
 export class AboutPageComponent implements OnInit {
 
-  dic = ['about_title', 'about_text1', 'about_text2']
+  dic = ['about_title', 'about_text1', 'about_text2', 'about_text3', 'about_text4', 'about_text5']
   i18n: Dictionary = this.translate.get(this.dic)
 
   constructor(

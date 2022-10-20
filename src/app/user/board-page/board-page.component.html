@@ -1,15 +1,17 @@
-<div *ngIf="board$ | async as board">
+<div *ngIf="board$ | async as board" class="board">
   <h2 [contentEditable]="boardEditable" #title >{{board.title}}</h2>
-  <p [contentEditable]="boardEditable" #description >{{board.description}}</p>
-  <button (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
-  <button (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
-  <button [routerLink]="['../../dashboard']">{{i18n['board_back']}}</button>
+  <h3 [contentEditable]="boardEditable" #description >{{board.description}}</h3>
+  <div class="buttons">
+    <button class="button" (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
+    <button class="button" (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
+    <button class="button" [routerLink]="['../../dashboard']">{{i18n['board_back']}}</button>
+  </div>
   <form [formGroup]="BoardForm" (ngSubmit)="create()">
     <label for="board__list">{{i18n['board_new']}}</label>
     <input type="text" id="board__list" placeholder="{{i18n['board_new']}}" formControlName="title">
-    <button type="submit" [disabled]="BoardForm.invalid">{{i18n['create']}}</button>
+    <button class="button" type="submit" [disabled]="BoardForm.invalid">{{i18n['create']}}</button>
   </form>
-  <div class="board" >
+  <div class="lists" >
     <app-board-list 
       *ngFor="let list of lists$ | async" 
       [list]="list"
