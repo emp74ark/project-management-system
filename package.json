@@ -5,10 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "start-ru": "ng serve --configuration=ru",
-    "start-en": "ng serve --configuration=en",
     "build": "ng build",
-    "build-ru": "ng build --configuration=production,ru",
-    "build-en": "ng build --configuration=production,en",
+    "build-localize": "ng build --localize",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

@@ -10,14 +10,6 @@
         </context-group>
         <target>Что такое kanban доска?</target>
       </trans-unit>
-      <trans-unit id="5501240856740476904" datatype="html">
-        <source> A kanban board is an agile project management tool designed to help visualize work, limit work-in-progress, and maximize efficiency (or flow). It can help both agile and DevOps teams establish order in their daily work. Kanban boards use cards, columns, and continuous improvement to help technology and service teams commit to the right amount of work, and get it done! </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about-page/about-page.component.html</context>
-          <context context-type="linenumber">3,11</context>
-        </context-group>
-        <target>Канбан-доска — это гибкий инструмент управления проектами, предназначенный для визуализации работы, ограничения незавершенной работы и максимизации эффективности (или потока). Это может помочь командам Agile и DevOps навести порядок в своей повседневной работе. Канбан-доски используют карточки, столбцы и постоянное совершенствование, чтобы помочь командам, занимающимся технологиями и обслуживанием, выполнить нужный объем работы и выполнить ее!</target>
-      </trans-unit>
       <trans-unit id="2177996849846300372" datatype="html">
         <source>kanban</source>
         <context-group purpose="location">
@@ -25,14 +17,6 @@
           <context context-type="linenumber">11</context>
         </context-group>
         <target>канбан</target>
-      </trans-unit>
-      <trans-unit id="5332723693152518342" datatype="html">
-        <source> By dividing the project into small tasks, you simplify the work process and the ability to divide the project between employees of different levels, capabilities and qualifications. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about-page/about-page.component.html</context>
-          <context context-type="linenumber">13,17</context>
-        </context-group>
-        <target>Разделяя проект на небольшие задачи - Вы упрощаете поцесс работы и возможность поделить проект между сотрудниками разного уровня, возможностей и квалификации.</target>
       </trans-unit>
       <trans-unit id="2821179408673282599" datatype="html">
         <source>Home</source>
@@ -474,14 +458,6 @@
         </context-group>
         <target>Наше приложение управление проектами - успех работы вашей команды.</target>
       </trans-unit>
-      <trans-unit id="6618451771552029976" datatype="html">
-        <source> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis ad sapiente, minima iusto inventore velit natus accusantium. Provident, rerum natus error laborum tempora dolore in veritatis obcaecati, nihil eius quisquam ab a possimus facere recusandae soluta! Soluta eius modi velit ipsa perferendis quidem recusandae error. Debitis aut molestiae repellendus hic. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/welcome-page/welcome-page.component.html</context>
-          <context context-type="linenumber">7,9</context>
-        </context-group>
-        <target>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. </target>
-      </trans-unit>
       <trans-unit id="1086089060464522984" datatype="html">
         <source>skill</source>
         <context-group purpose="location">
@@ -513,6 +489,32 @@
           <context context-type="linenumber">5</context>
         </context-group>
         <target>достижение</target>
+      </trans-unit>
+      <trans-unit id="5915355508213152675" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+        <source> A kanban board is an agile project management tool designed to help visualize work, limit work-in-progress, and maximize efficiency (or flow). It can help both agile and DevOps teams establish order in their daily work. Kanban boards use cards, columns, and continuous improvement to help technology and service teams commit to the right amount of work, and get it done! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/about-page/about-page.component.html</context>
+          <context context-type="linenumber">3,11</context>
+        </context-group>
+        <target>Канбан-доска — это гибкий инструмент управления проектами, предназначенный для визуализации работы, ограничения незавершенной работы и максимизации эффективности (или потока). Это может помочь командам Agile и DevOps навести порядок в своей повседневной работе. Канбан-доски используют карточки, столбцы и постоянное совершенствование, чтобы помочь командам, занимающимся технологиями и обслуживанием, выполнить нужный объем работы и выполнить ее!</target>
+      </trans-unit>
+      <trans-unit id="7870079565951616166" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+        <source> By dividing the project into small tasks, you simplify the work process and the ability to divide the project between employees of different levels, capabilities and qualifications. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/about-page/about-page.component.html</context>
+          <context context-type="linenumber">13,17</context>
+        </context-group>
+        <target>Разделяя проект на небольшие задачи - Вы упрощаете поцесс работы и возможность поделить проект между сотрудниками разного уровня, возможностей и квалификации.</target>
+      </trans-unit>
+      <trans-unit id="73400554490487666" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+        <source>
+          <img src="assets/images/skill.png" alt="skill" i18n-alt="i18n-alt"></img>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/welcome-page/welcome-page.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+        <target></target>
       </trans-unit>
     </body>
   </file>

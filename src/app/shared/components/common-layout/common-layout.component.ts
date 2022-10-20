@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -12,21 +12,20 @@ export class CommonLayoutComponent implements OnInit {
 
   SearchForm!: FormGroup;
   
+  selectedLocale!: string
+
+  localeList = [
+    {label: 'English', code: 'en'},
+    {label: 'Русский', code: 'ru'}
+  ]
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    @Inject(LOCALE_ID) private localeId: string
   ) { }
-  
-  public selectedLocale: string=this.localeId
-  public locales: any = [
-    {name: "English", code: "en-US"},
-    {name: "Russian", code: "ru-RU"},
-  ]
     
   ngOnInit(): void {
-    console.log(this.selectedLocale)
     this._createForm()
   }
 
@@ -44,9 +43,8 @@ export class CommonLayoutComponent implements OnInit {
     return localStorage.getItem('login')
   }
 
-  changePath(code: string) {
-    location.replace(`/${code}/`)
-    console.log(code)
+  changeLocale() {
+    console.log(this.selectedLocale)
   }
 
   logout(event: Event) {

@@ -14,15 +14,10 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": "en",
         "locales": {
           "ru": {
-            "translation": "src/locale/messages.ru.xlf",
-            "baseHref": "/ru-RU/"
-          },
-          "en": {
-            "translation": "src/locale/messages.en.xlf",
-            "baseHref": "/en-US/"
+            "translation": "src/locale/messages.ru.xlf"
           }
         }
       },
@@ -49,12 +44,7 @@
           },
           "configurations": {
             "ru": {
-              "localize": ["ru"],
-              "baseHref": "/ru-RU/"
-            },
-            "en": {
-              "localize": ["en"],
-              "baseHref": "/en-US/"
+              "localize": ["ru"]
             },
             "production": {
               "budgets": [
@@ -93,9 +83,6 @@
           "configurations": {
             "ru": {
               "browserTarget": "project-management-system:build:development,ru"
-            },
-            "en": {
-              "browserTarget": "project-management-system:build:development,en"
             },
             "production": {
               "browserTarget": "project-management-system:build:production"

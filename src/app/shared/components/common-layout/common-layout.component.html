@@ -32,11 +32,14 @@
       </li>
       <li>
         <select 
-          name="selectedLocale" 
-          id="selectedLocale"
-          (change)="changePath(selectedLocale)"
+          name="locale" 
           [(ngModel)]="selectedLocale">
-          <option [value]="locale.code" *ngFor="let locale of locales">{{locale.name}}</option>
+          (change)="changeLocale()"
+          <option
+            [value]="locale.code"
+            *ngFor="let locale of localeList"
+            >{{locale.label}}
+          </option>
         </select>
       </li>
     </ul>
