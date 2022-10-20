@@ -12,11 +12,11 @@
   <div class="task__author">
     <small *ngIf="user$ | async as user">{{user.login}}</small>
   </div>
-  <button (click)="edit()" *ngIf="!taskEditable">Edit</button>
+  <button (click)="edit()" *ngIf="!taskEditable">{{i18n['edit']}}</button>
   <button
     (click)="save(task.id!, title.innerText, description.innerText, task.userId)"
     *ngIf="taskEditable"
-    >Save
+    >{{i18n['save']}}
   </button>
-  <button (click)="delete()">Delete</button>
+  <button (click)="delete()">{{i18n['delete']}}</button>
 </div>

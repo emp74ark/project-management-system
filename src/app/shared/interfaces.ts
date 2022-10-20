@@ -30,3 +30,5 @@ export interface Task {
   boardId?: string,
   columnId?: string,
 }
+
+export interface Dictionary {[index: string]: string}

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Board, List } from 'src/app/shared/interfaces';
+import { Board, Dictionary, List } from 'src/app/shared/interfaces';
 import { ListService } from '../shared/services/lists.service';
 import { BoardService } from '../shared/services/boards.service';
 import { Observable, switchMap } from 'rxjs';
+import { TranslateService } from 'src/app/shared/services/translate.service';
 
 @Component({
   selector: 'app-board-page',
@@ -20,11 +21,27 @@ export class BoardPageComponent implements OnInit {
   
   lists$!: Observable<List[]>
 
+  dic = [
+    "board_back",
+    "board_new",
+    "title",
+    "description",
+    "create",
+    "open",
+    "close",
+    "edit",
+    "save",
+    "delete",
+    "required",
+  ]
+  i18n: Dictionary = this.translate.get(this.dic)
+
   constructor(
     private fb: FormBuilder,
     private boardService: BoardService,
     private listService: ListService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +62,12 @@ export class BoardPageComponent implements OnInit {
 
     this.listService.getAll(this.boardId).subscribe()
     this.lists$ = this.listService.listStream
+
+    this.translate.locale.subscribe(
+      lang => {
+        this.i18n = this.translate.get(this.dic, lang)
+      }
+    )
   }
 
   private _createForm() {

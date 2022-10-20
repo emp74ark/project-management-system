@@ -8,6 +8,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { CommonLayoutComponent } from './shared/components/common-layout/common-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './shared/services/auth.guard';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,12 @@ import { AuthGuard } from './shared/services/auth.guard';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     SharedModule
   ],
   providers: [
     AuthGuard, 
-    // AUTH_INTERCEPTOR,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,20 +1,20 @@
 <header>
-  <h1><a [routerLink]="['/']">Project management</a></h1>
+  <h1><a [routerLink]="['/']">PMA</a></h1>
   <nav>
     <ul>
       <li><a 
         [routerLink]="['/']"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}"
-        >Home</a></li>
+        >{{i18n['common_home']}}</a></li>
       <li><a 
         [routerLink]="['/about']"
         routerLinkActive="active"
-        >About</a></li>
+        >{{i18n['common_about']}}</a></li>
       <li
         *ngIf="!isAuthenticated()"
         routerLinkActive="active">
-        <a [routerLink]="['/user/login']">Login</a></li>
+        <a [routerLink]="['/user/login']">{{i18n['common_login']}}</a></li>
       <li *ngIf="isAuthenticated()"><a 
         [routerLink]="['/user', 'dashboard']"
         routerLinkActive="active"
@@ -22,7 +22,14 @@
       <li *ngIf="isAuthenticated()"><a 
         href="#" 
         (click)="logout($event)"
-        >Logout</a></li>
+        >{{i18n['common_logout']}}</a></li>
+      <li>
+        <select
+          [(ngModel)]="selectedLocale"
+          (change)="changeLocale()">
+          <option [value]="locale.code" *ngFor="let locale of locales">{{locale.label}}</option>
+        </select>
+      </li>
     </ul>
   </nav>
 </header>

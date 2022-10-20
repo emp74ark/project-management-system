@@ -1,50 +1,50 @@
 <div class="auth__mode">
-  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode}" (click)="authModeToggle()">Login</h2>
-  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode}" (click)="authModeToggle()">Sign up</h2>
+  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode}" (click)="authModeToggle()">{{i18n['login']}}</h2>
+  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode}" (click)="authModeToggle()">{{i18n['signup']}}</h2>
 </div>
 <div class="login" *ngIf="authMode">
   <form [formGroup]="LogInForm" (ngSubmit)="loginSubmit()">
     <div class="form-control">
-      <label for="login__email">Email</label>
+      <label for="login__email" #email>{{i18n['email']}}</label>
       <input
         type="email" 
         id="login__email" 
-        placeholder="Email"
+        placeholder="{{i18n['email']}}"
         formControlName="loginEmail">
       <div
         *ngIf="LogInForm.get('loginEmail')?.touched && LogInForm.get('loginEmail')?.invalid"
         class="validation">
         <small *ngIf="LogInForm.get('loginEmail')?.errors?.['required']">
-          Email is required
+          {{i18n['email']}} {{i18n['required']}}
         </small>
         <small *ngIf="LogInForm.get('loginEmail')?.errors?.['email']">
-          Type correct email address
+          {{i18n['correct_email']}}
         </small>
       </div>
     </div>
     <div class="form-control">
-      <label for="login__password">Password</label>
+      <label for="login__password">{{i18n['password']}}</label>
       <input
         type="password" 
         id="login__password" 
-        placeholder="Password"
+        placeholder="{{i18n['password']}}"
         formControlName="loginPassword">
       <div
         *ngIf="LogInForm.get('loginPassword')?.touched && LogInForm.get('loginPassword')?.invalid"
         class="validation"
         >
         <small *ngIf="LogInForm.get('loginPassword')?.errors?.['required']">
-          Password is required.
+          {{i18n['password']}} {{i18n['required']}}
         </small>
         <small *ngIf="LogInForm.get('loginPassword')?.errors?.['minlength']">
-          Minimum password length is 6 symbols.
+          {{i18n['correct_password']}}
         </small>
       </div>
     </div>
     <button 
       type="submit"
       [disabled]="LogInForm.invalid"
-      >Login</button>
+      >{{i18n['login']}}</button>
     <div class="form-control">
       <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
@@ -53,7 +53,7 @@
     <div class="modal__wrapper">
     </div>
     <div class="modal__message">
-      <h2>Loading</h2>
+      <h2>{{i18n['modal_loading']}}</h2>
     </div>
   </div>
 </div>
@@ -61,68 +61,68 @@
   <form [formGroup]="SignUpForm" (ngSubmit)="signUpSubmit()">
     <div class="form-control">
       <label for="signup__name">
-        Name
+        {{i18n['name']}}
       </label>
       <input type="text" 
         id="signup__name" 
-        placeholder="Name" 
+        placeholder="{{i18n['name']}}"
         formControlName="signupName">
       <div
         *ngIf="SignUpForm.get('signupName')?.touched && SignUpForm.get('signupName')?.invalid"
         class="validation">
         <small *ngIf="SignUpForm.get('signupName')?.errors?.['required']">
-          Name is required
+          {{i18n['name']}}{{i18n['required']}}
         </small>
         <small *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']">
-          Your name is too short
+          {{i18n['name']}} {{i18n['short']}}
         </small>
       </div>
     </div>
     <div class="form-control">
       <label for="signup__email">
-        Email
+        {{i18n['email']}}
       </label>
       <input
         type="email" 
         id="signup__email" 
-        placeholder="Email"
+        placeholder="{{i18n['email']}}"
         formControlName="signupEmail">
       <div
         *ngIf="SignUpForm.get('signupEmail')?.touched && SignUpForm.get('signupEmail')?.invalid"
         class="validation">
         <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['required']">
-          Email is required
+          {{i18n['email']}} {{i18n['required']}}
         </small>
         <small *ngIf="SignUpForm.get('signupEmail')?.errors?.['email']">
-          Type correct email address
+          {{i18n['correct_email']}}
         </small>
       </div>
     </div>
     <div class="form-control">
       <label for="signup__password">
-        Password
+        {{i18n['password']}}
       </label>
       <input
         type="password" 
         id="signup__password" 
-        placeholder="Password"
+        placeholder="{{i18n['password']}}"
         formControlName="signupPassword">
       <div
         *ngIf="SignUpForm.get('signupPassword')?.touched && SignUpForm.get('signupPassword')?.invalid"
         class="validation"
         >
         <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['required']">
-          Password is required.
+          {{i18n['password']}} {{i18n['required']}}
         </small>
         <small *ngIf="SignUpForm.get('signupPassword')?.errors?.['minlength']">
-          Minimum password length is 6 symbols.
+          {{i18n['correct_password']}}
         </small>
       </div>
     </div>
     <button 
       type="submit"
       [disabled]="SignUpForm.invalid"
-      >Sing up
+      >{{i18n['signup']}}
     </button>
     <div class="form-control">
       <small *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
@@ -132,8 +132,8 @@
     <div class="modal__wrapper">
     </div>
     <div class="modal__message">
-      <h2>Registration successful!</h2>
-      <button (click)="hideGreeting()">Close</button>
+      <h2>{{i18n['modal_registration']}}</h2>
+      <button (click)="hideGreeting()">{{i18n['close']}}</button>
     </div>
   </div>
 </div>
