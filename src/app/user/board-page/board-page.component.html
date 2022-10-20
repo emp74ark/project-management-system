@@ -6,7 +6,7 @@
   <button [routerLink]="['../../dashboard']">{{i18n['board_back']}}</button>
   <form [formGroup]="BoardForm" (ngSubmit)="create()">
     <label for="board__list">{{i18n['board_new']}}</label>
-    <input type="text" id="board__list" placeholder="New list name" formControlName="title">
+    <input type="text" id="board__list" placeholder="{{i18n['board_new']}}" formControlName="title">
     <button type="submit" [disabled]="BoardForm.invalid">{{i18n['create']}}</button>
   </form>
   <div class="board" >

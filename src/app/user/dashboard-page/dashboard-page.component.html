@@ -3,12 +3,12 @@
   <div class="form-control">
     <h3>{{i18n['dashboard_new']}}</h3>
     <label for="dashboard__new">
-      {{i18n['title']}}
+      {{i18n['dashboard_new']}}
     </label>
     <input 
       type="text" 
       id="dashboard__new-title" 
-      placeholder="New board title"
+      placeholder="{{i18n['dashboard_new']}}"
       formControlName="title">
     <small *ngIf="DashboardForm.get('title')?.touched && DashboardForm.get('title')?.errors?.['required']">
       {{i18n['title']}} {{i18n['required']}}
@@ -21,7 +21,7 @@
     <input 
       type="text" 
       id="dashboard__new-description" 
-      placeholder="New board description"
+      placeholder="{{i18n['description']}}"
       formControlName="description">
   </div>
   <button type="submit" [disabled]="DashboardForm.invalid">{{i18n['create']}}</button>

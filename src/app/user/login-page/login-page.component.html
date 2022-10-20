@@ -5,11 +5,11 @@
 <div class="login" *ngIf="authMode">
   <form [formGroup]="LogInForm" (ngSubmit)="loginSubmit()">
     <div class="form-control">
-      <label for="login__email">{{i18n['email']}}</label>
+      <label for="login__email" #email>{{i18n['email']}}</label>
       <input
         type="email" 
         id="login__email" 
-        placeholder="Email"
+        placeholder="{{i18n['email']}}"
         formControlName="loginEmail">
       <div
         *ngIf="LogInForm.get('loginEmail')?.touched && LogInForm.get('loginEmail')?.invalid"
@@ -27,7 +27,7 @@
       <input
         type="password" 
         id="login__password" 
-        placeholder="Password"
+        placeholder="{{i18n['password']}}"
         formControlName="loginPassword">
       <div
         *ngIf="LogInForm.get('loginPassword')?.touched && LogInForm.get('loginPassword')?.invalid"
@@ -65,7 +65,7 @@
       </label>
       <input type="text" 
         id="signup__name" 
-        placeholder="Name"
+        placeholder="{{i18n['name']}}"
         formControlName="signupName">
       <div
         *ngIf="SignUpForm.get('signupName')?.touched && SignUpForm.get('signupName')?.invalid"
@@ -74,7 +74,7 @@
           {{i18n['name']}}{{i18n['required']}}
         </small>
         <small *ngIf="SignUpForm.get('signupName')?.errors?.['minlength']">
-          {{i18n['name']}}{{i18n['short']}}
+          {{i18n['name']}} {{i18n['short']}}
         </small>
       </div>
     </div>
@@ -85,7 +85,7 @@
       <input
         type="email" 
         id="signup__email" 
-        placeholder="Email"
+        placeholder="{{i18n['email']}}"
         formControlName="signupEmail">
       <div
         *ngIf="SignUpForm.get('signupEmail')?.touched && SignUpForm.get('signupEmail')?.invalid"
@@ -105,7 +105,7 @@
       <input
         type="password" 
         id="signup__password" 
-        placeholder="Password"
+        placeholder="{{i18n['password']}}"
         formControlName="signupPassword">
       <div
         *ngIf="SignUpForm.get('signupPassword')?.touched && SignUpForm.get('signupPassword')?.invalid"

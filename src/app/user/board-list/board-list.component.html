@@ -23,15 +23,15 @@
       <input 
         type="text" 
         id="task__name" 
-        placeholder="New task title"
+        placeholder="{{i18n['title']}}"
         formControlName="title">
     </div>
     <div class="form-control">
-      <label for="task__description">{{i18n['description']}}</label>
+      <label for="task__description">{{i18n['title']}}</label>
       <input 
         type="text" 
         id="task__description" 
-        placeholder="New task description"
+        placeholder="{{i18n['title']}}"
         formControlName="description">
     </div>
     <button type="submit" [disabled]="TaskForm.invalid">{{i18n['save']}}</button>
