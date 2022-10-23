@@ -38,5 +38,6 @@
   "board_new": "Create new list",
   "task_new": "Create",
   "auth_403": "Email or password is wrong",
-  "auth_409": "User already exists!"
+  "auth_409": "User already exists!",
+  "user_select": "Select user"
 }

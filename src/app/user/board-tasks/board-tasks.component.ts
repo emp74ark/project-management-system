@@ -16,19 +16,21 @@ export class BoardTasksComponent implements OnInit {
 
   @Input()
 
-  task!: Task // get from board-list.component (is, title, order, description, userId)
+  task!: Task
 
   taskEditable = false;
 
-  users$!: Observable<User[]> // TODO: add ability to change or assign user
+  users$!: Observable<User[]>
   user$!: Observable<User>
+  userSelect = 'none'
 
   boardId!: string
 
   dic = [
     "edit",
     "save",
-    "delete"
+    "delete",
+    "user_select"
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 
@@ -68,10 +70,10 @@ export class BoardTasksComponent implements OnInit {
     this.taskEditable = true
   }
 
-  save(id: string, title: string, description: string, user: string){
+  save(id: string, order: number, title: string, description: string, user: string){
     const task: Task = {
       id: id,
-      order: 1, // TODO: task ordering
+      order: order,
       title: title,
       description: description,
       userId: user,
@@ -79,7 +81,10 @@ export class BoardTasksComponent implements OnInit {
     }
     this.taskEditable = false
     this.taskService.edit(this.boardId, task)
-      .pipe(switchMap(() => this.taskService.getAll(this.boardId, task.columnId!)))
+      .pipe(
+        switchMap(() => this.taskService.getAll(this.boardId, task.columnId!)),
+        switchMap(() => this.user$ = this.userService.getUserById(this.userSelect))
+      )
       .subscribe()
   }
 

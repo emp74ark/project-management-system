@@ -7,14 +7,34 @@
   <div class="task__description" #description>
     <p [contentEditable]="taskEditable">{{task.description}}</p>
   </div>
-  <div class="task__author">
+  <div class="task__author" *ngIf="!taskEditable">
     <small *ngIf="user$ | async as user">{{user.login}}</small>
   </div>
+  <div class="task__author" *ngIf="taskEditable">
+    <select
+      name="task__author"
+      id="task__author"
+      [(ngModel)]="userSelect"
+      >
+      <option value='none' disabled>
+        {{i18n['user_select']}}
+      </option>
+      <option *ngFor="let user of users$ | async"
+        value={{user.id}}>
+        {{user.login}}
+      </option>
+    </select>
+  </div>
   <div class="buttons">
-    <button class="btn btn-edit" (click)="edit()" *ngIf="!taskEditable">{{i18n['edit']}}</button>
+    <button 
+      class="btn btn-edit" 
+      (click)="edit()" 
+      *ngIf="!taskEditable">
+      {{i18n['edit']}}
+    </button>
     <button
     class="btn btn-save"
-      (click)="save(task.id!, title.innerText, description.innerText, task.userId)"
+      (click)="save(task.id!, task.order!, title.innerText, description.innerText, userSelect)"
       *ngIf="taskEditable"
       >{{i18n['save']}}
     </button>
