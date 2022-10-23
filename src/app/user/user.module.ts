@@ -16,6 +16,7 @@ import { UserService } from "./shared/services/users.service";
 import { BoardTasksComponent } from './board-tasks/board-tasks.component';
 import { AUTH_INTERCEPTOR } from "./shared/interceptors";
 import { CommonLayoutComponent } from "../shared/components/common-layout/common-layout.component";
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CommonLayoutComponent } from "../shared/components/common-layout/common
     BoardPageComponent,
     BoardListComponent,
     BoardTasksComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { CommonLayoutComponent } from "../shared/components/common-layout/common
         path: '', component: CommonLayoutComponent, children: [
           {path: '', redirectTo: '/user/login', pathMatch: 'full'},
           {path: 'login', component: LoginPageComponent},
+          {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
           {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
           {path: 'board/:id', component: BoardPageComponent, canActivate: [AuthGuard]}
         ]

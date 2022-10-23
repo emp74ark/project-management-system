@@ -5,6 +5,9 @@ import { AuthResponse, Dictionary, User } from "src/app/shared/interfaces";
 import { environment } from "src/environments/environment";
 import { TranslateService } from "./translate.service";
 
+// TODO: If there is an unexpired token, the user should be redirected to the "Main route" of the application automatically.
+// TODO: When the token expires - the user should be redirected to the "Welcome page" automatically.
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
   dic = ['auth_403', 'auth_409']
@@ -48,8 +51,7 @@ export class AuthService {
             localStorage.setItem('token', response.token)
           }
         ),
-        catchError<any, any>(this.errorHandle.bind(this)),
-
+        catchError<any, any>(this.errorHandle.bind(this)), // BUG: 403 under the modal
       )
    }
 

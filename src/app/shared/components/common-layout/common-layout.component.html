@@ -18,6 +18,10 @@
       <li *ngIf="isAuthenticated()"><a 
         [routerLink]="['/user', 'dashboard']"
         routerLinkActive="active"
+        >{{i18n['dashboard_title']}}</a></li>
+      <li *ngIf="isAuthenticated()"><a 
+        [routerLink]="['/user', 'profile']"
+        routerLinkActive="active"
         >{{getLogin()}}</a></li>
       <li *ngIf="isAuthenticated()"><a 
         href="#" 

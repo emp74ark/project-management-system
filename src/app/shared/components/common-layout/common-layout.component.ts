@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Dictionary } from '../../interfaces';
 import { TranslateService } from '../../services/translate.service';
@@ -23,7 +22,7 @@ export class CommonLayoutComponent implements OnInit {
   
   selectedLocale = this.translate.currentLocale // start value
 
-  dic = ['common_home', 'common_about', 'common_login', 'common_logout']
+  dic = ['common_home', 'common_about', 'common_login', 'common_logout', 'dashboard_title']
   i18n: Dictionary = this.translate.get(this.dic)
 
   ngOnInit(): void {

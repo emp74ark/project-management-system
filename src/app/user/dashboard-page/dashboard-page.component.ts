@@ -90,7 +90,7 @@ export class DashboardPageComponent implements OnInit {
     this.boardService.delete(id)
       .pipe(switchMap(() => this.boardService.getList()))
       .subscribe()
-    
+    // TODO: confirmation modal window
   }
 
   checkEditableStatus(boardId: string) {

@@ -26,4 +26,18 @@ export class UserService {
         )
       )
   }
+  
+  edit(id: string, user: User): Observable<User> {
+    return this.http.put<User>(`${environment.base_url}/users/${id}`, user)
+  } 
+
+  delete(id: string): Observable<User> {
+    console.log('delete')
+    return this.http.delete<User>(`${environment.base_url}/users/${id}`)
+      .pipe(
+        tap(
+          res => console.log(res)
+        )
+      )
+  } 
 }

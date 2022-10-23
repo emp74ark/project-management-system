@@ -32,6 +32,7 @@
   "correct_password": "Minimum password length is 6 symbols.",
   "modal_registration": "Registration successful!",
   "modal_loading": "Loading...",
+  "modal_saved": "Data was saved",
   "dashboard_title": "Dashboard",
   "dashboard_new": "Create new board",
   "board_back": "Go to dashboard",
@@ -39,5 +40,8 @@
   "task_new": "Create",
   "auth_403": "Email or password is wrong",
   "auth_409": "User already exists!",
-  "user_select": "Select user"
+  "user_select": "Select user",
+  "profile": "Profile",
+  "repeat": "(repeat)",
+  "mismatch_passwords": "Passwords does not match"
 }

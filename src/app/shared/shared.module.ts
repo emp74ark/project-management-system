@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { TranslatePipe } from './pipes/translate.pipe'
 
 @NgModule({
   imports: [
@@ -10,7 +9,6 @@ import { TranslatePipe } from './pipes/translate.pipe'
     HttpClientModule
   ],
   declarations: [
-    TranslatePipe
   ]
 })
 
