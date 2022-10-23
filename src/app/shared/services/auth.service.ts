@@ -1,14 +1,25 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, Subject, tap, throwError} from "rxjs";
-import { AuthResponse, User } from "src/app/shared/interfaces";
+import { AuthResponse, Dictionary, User } from "src/app/shared/interfaces";
 import { environment } from "src/environments/environment";
+import { TranslateService } from "./translate.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+  dic = ['auth_403', 'auth_409']
+  i18n: Dictionary = this.translate.get(this.dic)
+
   constructor(
     private http: HttpClient,
-  ) {}
+    private translate: TranslateService
+  ) {
+    this.translate.locale.subscribe(
+      lang => {
+        this.i18n = this.translate.get(this.dic, lang)
+      }
+    )
+  }
 
   public authenticated = false
 
@@ -16,13 +27,12 @@ export class AuthService {
   
   private errorHandle(error: HttpErrorResponse){
     const { statusCode } = error.error
-    console.log(statusCode)
     switch(statusCode) {
       case 403:
-        this.authErrorMessage$.next('Email or password is wrong') // TODO: add translation
+        this.authErrorMessage$.next(this.i18n['auth_403'])
         break;
       case 409:
-        this.authErrorMessage$.next('User already exists!')
+        this.authErrorMessage$.next(this.i18n['auth_409'])
         break;
     }
     return throwError(error)

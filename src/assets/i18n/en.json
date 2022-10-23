@@ -36,5 +36,7 @@
   "dashboard_new": "Create new board",
   "board_back": "Go to dashboard",
   "board_new": "Create new list",
-  "task_new": "Create"
+  "task_new": "Create",
+  "auth_403": "Email or password is wrong",
+  "auth_409": "User already exists!"
 }
