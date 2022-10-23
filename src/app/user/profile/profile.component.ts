@@ -7,8 +7,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { UserService } from '../shared/services/users.service';
 
-// TODO: - Edit profile should redirect the user to a route with a form for edit profile. The requirements for the form are the same as for all forms in the application. There should be a 'Delete User' button. In case of this action should be shown as a  "confirmation modal" then the user should be logged out, and the user should be removed from the database.
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -112,9 +110,9 @@ export class ProfileComponent implements OnInit {
     return value1 === value2 ? true : false
   }
 
-  deleteProfile() {
-    // this.userService.delete(this.userId)
-    // this.auth.logout()
-    // this.router.navigate(['/user', 'login'])
+  deleteProfile() { // TODO: modal window with confirmation with 
+    this.userService.delete(this.userId).subscribe()
+    this.auth.logout()
+    this.router.navigate(['/user', 'login'])
   }
 }

@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
-import { BehaviorSubject, filter, find, map, MonoTypeOperatorFunction, Observable, tap } from "rxjs";
+import { Injectable } from "@angular/core";
+import { map, Observable } from "rxjs";
 import { User } from "src/app/shared/interfaces";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class UserService {
@@ -31,13 +31,7 @@ export class UserService {
     return this.http.put<User>(`${environment.base_url}/users/${id}`, user)
   } 
 
-  delete(id: string): Observable<User> {
-    console.log('delete')
-    return this.http.delete<User>(`${environment.base_url}/users/${id}`)
-      .pipe(
-        tap(
-          res => console.log(res)
-        )
-      )
-  } 
+  delete(id: string) {
+    return this.http.delete(`${environment.base_url}/users/${id}`)
+  }
 }
