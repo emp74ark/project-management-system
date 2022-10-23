@@ -29,16 +29,33 @@
 <div class="dashboard">
   <div class="dashboard__item" *ngFor="let board of boardList$ | async">
     <div class="project__title">
-      <h3 [contentEditable]="boardEditable" #title>{{board.title}}</h3>
+      <h3 [contentEditable]="checkEditableStatus(board.id!)" #title>{{board.title}}</h3>
     </div>
-    <div class="project__description" [contentEditable]="boardEditable" #description>
+    <div class="project__description" [contentEditable]="checkEditableStatus(board.id!)" #description>
       {{board.description}}
     </div>
     <div class="buttons">
-      <button class="btn" (click)="open(board.id!)">{{i18n['open']}}</button>
-      <button class="btn btn-edit" (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
-      <button class="btn btn-save" (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
-      <button class="btn btn-delete" (click)="delete(board.id!)">{{i18n['delete']}}</button>
+      <button class="btn"
+        (click)="open(board.id!)">
+        {{i18n['open']}}
+      </button>
+      <button
+        class="btn btn-edit"
+        (click)="edit(board.id!)"
+        *ngIf="!checkEditableStatus(board.id!)">
+        {{i18n['edit']}}
+      </button>
+      <button
+        class="btn btn-save"
+        (click)="save(board.id!, title.innerText, description.innerText)"
+        *ngIf="checkEditableStatus(board.id!)">
+        {{i18n['save']}}
+      </button>
+      <button
+        class="btn btn-delete"
+        (click)="delete(board.id!)">
+        {{i18n['delete']}}
+      </button>
     </div>
   </div>
 </div>

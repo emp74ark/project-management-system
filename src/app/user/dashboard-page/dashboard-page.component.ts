@@ -16,7 +16,7 @@ export class DashboardPageComponent implements OnInit {
   
   DashboardForm!: FormGroup;
   boardList$!: Observable<Board[]>
-  boardEditable = false;
+  boardEditable: {[index: string]: boolean} = {};
 
   dic = [
     'dashboard_title',
@@ -93,8 +93,19 @@ export class DashboardPageComponent implements OnInit {
     
   }
 
-  edit(){
-    this.boardEditable = true // BUG: edit only current list
+  checkEditableStatus(boardId: string) {
+    if(this.boardEditable[boardId] === undefined) {
+      return false
+    } else {
+      return this.boardEditable[boardId]
+    }
+  }
+
+  edit(boardId: string){
+    this.boardEditable = {
+      ...this.boardEditable,
+      [boardId]: true
+    }
   }
 
   save(id: string, title: string, description: string){
@@ -103,7 +114,10 @@ export class DashboardPageComponent implements OnInit {
       title: title,
       description: description
     }
-    this.boardEditable = false
+    this.boardEditable = {
+      ...this.boardEditable,
+      [id]: false
+    }
     this.boardService.edit(board)
       .pipe(switchMap(() => this.boardService.getList()))
       .subscribe()
