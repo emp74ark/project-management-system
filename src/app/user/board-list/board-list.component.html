@@ -8,7 +8,7 @@
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
   <div class="buttons">
     <button class="btn btn-edit" (click)="editList()" *ngIf="!listEditable" >{{i18n['edit']}}</button>
-    <button class="btn btn-save" (click)="saveList(title.innerText)" *ngIf="listEditable">{{i18n['save']}}</button>
+    <button class="btn btn-save" (click)="saveList(title.innerText, list.order!)" *ngIf="listEditable">{{i18n['save']}}</button>
     <button class="btn btn-delete" (click)="deleteList()">{{i18n['delete']}}</button>
     <button
       class="btn btn-create"

@@ -115,10 +115,10 @@ export class BoardListComponent implements OnInit {
     this.listEditable = true
   }
 
-  saveList(title: string) {
+  saveList(title: string, order: number) {
     const list: List = {
       id: this.list.id,
-      order: 1,
+      order: order,
       title: title,
     }
     this.listService.edit(this.boardId, list)
