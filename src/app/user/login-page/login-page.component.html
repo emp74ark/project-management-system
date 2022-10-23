@@ -1,6 +1,6 @@
 <div class="auth__mode">
-  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode}" (click)="authModeToggle()">{{i18n['login']}}</h2>
-  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode}" (click)="authModeToggle()">{{i18n['signup']}}</h2>
+  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode, 'auth__left': true}" (click)="authModeToggle()">{{i18n['login']}}</h2>
+  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode, 'auth__right': true}" (click)="authModeToggle()">{{i18n['signup']}}</h2>
 </div>
 <div class="login" *ngIf="authMode">
   <form [formGroup]="LogInForm" (ngSubmit)="loginSubmit()">
@@ -44,7 +44,7 @@
     <button 
       type="submit"
       [disabled]="LogInForm.invalid"
-      class="button button-auth"
+      class="btn"
       >{{i18n['login']}}</button>
     <div class="form-control">
       <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
@@ -121,7 +121,7 @@
       </div>
     </div>
     <button 
-      class="button button-auth"
+      class="btn"
       type="submit"
       [disabled]="SignUpForm.invalid"
       >{{i18n['signup']}}
@@ -135,7 +135,7 @@
     </div>
     <div class="modal__message">
       <h2>{{i18n['modal_registration']}}</h2>
-      <button (click)="hideGreeting()">{{i18n['close']}}</button>
+      <button class="btn" (click)="hideGreeting()">{{i18n['close']}}</button>
     </div>
   </div>
 </div>

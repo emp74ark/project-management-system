@@ -24,7 +24,7 @@
       placeholder="{{i18n['description']}}"
       formControlName="description">
   </div>
-  <button class="button" type="submit" [disabled]="DashboardForm.invalid">{{i18n['create']}}</button>
+  <button class="btn btn-create" type="submit" [disabled]="DashboardForm.invalid">{{i18n['create']}}</button>
 </form>
 <div class="dashboard">
   <div class="dashboard__item" *ngFor="let board of boardList$ | async">
@@ -35,10 +35,10 @@
       {{board.description}}
     </div>
     <div class="buttons">
-      <button class="button" (click)="open(board.id!)">{{i18n['open']}}</button>
-      <button class="button" (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
-      <button class="button" (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
-      <button class="button button-danger" (click)="delete(board.id!)">{{i18n['delete']}}</button>
+      <button class="btn" (click)="open(board.id!)">{{i18n['open']}}</button>
+      <button class="btn btn-edit" (click)="edit()" *ngIf="!boardEditable">{{i18n['edit']}}</button>
+      <button class="btn btn-save" (click)="save(board.id!, title.innerText, description.innerText)" *ngIf="boardEditable">{{i18n['save']}}</button>
+      <button class="btn btn-delete" (click)="delete(board.id!)">{{i18n['delete']}}</button>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-@import '../../shared/scss/variables.scss';
+@import '../../shared/scss/shared';
 
 .board__list {
   width: 20rem;
@@ -21,7 +21,13 @@
 .buttons {
   display: flex;
   flex-direction: column;
+  background: $background-middle;
+  border-radius: .3rem;
 }
 .board__list_drop {
   border-width: .2rem;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
 }

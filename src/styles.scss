@@ -1,4 +1,4 @@
-@import './app/shared/scss/variables.scss';
+@import './app/shared/scss/shared';
 
 :root {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -17,23 +17,6 @@
   }
 }
 
-h1 {
-  font-size: 3rem;
-  color: $font-accent;
-}
-
-h2 {
-  font-size: 2.5rem;
-  color: $font-dark;
-  text-align: center;
-}
-
-h3 {
-  font-size: 2rem;
-  color: $font-light;
-  margin: .5rem;
-}
-
 p,
 span,
 form {
@@ -48,46 +31,12 @@ input {
   padding: 0 .5rem;
 }
 
-.modal__wrapper {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: $background-dark;
-  opacity: .5;
-}
-.modal__message {
-  position: fixed;
-  width: 20rem;
-  background: $background-light;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: auto;
-  padding: 1rem 2rem;
-  border-radius: .3rem;
-}
-
-.button {
-  margin: 1rem;
-  background: $background-accent;
-  border: 0;
-  border-radius: .3rem;
-  padding: .5rem 1rem;
-  &:disabled {
-    background: $background-dark;
-  }
-}
-
-.button-danger {
-  background: $background-danger;
-}
-
 .danger {
   color: $font-danger;
 }
 
 [contenteditable='true'] {
   border: .1rem dashed $border-editable;
+  border-radius: .3rem;
+  padding: .1 .2rem;
 }

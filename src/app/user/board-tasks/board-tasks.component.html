@@ -11,13 +11,13 @@
     <small *ngIf="user$ | async as user">{{user.login}}</small>
   </div>
   <div class="buttons">
-    <button class="button" (click)="edit()" *ngIf="!taskEditable">{{i18n['edit']}}</button>
+    <button class="btn btn-edit" (click)="edit()" *ngIf="!taskEditable">{{i18n['edit']}}</button>
     <button
-    class="button"
+    class="btn btn-save"
       (click)="save(task.id!, title.innerText, description.innerText, task.userId)"
       *ngIf="taskEditable"
       >{{i18n['save']}}
     </button>
-    <button class="button button-danger" (click)="delete()">{{i18n['delete']}}</button>
+    <button class="btn btn-delete" (click)="delete()">{{i18n['delete']}}</button>
   </div>
 </div>

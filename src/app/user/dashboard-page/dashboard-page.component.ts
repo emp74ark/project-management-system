@@ -94,7 +94,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   edit(){
-    this.boardEditable = true
+    this.boardEditable = true // FIXME: edit only current list
   }
 
   save(id: string, title: string, description: string){

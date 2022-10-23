@@ -1,0 +1,20 @@
+.modal__wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $background-dark;
+  opacity: .5;
+}
+.modal__message {
+  position: fixed;
+  width: 20rem;
+  background: $background-light;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  padding: 1rem 2rem;
+  border-radius: .3rem;
+}

@@ -1,0 +1,22 @@
+.btn {
+  margin: 1rem;
+  background: $background-accent;
+  border: 0;
+  border-radius: .3rem;
+  padding: .5rem 1rem;
+  &:disabled {
+    background: $background-middle;
+  }
+}
+
+// .btn-create {}
+
+.btn-edit,
+.btn-save {
+  background: $background-alter;
+}
+
+.btn-delete,
+.btn-cancel {
+  background: $background-danger;
+}
