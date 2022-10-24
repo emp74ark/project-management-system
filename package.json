@@ -10,6 +10,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~14.2.3",
+    "@angular/compiler-cli": "^14.2.0",
     "@angular/animations": "^14.2.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
@@ -24,8 +26,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.3",
-    "@angular/cli": "~14.2.3",
-    "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
