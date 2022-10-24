@@ -41,6 +41,7 @@
     <button class="btn btn-cancel" (click)="createFormClose()" *ngIf="createFormVisibility">{{i18n['cancel']}}</button>
   </form>
   <div class="board__list-items">
+    <div class="drop-zone" [attr.data-order]="0">+</div>
     <app-board-tasks *ngFor="let task of tasks$ | async" [task]="task"></app-board-tasks>
   </div>
 </div>

@@ -42,4 +42,21 @@ input {
   padding: .1 .2rem;
 }
 
+.drop-zone {
+  height: .5rem;
+  border-radius: .3rem;
+  width: 100%;
+  background: $background-middle;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all .3s ease;
+}
+.drop-zone-active {
+  height: 10rem;
+  background: $background-accent;
+  opacity: .8;
+}
 //TODO: Adaptive layout with minimum page width 320px

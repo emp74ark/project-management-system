@@ -130,32 +130,41 @@ export class BoardListComponent implements OnInit {
 
   taskDragOverHandler(e: DragEvent) {
     e.preventDefault();
+    const column = e.currentTarget as HTMLDivElement
+    column.classList.add('board__list_drop')
   }
 
   taskDragEnterHandler(e: DragEvent) {
-    const dropZone = e.currentTarget as HTMLDivElement
-    dropZone.classList.add('board__list_drop')
+    const zone = e.target as HTMLElement
+    if(zone.dataset['order']) {
+      zone.classList.add('drop-zone-active')
+    }
   }
 
   taskDragLeaveHandler(e: DragEvent) {
-    const dropZone = e.currentTarget as HTMLDivElement
-    dropZone.classList.remove('board__list_drop')
+    const column = e.currentTarget as HTMLDivElement
+    column.classList.remove('board__list_drop')
+    const zone = e.target as HTMLElement
+    if(zone.dataset['order']) {
+      zone.classList.remove('drop-zone-active')
+    }
   }
 
   taskDropHandler(e: DragEvent) {
     e.preventDefault();
     const oldTask: Task = JSON.parse(e.dataTransfer!.getData('text'))
-    const dropZone = e.currentTarget as HTMLDivElement
-    const dragObject = e.target as HTMLElement
-    dragObject.classList.remove('task__container_drag')
+    const column = e.currentTarget as HTMLDivElement
+    const zone = e.target as HTMLElement
+    zone.classList.remove('task__container_drag')
     const newTask: Task = {
       ...oldTask,
-      columnId: dropZone.id,
+      columnId: column.id,
+      order: Number(zone.dataset['order']) + 1
     }
     this.taskService.delete(this.boardId, oldTask)
-      .subscribe(() => console.log('delete old'))
+      .subscribe()
     this.taskService.create(this.boardId, newTask)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
-      .subscribe(() => console.log('create new'))
+      .subscribe()
   }
 }
