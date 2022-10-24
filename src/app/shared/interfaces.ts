@@ -32,3 +32,11 @@ export interface Task {
 }
 
 export interface Dictionary {[index: string]: string}
+
+export interface Modal {
+  show: boolean,
+  type: 'info' | 'alert' | 'prompt' | null,
+  message: string | null,
+  callback: any,
+  parameter?: string
+};

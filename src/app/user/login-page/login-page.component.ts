@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { Dictionary, User } from 'src/app/shared/interfaces';
+import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { AuthService } from '../../shared/services/auth.service';
 
@@ -18,8 +18,6 @@ export class LoginPageComponent implements OnInit {
   LogInForm!: FormGroup
   SignUpForm!: FormGroup;
   
-  displayModal: boolean;
-
   dic = [
     'email',
     'name',
@@ -41,12 +39,12 @@ export class LoginPageComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modal: ModalService
   ) {
     this._createLoginForm()
     this._createSignUpForm()
     this.authMode = true;
-    this.displayModal = false;
    }
   
   ngOnInit() {
@@ -76,18 +74,12 @@ export class LoginPageComponent implements OnInit {
     this.authMode = !this.authMode
   }
 
-  closeModal(){
-    this.displayModal = false;
-    this.authMode = true;
-    this.router.navigate(['/user', 'login'])
-  }
-
   loginSubmit() {
     if (this.LogInForm.invalid) {
       return
     }
 
-    this.displayModal = true
+    this.modal.info(this.i18n['modal_loading'])
 
     const user: User = {
       login: this.LogInForm.value.loginEmail,
@@ -96,12 +88,20 @@ export class LoginPageComponent implements OnInit {
     this.auth.login(user)
       .subscribe(
         () => {
+          this.modal.close();
           this.router.navigate(['/user', 'dashboard'])
         },
         () => {
-          this.displayModal = false
+          this.modal.close();
+          this.router.navigate(['/user', 'login'])
         }
       )
+  }
+
+  successRegistration = () => {
+    console.log('callback works')
+    this.authMode = true
+    this.router.navigate(['/user', 'login'])
   }
 
   signUpSubmit() {
@@ -116,7 +116,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.auth.signup(user).subscribe(() => {
-      this.displayModal = true;
+      this.modal.alert(this.i18n['modal_registration'], this.successRegistration)
     })
   }
 }

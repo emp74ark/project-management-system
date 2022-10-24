@@ -1,0 +1,17 @@
+<div *ngIf="modal.displayModal$| async as modal">
+  <div *ngIf="modal.show">
+    <div class="modal__wrapper"></div>
+    <div class="modal__message" *ngIf="modal.type === 'info'">
+      <h2>{{modal.message}}</h2>
+    </div>
+    <div class="modal__message" *ngIf="modal.type === 'alert'">
+      <h2>{{modal.message}}</h2>
+      <button class="btn" (click)="modal.callback()">{{i18n['close']}}</button>
+    </div>
+    <div class="modal__message" *ngIf="modal.type === 'prompt'">
+      <h2>{{modal.message}}</h2>
+      <button class="btn btn-edit" (click)="close()">{{i18n['cancel']}}</button>
+      <button class="btn btn-delete" (click)="modal.callback(id)">{{i18n['delete']}}</button>
+    </div>
+  </div>
+</div>

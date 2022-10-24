@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, pipe, Subject, tap } from 'rxjs';
+import { Subject } from 'rxjs';
 import * as english from '../../../assets/i18n/en.json';
 import * as russian from '../../../assets/i18n/ru.json';
 import { Dictionary } from '../interfaces';

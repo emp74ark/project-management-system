@@ -1,6 +1,14 @@
 <div class="auth__mode">
-  <h2 [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode, 'auth__left': true}" (click)="authModeToggle()">{{i18n['login']}}</h2>
-  <h2 [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode, 'auth__right': true}" (click)="authModeToggle()">{{i18n['signup']}}</h2>
+  <h2
+    [ngClass]="{'auth__mode_active': authMode, 'auth__mode_unactive': !authMode, 'auth__left': true}"
+    (click)="authModeToggle()">
+    {{i18n['login']}}
+  </h2>
+  <h2
+    [ngClass]="{'auth__mode_active': !authMode, 'auth__mode_unactive': authMode, 'auth__right': true}"
+    (click)="authModeToggle()">
+    {{i18n['signup']}}
+  </h2>
 </div>
 <div class="login" *ngIf="authMode">
   <form [formGroup]="LogInForm" (ngSubmit)="loginSubmit()">
@@ -50,13 +58,7 @@
       <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
   </form>
-  <div *ngIf="displayModal">
-    <div class="modal__wrapper">
-    </div>
-    <div class="modal__message">
-      <h2>{{i18n['modal_loading']}}</h2>
-    </div>
-  </div>
+  <app-modal></app-modal>
 </div>
 <div class="signup" *ngIf="!authMode">
   <form [formGroup]="SignUpForm" (ngSubmit)="signUpSubmit()">
@@ -134,12 +136,5 @@
       </small>
     </div>
   </form>
-  <div *ngIf="displayModal">
-    <div class="modal__wrapper">
-    </div>
-    <div class="modal__message">
-      <h2>{{i18n['modal_registration']}}</h2>
-      <button class="btn" (click)="closeModal()">{{i18n['close']}}</button>
-    </div>
-  </div>
+  <app-modal></app-modal>
 </div>

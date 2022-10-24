@@ -109,16 +109,5 @@
     </form>
   </div>
   <button class="btn btn-delete" (click)="deletePrompt()">{{i18n['delete']}}</button>
-  <div *ngIf="displayModal['show']">
-    <div class="modal__wrapper"></div>
-    <div class="modal__message" *ngIf="displayModal['type'] === 'alert'">
-      <h2>{{i18n['modal_saved']}}</h2>
-      <button class="btn" (click)="closeModal()">{{i18n['close']}}</button>
-    </div>
-    <div class="modal__message" *ngIf="displayModal['type'] === 'prompt'">
-      <h2>{{i18n['modal_delete']}}</h2>
-      <button class="btn btn-edit" (click)="closeModal()">{{i18n['cancel']}}</button>
-      <button class="btn btn-delete" (click)="deleteProfile()">{{i18n['delete']}}</button>
-    </div>
-  </div>
+  <app-modal></app-modal>
 </div>

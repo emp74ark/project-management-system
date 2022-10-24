@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { Dictionary, User } from 'src/app/shared/interfaces';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { UserService } from '../shared/services/users.service';
 
@@ -18,8 +19,6 @@ export class ProfileComponent implements OnInit {
 
   profileEditable = false
   profileForm!: FormGroup
-
-  displayModal: {show: boolean, type: 'alert' | 'prompt' | null};
 
   dic = [
     'profile',
@@ -47,13 +46,9 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private translate: TranslateService,
     private fb: FormBuilder,
-    private router: Router
-  ) { 
-    this.displayModal = {
-      show: false,
-      type: null
-    };
-  }
+    private router: Router,
+    private modal: ModalService
+  ) { }
 
   ngOnInit(): void {
     this.user$ = this.userService.getUserById(this.userId)
@@ -80,10 +75,6 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  closeModal(){
-    this.displayModal = {show: false, type: null};
-  }
-
   editProfile() {
     this.profileEditable = true
   }
@@ -92,6 +83,8 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.invalid) {
       return
     }
+
+    this.modal.info(this.i18n['modal_saved'])
     
     const user: User = {
       name: this.profileForm.value.profileName,
@@ -104,8 +97,8 @@ export class ProfileComponent implements OnInit {
         () => this.user$ = this.userService.getUserById(this.userId)
       ))
       .subscribe(() => {
-        this.displayModal = {show: true, type: 'alert'};
         this.profileEditable = false;
+        this.modal.close()
       })
   }
 
@@ -116,10 +109,10 @@ export class ProfileComponent implements OnInit {
   }
 
   deletePrompt() {
-    this.displayModal = {show: true, type: 'prompt'};
+    this.modal.prompt(this.i18n['modal_delete'], this.deleteProfile);
   }
 
-  deleteProfile() {
+  deleteProfile = () => {
     this.userService.delete(this.userId).subscribe()
     this.auth.logout()
     this.router.navigate(['/user', 'login'])

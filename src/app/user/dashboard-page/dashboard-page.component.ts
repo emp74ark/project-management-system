@@ -6,6 +6,7 @@ import { BoardService } from '../shared/services/boards.service';
 import { Observable, switchMap } from 'rxjs';
 import { UserService } from '../shared/services/users.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -17,8 +18,6 @@ export class DashboardPageComponent implements OnInit {
   DashboardForm!: FormGroup;
   boardList$!: Observable<Board[]>
   boardEditable: {[index: string]: boolean} = {};
-
-  displayModal: {show: boolean, type: 'alert' | 'prompt' | null};
 
   dic = [
     'dashboard_title',
@@ -37,19 +36,14 @@ export class DashboardPageComponent implements OnInit {
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private boardService: BoardService,
     private userService: UserService,
-    private translate: TranslateService
-  ) {
-    this.displayModal = {
-      show: false,
-      type: null
-    };
-  }
+    private translate: TranslateService,
+    private modal: ModalService
+  ) {}
   
   ngOnInit(): void {
     this._createForm()
@@ -74,10 +68,6 @@ export class DashboardPageComponent implements OnInit {
     })
   }
 
-  closeModal(){
-    this.displayModal = {show: false, type: null};
-  }
-
   create() {
     if(this.DashboardForm.invalid){
       return
@@ -100,13 +90,13 @@ export class DashboardPageComponent implements OnInit {
   }
 
   deletePrompt() {
-    this.displayModal = {show: true, type: 'prompt'};
+    this.modal.prompt(this.i18n['modal_delete'], this.delete);
   }
   
-  delete(id: string) {
+  delete = (id: string) => {
     this.boardService.delete(id)
       .pipe(switchMap(() => this.boardService.getList()))
-      .subscribe(() => this.closeModal())
+      .subscribe(() => this.modal.close())
   }
 
   checkEditableStatus(boardId: string) {

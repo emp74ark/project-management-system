@@ -17,6 +17,7 @@ import { BoardTasksComponent } from './board-tasks/board-tasks.component';
 import { AUTH_INTERCEPTOR } from "./shared/interceptors";
 import { CommonLayoutComponent } from "../shared/components/common-layout/common-layout.component";
 import { ProfileComponent } from './profile/profile.component';
+import { ModalComponent } from "../shared/components/modal/modal.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
     BoardListComponent,
     BoardTasksComponent,
     ProfileComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,

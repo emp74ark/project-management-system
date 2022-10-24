@@ -9,6 +9,7 @@ import { CommonLayoutComponent } from './shared/components/common-layout/common-
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './shared/services/auth.guard';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
