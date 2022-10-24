@@ -50,7 +50,7 @@
       <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
   </form>
-  <div *ngIf="displayGreeting">
+  <div *ngIf="displayModal">
     <div class="modal__wrapper">
     </div>
     <div class="modal__message">
@@ -130,7 +130,7 @@
       <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
     </div>
   </form>
-  <div *ngIf="displayGreeting">
+  <div *ngIf="displayModal">
     <div class="modal__wrapper">
     </div>
     <div class="modal__message">

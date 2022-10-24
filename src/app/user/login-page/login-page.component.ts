@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
   LogInForm!: FormGroup
   SignUpForm!: FormGroup;
   
-  displayGreeting: boolean;
+  displayModal: boolean;
 
   dic = [
     'email',
@@ -45,7 +45,7 @@ export class LoginPageComponent implements OnInit {
     this._createLoginForm()
     this._createSignUpForm()
     this.authMode = true;
-    this.displayGreeting = false;
+    this.displayModal = false;
    }
   
   ngOnInit() {
@@ -76,7 +76,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   hideGreeting(){
-    this.displayGreeting = false;
+    this.displayModal = false;
     this.authMode = true;
     this.router.navigate(['/user', 'login'])
   }
@@ -86,14 +86,14 @@ export class LoginPageComponent implements OnInit {
       return
     }
 
-    this.displayGreeting = true
+    this.displayModal = true
 
     const user: User = {
       login: this.LogInForm.value.loginEmail,
       password: this.LogInForm.value.loginPassword
     }
     this.auth.login(user).subscribe(() => {
-      this.displayGreeting = false
+      this.displayModal = false
       this.router.navigate(['/user', 'dashboard'])
     })
   }
@@ -110,7 +110,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.auth.signup(user).subscribe(() => {
-      this.displayGreeting = true;
+      this.displayModal = true;
     })
   }
 }

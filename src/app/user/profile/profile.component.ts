@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   profileEditable = false
   profileForm!: FormGroup
 
-  displayGreeting: boolean;
+  displayModal: {show: boolean, type: 'alert' | 'prompt' | null};
 
   dic = [
     'profile',
@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
     'save',
     'close',
     'delete',
+    'cancel',
     'repeat',
     'modal_saved'
   ]
@@ -47,7 +48,10 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) { 
-    this.displayGreeting = false;
+    this.displayModal = {
+      show: false,
+      type: null
+    };
   }
 
   ngOnInit(): void {
@@ -76,7 +80,7 @@ export class ProfileComponent implements OnInit {
   }
 
   hideGreeting(){
-    this.displayGreeting = false;
+    this.displayModal = {show: false, type: null};
   }
 
   editProfile() {
@@ -99,7 +103,7 @@ export class ProfileComponent implements OnInit {
         () => this.user$ = this.userService.getUserById(this.userId)
       ))
       .subscribe(() => {
-        this.displayGreeting = true;
+        this.displayModal = {show: true, type: 'alert'};
         this.profileEditable = false;
       })
   }
@@ -110,7 +114,11 @@ export class ProfileComponent implements OnInit {
     return value1 === value2 ? true : false
   }
 
-  deleteProfile() { // TODO: modal window with confirmation with 
+  deletePrompt() {
+    this.displayModal = {show: true, type: 'prompt'};
+  }
+
+  deleteProfile() {
     this.userService.delete(this.userId).subscribe()
     this.auth.logout()
     this.router.navigate(['/user', 'login'])
