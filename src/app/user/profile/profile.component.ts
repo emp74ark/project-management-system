@@ -37,7 +37,8 @@ export class ProfileComponent implements OnInit {
     'delete',
     'cancel',
     'repeat',
-    'modal_saved'
+    'modal_saved',
+    'modal_delete'
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 
@@ -79,7 +80,7 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  hideGreeting(){
+  hideGreeting(){ // TODO: rename to closeModal
     this.displayModal = {show: false, type: null};
   }
 

@@ -33,6 +33,7 @@
   "modal_registration": "Registration successful!",
   "modal_loading": "Loading...",
   "modal_saved": "Data was saved",
+  "modal_delete": "Delete?",
   "dashboard_title": "Dashboard",
   "dashboard_new": "Create new board",
   "board_back": "Go to dashboard",

@@ -18,6 +18,8 @@ export class DashboardPageComponent implements OnInit {
   boardList$!: Observable<Board[]>
   boardEditable: {[index: string]: boolean} = {};
 
+  displayModal: {show: boolean, type: 'alert' | 'prompt' | null};
+
   dic = [
     'dashboard_title',
     'dashboard_new',
@@ -29,7 +31,9 @@ export class DashboardPageComponent implements OnInit {
     "edit",
     "save",
     "delete",
+    "cancel",
     "required",
+    'modal_delete'
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 
@@ -40,7 +44,12 @@ export class DashboardPageComponent implements OnInit {
     private boardService: BoardService,
     private userService: UserService,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.displayModal = {
+      show: false,
+      type: null
+    };
+  }
   
   ngOnInit(): void {
     this._createForm()
@@ -65,6 +74,10 @@ export class DashboardPageComponent implements OnInit {
     })
   }
 
+  closeModal(){
+    this.displayModal = {show: false, type: null};
+  }
+
   create() {
     if(this.DashboardForm.invalid){
       return
@@ -85,12 +98,15 @@ export class DashboardPageComponent implements OnInit {
   open(id: string) {
     this.router.navigate(['/user/board', id])
   }
+
+  deletePrompt() {
+    this.displayModal = {show: true, type: 'prompt'};
+  }
   
   delete(id: string) {
     this.boardService.delete(id)
       .pipe(switchMap(() => this.boardService.getList()))
-      .subscribe()
-    // TODO: confirmation modal window
+      .subscribe(() => this.closeModal())
   }
 
   checkEditableStatus(boardId: string) {

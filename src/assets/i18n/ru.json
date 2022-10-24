@@ -33,6 +33,7 @@
   "modal_registration": "Регистрация успешная!",
   "modal_loading": "Загрузка...",
   "modal_saved": "Данные сохранены",
+  "modal_delete": "Удалить?",
   "dashboard_title": "Панель",
   "dashboard_new": "Создать новую доску",
   "board_back": "Вернуться на панель",
