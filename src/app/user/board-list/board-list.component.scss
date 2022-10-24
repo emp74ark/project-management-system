@@ -8,9 +8,9 @@
   display: flex;
   flex-direction: column;
   gap: .5rem;
-  max-height: 64rem;
 }
 .board__list-items {
+  height: 64rem;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -28,9 +28,6 @@
   flex-direction: column;
   background: $background-middle;
   border-radius: .3rem;
-}
-.board__list_drop {
-  border-width: .2rem;
 }
 .form-control {
   display: flex;

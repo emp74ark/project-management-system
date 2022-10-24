@@ -2,7 +2,8 @@
   class="task__container"
   draggable="true"
   (dragstart)="taskDragStartHandler($event)"
-  (dragend)="taskDragEndHandler($event)">
+  (dragend)="taskDragEndHandler($event)"
+  [ngStyle]="{order: task.order}">
   <div class="task__title" [contentEditable]="taskEditable" #title>{{task.title}}</div>
   <div class="task__description" #description>
     <p [contentEditable]="taskEditable">{{task.description}}</p>
