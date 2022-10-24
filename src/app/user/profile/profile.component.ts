@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  hideGreeting(){ // TODO: rename to closeModal
+  closeModal(){
     this.displayModal = {show: false, type: null};
   }
 

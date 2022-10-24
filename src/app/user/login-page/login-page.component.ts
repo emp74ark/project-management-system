@@ -76,7 +76,7 @@ export class LoginPageComponent implements OnInit {
     this.authMode = !this.authMode
   }
 
-  hideGreeting(){
+  closeModal(){
     this.displayModal = false;
     this.authMode = true;
     this.router.navigate(['/user', 'login'])
