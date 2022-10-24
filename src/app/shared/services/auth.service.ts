@@ -5,9 +5,6 @@ import { AuthResponse, Dictionary, User } from "src/app/shared/interfaces";
 import { environment } from "src/environments/environment";
 import { TranslateService } from "./translate.service";
 
-// TODO: If there is an unexpired token, the user should be redirected to the "Main route" of the application automatically.
-// TODO: When the token expires - the user should be redirected to the "Welcome page" automatically.
-
 @Injectable({providedIn: 'root'})
 export class AuthService {
   dic = ['auth_403', 'auth_409']
@@ -41,6 +38,10 @@ export class AuthService {
     return throwError(error)
   }
 
+  calcTokenExpireDate() {
+    return Date.now() + 86400000
+  }
+
   login(user: User): Observable<AuthResponse> {
     return this.http.post(`${environment.base_url}/signin`, user)
       .pipe(
@@ -49,6 +50,7 @@ export class AuthService {
             this.authenticated = true
             localStorage.setItem('login', user.login)
             localStorage.setItem('token', response.token)
+            localStorage.setItem('exp', this.calcTokenExpireDate().toString())
           }
         ),
         catchError<any, any>(this.errorHandle.bind(this)),

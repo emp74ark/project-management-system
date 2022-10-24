@@ -6,7 +6,6 @@ import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
-// TODO: The user can change the order of tasks columns using drag-n-drop.
 
 @Component({
   selector: 'app-board-tasks',
