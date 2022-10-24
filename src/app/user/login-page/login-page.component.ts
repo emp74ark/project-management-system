@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { Dictionary, User } from 'src/app/shared/interfaces';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { AuthService } from '../../shared/services/auth.service';
@@ -92,10 +93,15 @@ export class LoginPageComponent implements OnInit {
       login: this.LogInForm.value.loginEmail,
       password: this.LogInForm.value.loginPassword
     }
-    this.auth.login(user).subscribe(() => {
-      this.displayModal = false
-      this.router.navigate(['/user', 'dashboard'])
-    })
+    this.auth.login(user)
+      .subscribe(
+        () => {
+          this.router.navigate(['/user', 'dashboard'])
+        },
+        () => {
+          this.displayModal = false
+        }
+      )
   }
 
   signUpSubmit() {

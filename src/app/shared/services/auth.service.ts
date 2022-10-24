@@ -28,7 +28,7 @@ export class AuthService {
 
   public authErrorMessage$: Subject<string> = new Subject<string>()
   
-  private errorHandle(error: HttpErrorResponse){
+  private errorHandle(error: HttpErrorResponse) {
     const { statusCode } = error.error
     switch(statusCode) {
       case 403:
@@ -51,7 +51,7 @@ export class AuthService {
             localStorage.setItem('token', response.token)
           }
         ),
-        catchError<any, any>(this.errorHandle.bind(this)), // BUG: 403 under the modal
+        catchError<any, any>(this.errorHandle.bind(this)),
       )
    }
 

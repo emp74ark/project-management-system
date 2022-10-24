@@ -127,7 +127,11 @@
       >{{i18n['signup']}}
     </button>
     <div class="form-control">
-      <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+      <small
+        class="danger"
+        *ngIf="auth.authErrorMessage$ | async as message">
+        {{message}}
+      </small>
     </div>
   </form>
   <div *ngIf="displayModal">
