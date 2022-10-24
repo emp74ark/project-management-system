@@ -1,5 +1,4 @@
 @import '../../shared/scss/shared';
-// TODO:  When overflowing with the number of tasks of the column - display scroll inside the column.
 
 .board__list {
   width: 20rem;
@@ -9,6 +8,11 @@
   display: flex;
   flex-direction: column;
   gap: .5rem;
+  max-height: 64rem;
+}
+.board__list-items {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .board__list-title {
   font-size: 2rem;

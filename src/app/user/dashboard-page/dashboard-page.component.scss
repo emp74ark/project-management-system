@@ -18,10 +18,12 @@ form {
 }
 
 .dashboard {
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+  width: fit-content;
 }
 
 .dashboard__item {
