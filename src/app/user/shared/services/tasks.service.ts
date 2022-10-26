@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http'
 import { environment } from "src/environments/environment";
 import { Task } from "src/app/shared/interfaces";
-import { Observable, tap } from "rxjs";
+import { distinct, Observable, tap } from "rxjs";
 
 @Injectable()
 export class TaskService {
@@ -51,6 +51,9 @@ export class TaskService {
   getAll(boardId: string, listId: string): Observable<Task[]> {
     return this.http.get<Task[]>(
       `${environment.base_url}/boards/${boardId}/columns/${listId}/tasks`
+      )
+      .pipe(
+        tap(list => {list.sort((a, b) => a.order! - b.order!)})
       )
   }
 }

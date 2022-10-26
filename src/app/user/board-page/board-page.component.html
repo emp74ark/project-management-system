@@ -11,9 +11,11 @@
     <input type="text" id="board__list" placeholder="{{i18n['board_new']}}" formControlName="title">
     <button class="btn btn-create" type="submit" [disabled]="BoardForm.invalid">{{i18n['create']}}</button>
   </form>
-  <div class="lists" >
-    <app-board-list 
-      *ngFor="let list of lists$ | async" 
+  <div class="lists"
+    cdkDropListGroup
+    *ngIf="(lists$ | async) as lists">
+    <app-board-list
+      *ngFor="let list of lists" 
       [list]="list"
       >
     </app-board-list>

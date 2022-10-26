@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable, switchMap, tap } from 'rxjs';
+import { debounceTime, Observable, switchMap, tap } from 'rxjs';
 import { Dictionary, List } from 'src/app/shared/interfaces';
 import { Task } from "src/app/shared/interfaces";
 import { TranslateService } from 'src/app/shared/services/translate.service';
@@ -129,11 +129,25 @@ export class BoardListComponent implements OnInit {
     this.listEditable = false
   }
 
-  drop(event: CdkDragDrop<Task[]>, tasks: Task[]) {
-    moveItemInArray(tasks, event.previousIndex, event.currentIndex);
-    const prev = tasks[event.previousIndex]
-    const current: Task = {...prev, order: prev.order! + 1}
-    this.taskService.edit(this.boardId, current).subscribe()
+  drop(event: CdkDragDrop<Task[]>) {
+    const prev = event.previousContainer.data[event.previousIndex]
+    const current: Task = {...prev, order: event.currentIndex + 1, columnId: event.container.id}
+    if (event.previousContainer.id === event.container.id) {
+      moveItemInArray(event.previousContainer.data, event.previousIndex, event.currentIndex);
+      this.taskService.edit(this.boardId, current).subscribe()
+    } else {
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+      this.taskService.create(this.boardId, current)
+        .pipe(
+          switchMap(() => this.taskService.delete(this.boardId, prev)),
+          switchMap(() => this.tasks$ = this.taskService.getAll(this.boardId, prev.columnId!)),
+          switchMap(() => this.listService.getAll(this.boardId))
+        )
+        .subscribe()
+    }
   }
   
 }

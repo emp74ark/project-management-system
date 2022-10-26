@@ -44,6 +44,7 @@ export class ListService {
   getAll(boardId: string): Observable<List[]> {
     return this.http.get<List[]>(`${environment.base_url}/boards/${boardId}/columns`)
     .pipe(
+      // tap(list => {list.sort((a, b) => a.order! - b.order!)}),
       tap(
         response => this.listSubject.next(response)
       )

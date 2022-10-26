@@ -1,7 +1,9 @@
 <div class="board__list"
+  [cdkDropListData]="tasks"
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
   id={{list.id}}
   *ngIf="(tasks$ | async) as tasks">
-
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
   <div class="buttons">
     <button class="btn btn-edit" (click)="editList()" *ngIf="!listEditable" >{{i18n['edit']}}</button>
@@ -38,11 +40,9 @@
     <button class="btn btn-cancel" (click)="createFormClose()" *ngIf="createFormVisibility">{{i18n['cancel']}}</button>
   </form>
   <div
-    cdkDropList
-    (cdkDropListDropped)="drop($event, tasks)"
+    cdkDrag
+    *ngFor="let task of tasks"
     class="board__list-items">
-    <div *ngFor="let task of tasks" cdkDrag>
-      <app-board-tasks [task]="task"></app-board-tasks>
-    </div>    
+    <app-board-tasks [task]="task"></app-board-tasks>
   </div>
 </div>
