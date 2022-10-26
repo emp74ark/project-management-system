@@ -7,6 +7,7 @@ import { Task } from "src/app/shared/interfaces";
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 // TODO: The user can swap columns using drag-n-drop.
 
 @Component({
@@ -128,43 +129,11 @@ export class BoardListComponent implements OnInit {
     this.listEditable = false
   }
 
-  taskDragOverHandler(e: DragEvent) {
-    e.preventDefault();
-    const column = e.currentTarget as HTMLDivElement
-    column.classList.add('board__list_drop')
+  drop(event: CdkDragDrop<Task[]>, tasks: Task[]) {
+    moveItemInArray(tasks, event.previousIndex, event.currentIndex);
+    const prev = tasks[event.previousIndex]
+    const current: Task = {...prev, order: prev.order! + 1}
+    this.taskService.edit(this.boardId, current).subscribe()
   }
-
-  taskDragEnterHandler(e: DragEvent) {
-    const zone = e.target as HTMLElement
-    if(zone.dataset['order']) {
-      zone.classList.add('drop-zone-active')
-    }
-  }
-
-  taskDragLeaveHandler(e: DragEvent) {
-    const column = e.currentTarget as HTMLDivElement
-    column.classList.remove('board__list_drop')
-    const zone = e.target as HTMLElement
-    if(zone.dataset['order']) {
-      zone.classList.remove('drop-zone-active')
-    }
-  }
-
-  taskDropHandler(e: DragEvent) {
-    e.preventDefault();
-    const oldTask: Task = JSON.parse(e.dataTransfer!.getData('text'))
-    const column = e.currentTarget as HTMLDivElement
-    const zone = e.target as HTMLElement
-    zone.classList.remove('task__container_drag')
-    const newTask: Task = {
-      ...oldTask,
-      columnId: column.id,
-      order: Number(zone.dataset['order']) + 1
-    }
-    this.taskService.delete(this.boardId, oldTask)
-      .subscribe()
-    this.taskService.create(this.boardId, newTask)
-      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
-      .subscribe()
-  }
+  
 }

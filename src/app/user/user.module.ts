@@ -18,6 +18,7 @@ import { AUTH_INTERCEPTOR } from "./shared/interceptors";
 import { CommonLayoutComponent } from "../shared/components/common-layout/common-layout.component";
 import { ProfileComponent } from './profile/profile.component';
 import { ModalComponent } from "../shared/components/modal/modal.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ModalComponent } from "../shared/components/modal/modal.component";
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
+    DragDropModule,
     RouterModule.forChild([
       {
         path: '', component: CommonLayoutComponent, children: [

@@ -1,9 +1,6 @@
 <div class="board__list"
   id={{list.id}}
-  (dragover)="taskDragOverHandler($event)" 
-  (drop)="taskDropHandler($event)"
-  (dragenter)="taskDragEnterHandler($event)"
-  (dragleave)="taskDragLeaveHandler($event)">
+  *ngIf="(tasks$ | async) as tasks">
 
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
   <div class="buttons">
@@ -40,8 +37,12 @@
     <button class="btn btn-save" type="submit" [disabled]="TaskForm.invalid">{{i18n['save']}}</button>
     <button class="btn btn-cancel" (click)="createFormClose()" *ngIf="createFormVisibility">{{i18n['cancel']}}</button>
   </form>
-  <div class="board__list-items">
-    <div class="drop-zone" [attr.data-order]="0">+</div>
-    <app-board-tasks *ngFor="let task of tasks$ | async" [task]="task"></app-board-tasks>
+  <div
+    cdkDropList
+    (cdkDropListDropped)="drop($event, tasks)"
+    class="board__list-items">
+    <div *ngFor="let task of tasks" cdkDrag>
+      <app-board-tasks [task]="task"></app-board-tasks>
+    </div>    
   </div>
 </div>
