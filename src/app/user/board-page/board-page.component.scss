@@ -12,10 +12,12 @@ form {
 }
 .lists {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
   margin: 1rem;
+  width: fit-content;
+  max-width: 90vw;
+  overflow-x: auto;
 }
 .buttons {
   display: flex;

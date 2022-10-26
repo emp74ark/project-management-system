@@ -1,9 +1,6 @@
-<div 
-  class="task__container"
-  draggable="true"
-  (dragstart)="taskDragStartHandler($event)"
-  (dragend)="taskDragEndHandler($event)"
-  [ngStyle]="{order: task.order}">
+<div
+  [ngStyle]="{order: task.order}"
+  class="task__container">
   <div class="task__title" [contentEditable]="taskEditable" #title>{{task.title}}</div>
   <div class="task__description" #description>
     <p [contentEditable]="taskEditable">{{task.description}}</p>
@@ -42,4 +39,3 @@
     <button class="btn btn-delete" (click)="delete()">{{i18n['delete']}}</button>
   </div>
 </div>
-<div class="drop-zone" [attr.data-order]="task.order">+</div>

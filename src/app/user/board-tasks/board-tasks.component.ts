@@ -14,9 +14,7 @@ import { UserService } from '../shared/services/users.service';
 })
 export class BoardTasksComponent implements OnInit {
 
-  @Input()
-
-  task!: Task
+  @Input() task!: Task
 
   taskEditable = false;
 
@@ -88,13 +86,13 @@ export class BoardTasksComponent implements OnInit {
       .subscribe()
   }
 
-  taskDragStartHandler(e: DragEvent) {
-    e.dataTransfer!.setData('text', JSON.stringify(this.task))
-    const dragObject = e.target as HTMLElement
-    dragObject.classList.add('task__container_drag')
-  }
+  // taskDragStartHandler(e: DragEvent) {
+  //   e.dataTransfer!.setData('text', JSON.stringify(this.task))
+  //   const dragObject = e.target as HTMLElement
+  //   dragObject.classList.add('task__container_drag')
+  // }
 
-  taskDragEndHandler(e: DragEvent) {
-    e.dataTransfer?.clearData()
-  }
+  // taskDragEndHandler(e: DragEvent) {
+  //   e.dataTransfer?.clearData()
+  // }
 }

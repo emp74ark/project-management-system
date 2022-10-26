@@ -1,13 +1,12 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable, switchMap, tap } from 'rxjs';
-import { Dictionary, List } from 'src/app/shared/interfaces';
-import { Task } from "src/app/shared/interfaces";
+import { Observable, switchMap } from 'rxjs';
+import { Dictionary, List, Task } from 'src/app/shared/interfaces';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
-// TODO: The user can swap columns using drag-n-drop.
 
 @Component({
   selector: 'app-board-list',
@@ -18,7 +17,7 @@ import { TaskService } from '../shared/services/tasks.service';
 export class BoardListComponent implements OnInit {
   @Input()
   list!: List
-  
+
   tasks$!: Observable<Task[]>
   boardId!: string
 
@@ -39,14 +38,14 @@ export class BoardListComponent implements OnInit {
     "cancel",
   ]
   i18n: Dictionary = this.translate.get(this.dic)
-  
+
   constructor(
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private listService: ListService,
     private taskService: TaskService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._createForm()
@@ -55,7 +54,7 @@ export class BoardListComponent implements OnInit {
         this.boardId = params['id']
       }
     )
-    
+
     this.taskService.getAll(this.boardId, this.list.id!).subscribe()
     this.tasks$ = this.taskService.getAll(this.boardId, this.list.id!)
 
@@ -76,7 +75,7 @@ export class BoardListComponent implements OnInit {
   createFormOpen() {
     this.createFormVisibility = true
   }
-  
+
   createFormClose() {
     this.createFormVisibility = false
     this.TaskForm.reset()
@@ -84,11 +83,11 @@ export class BoardListComponent implements OnInit {
 
   create() {
     this.createFormVisibility = false
-    
-    if(this.TaskForm.invalid){
+
+    if (this.TaskForm.invalid) {
       return
     }
-    
+
     const task: Task = {
       title: this.TaskForm.value.title,
       description: this.TaskForm.value.description,
@@ -128,43 +127,25 @@ export class BoardListComponent implements OnInit {
     this.listEditable = false
   }
 
-  taskDragOverHandler(e: DragEvent) {
-    e.preventDefault();
-    const column = e.currentTarget as HTMLDivElement
-    column.classList.add('board__list_drop')
-  }
-
-  taskDragEnterHandler(e: DragEvent) {
-    const zone = e.target as HTMLElement
-    if(zone.dataset['order']) {
-      zone.classList.add('drop-zone-active')
+  drop(event: CdkDragDrop<Task[]>) {
+    const prev = event.previousContainer.data[event.previousIndex]
+    const current: Task = { ...prev, order: event.currentIndex + 1, columnId: event.container.id }
+    if (event.previousContainer.id === event.container.id) {
+      moveItemInArray(event.previousContainer.data, event.previousIndex, event.currentIndex);
+      this.taskService.edit(this.boardId, current).subscribe()
+    } else {
+      event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      this.taskService.create(this.boardId, current)
+        .pipe(
+          switchMap(() => this.taskService.delete(this.boardId, prev)),
+          switchMap(() => this.tasks$ = this.taskService.getAll(this.boardId, prev.columnId!)),
+          switchMap(() => this.listService.getAll(this.boardId))
+        )
+        .subscribe()
     }
   }
 
-  taskDragLeaveHandler(e: DragEvent) {
-    const column = e.currentTarget as HTMLDivElement
-    column.classList.remove('board__list_drop')
-    const zone = e.target as HTMLElement
-    if(zone.dataset['order']) {
-      zone.classList.remove('drop-zone-active')
-    }
-  }
-
-  taskDropHandler(e: DragEvent) {
-    e.preventDefault();
-    const oldTask: Task = JSON.parse(e.dataTransfer!.getData('text'))
-    const column = e.currentTarget as HTMLDivElement
-    const zone = e.target as HTMLElement
-    zone.classList.remove('task__container_drag')
-    const newTask: Task = {
-      ...oldTask,
-      columnId: column.id,
-      order: Number(zone.dataset['order']) + 1
-    }
-    this.taskService.delete(this.boardId, oldTask)
-      .subscribe()
-    this.taskService.create(this.boardId, newTask)
-      .pipe(switchMap(() => this.listService.getAll(this.boardId)))
-      .subscribe()
-  }
 }

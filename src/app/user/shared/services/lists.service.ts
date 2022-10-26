@@ -11,7 +11,7 @@ export class ListService {
 
   constructor(
     private http: HttpClient
-  ){}
+  ) { }
 
   create(boardId: string, list: List): Observable<List> {
     return this.http.post<List>(`${environment.base_url}/boards/${boardId}/columns`, list)
@@ -37,16 +37,17 @@ export class ListService {
       })
   }
 
-  getById(boardId: string, listId: string): Observable<List>{
+  getById(boardId: string, listId: string): Observable<List> {
     return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/${listId}`)
   }
 
   getAll(boardId: string): Observable<List[]> {
     return this.http.get<List[]>(`${environment.base_url}/boards/${boardId}/columns`)
-    .pipe(
-      tap(
-        response => this.listSubject.next(response)
+      .pipe(
+        tap(list => { list.sort((a, b) => a.order! - b.order!) }),
+        tap(
+          response => this.listSubject.next(response)
+        )
       )
-    )
   }
 }
