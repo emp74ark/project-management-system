@@ -20,7 +20,7 @@ export class CommonLayoutComponent implements OnInit {
   
   locales = this.translate.locales
   
-  selectedLocale = this.translate.currentLocale // start value
+  selectedLocale = this.translate.currentLocale
 
   dic = ['common_home', 'common_about', 'common_login', 'common_logout', 'dashboard_title']
   i18n: Dictionary = this.translate.get(this.dic)

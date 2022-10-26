@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
 
     this._createProfileForm()
   }
-  
+
   private _createProfileForm() {
     this.user$.subscribe(
       user => {
@@ -85,13 +85,13 @@ export class ProfileComponent implements OnInit {
     }
 
     this.modal.info(this.i18n['modal_saved'])
-    
+
     const user: User = {
       name: this.profileForm.value.profileName,
       login: this.profileForm.value.profileEmail,
       password: this.profileForm.value.profilePassword1
     }
-    
+
     this.userService.edit(this.userId, user)
       .pipe(switchMap(
         () => this.user$ = this.userService.getUserById(this.userId)

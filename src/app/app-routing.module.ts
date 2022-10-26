@@ -7,9 +7,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 const routes: Routes = [
   {
     path: '', component: CommonLayoutComponent, children: [
-      {path: '', redirectTo: '/', pathMatch: 'full'},
-      {path: '', component: WelcomePageComponent},
-      {path: 'about', component: AboutPageComponent}
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: '', component: WelcomePageComponent },
+      { path: 'about', component: AboutPageComponent }
     ]
   },
   {

@@ -20,7 +20,7 @@ export class AboutPageComponent implements OnInit {
         this.i18n = this.translate.get(this.dic, lang)
       }
     )
-   }
+  }
 
   ngOnInit(): void {
   }

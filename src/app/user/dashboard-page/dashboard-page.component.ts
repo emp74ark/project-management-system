@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Board, Dictionary } from 'src/app/shared/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BoardService } from '../shared/services/boards.service';
 import { Observable, switchMap } from 'rxjs';
-import { UserService } from '../shared/services/users.service';
-import { TranslateService } from 'src/app/shared/services/translate.service';
+import { Board, Dictionary } from 'src/app/shared/interfaces';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { TranslateService } from 'src/app/shared/services/translate.service';
+import { BoardService } from '../shared/services/boards.service';
+import { UserService } from '../shared/services/users.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,10 +14,10 @@ import { ModalService } from 'src/app/shared/services/modal.service';
   styleUrls: ['./dashboard-page.component.scss']
 })
 export class DashboardPageComponent implements OnInit {
-  
+
   DashboardForm!: FormGroup;
   boardList$!: Observable<Board[]>
-  boardEditable: {[index: string]: boolean} = {};
+  boardEditable: { [index: string]: boolean } = {};
 
   dic = [
     'dashboard_title',
@@ -43,8 +43,8 @@ export class DashboardPageComponent implements OnInit {
     private userService: UserService,
     private translate: TranslateService,
     private modal: ModalService
-  ) {}
-  
+  ) { }
+
   ngOnInit(): void {
     this._createForm()
     this.boardService.getList().subscribe()
@@ -61,7 +61,7 @@ export class DashboardPageComponent implements OnInit {
     )
   }
 
-  private _createForm(){
+  private _createForm() {
     this.DashboardForm = this.fb.group({
       title: [null, [Validators.required]],
       description: [null]
@@ -69,7 +69,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   create() {
-    if(this.DashboardForm.invalid){
+    if (this.DashboardForm.invalid) {
       return
     }
 
@@ -81,8 +81,8 @@ export class DashboardPageComponent implements OnInit {
     this.boardService.create(board)
       .pipe(switchMap(() => this.boardService.getList()))
       .subscribe(() => {
-      this.DashboardForm.reset()
-    })
+        this.DashboardForm.reset()
+      })
   }
 
   open(id: string) {
@@ -92,7 +92,7 @@ export class DashboardPageComponent implements OnInit {
   deletePrompt() {
     this.modal.prompt(this.i18n['modal_delete'], this.delete);
   }
-  
+
   delete = (id: string) => {
     this.boardService.delete(id)
       .pipe(switchMap(() => this.boardService.getList()))
@@ -100,21 +100,21 @@ export class DashboardPageComponent implements OnInit {
   }
 
   checkEditableStatus(boardId: string) {
-    if(this.boardEditable[boardId] === undefined) {
+    if (this.boardEditable[boardId] === undefined) {
       return false
     } else {
       return this.boardEditable[boardId]
     }
   }
 
-  edit(boardId: string){
+  edit(boardId: string) {
     this.boardEditable = {
       ...this.boardEditable,
       [boardId]: true
     }
   }
 
-  save(id: string, title: string, description: string){
+  save(id: string, title: string, description: string) {
     const board: Board = {
       id: id,
       title: title,

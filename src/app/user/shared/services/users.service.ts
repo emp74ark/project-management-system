@@ -8,8 +8,8 @@ import { environment } from "src/environments/environment";
 export class UserService {
   constructor(
     private http: HttpClient
-  ){}
-  
+  ) { }
+
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${environment.base_url}/users/${id}`)
   }
@@ -26,10 +26,10 @@ export class UserService {
         )
       )
   }
-  
+
   edit(id: string, user: User): Observable<User> {
     return this.http.put<User>(`${environment.base_url}/users/${id}`, user)
-  } 
+  }
 
   delete(id: string) {
     return this.http.delete(`${environment.base_url}/users/${id}`)

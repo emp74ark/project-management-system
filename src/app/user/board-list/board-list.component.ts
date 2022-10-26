@@ -105,7 +105,7 @@ export class BoardListComponent implements OnInit {
       )
   }
 
-  deleteList() {
+  deleteList() { // TODO: confirmation modal
     this.listService.delete(this.boardId, this.list.id!)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
       .subscribe()

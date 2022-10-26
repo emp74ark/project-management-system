@@ -14,7 +14,7 @@ export class TranslateService {
   private en: Dictionary = english
   private ru: Dictionary = russian
 
-  public currentLocale = 'en' //default locales
+  public currentLocale = 'en'
 
   public locale = new Subject<string>()
 

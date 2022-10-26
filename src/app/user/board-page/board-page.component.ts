@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Board, Dictionary, List } from 'src/app/shared/interfaces';
-import { ListService } from '../shared/services/lists.service';
-import { BoardService } from '../shared/services/boards.service';
-import { Observable, switchMap } from 'rxjs';
-import { TranslateService } from 'src/app/shared/services/translate.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
+import { Board, Dictionary, List } from 'src/app/shared/interfaces';
+import { TranslateService } from 'src/app/shared/services/translate.service';
+import { BoardService } from '../shared/services/boards.service';
+import { ListService } from '../shared/services/lists.service';
 
 @Component({
   selector: 'app-board-page',

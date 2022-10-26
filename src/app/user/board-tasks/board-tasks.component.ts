@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { User, Task, Dictionary } from 'src/app/shared/interfaces';
+import { Dictionary, Task, User } from 'src/app/shared/interfaces';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
@@ -42,13 +42,13 @@ export class BoardTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.users$ = this.userService.getAll()
-    
+
     this.activeRoute.params.subscribe(
       (params: Params) => {
         this.boardId = params['id']
       }
     )
-    
+
     this.user$ = this.userService.getUserById(this.task.userId)
 
     this.translate.locale.subscribe(
@@ -58,7 +58,7 @@ export class BoardTasksComponent implements OnInit {
     )
   }
 
-  delete() {
+  delete() { // TODO: confirmation modal
     this.taskService.delete(this.boardId, this.task)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
       .subscribe()
@@ -68,7 +68,7 @@ export class BoardTasksComponent implements OnInit {
     this.taskEditable = true
   }
 
-  save(id: string, order: number, title: string, description: string, user: string){
+  save(id: string, order: number, title: string, description: string, user: string) {
     const task: Task = {
       id: id,
       order: order,
@@ -85,14 +85,4 @@ export class BoardTasksComponent implements OnInit {
       )
       .subscribe()
   }
-
-  // taskDragStartHandler(e: DragEvent) {
-  //   e.dataTransfer!.setData('text', JSON.stringify(this.task))
-  //   const dragObject = e.target as HTMLElement
-  //   dragObject.classList.add('task__container_drag')
-  // }
-
-  // taskDragEndHandler(e: DragEvent) {
-  //   e.dataTransfer?.clearData()
-  // }
 }

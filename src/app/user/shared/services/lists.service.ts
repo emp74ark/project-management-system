@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http'
-import { environment } from "src/environments/environment";
-import { List } from "src/app/shared/interfaces";
 import { BehaviorSubject, map, Observable, tap } from "rxjs";
+import { List } from "src/app/shared/interfaces";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class ListService {

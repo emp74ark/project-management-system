@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
 
   LogInForm!: FormGroup
   SignUpForm!: FormGroup;
-  
+
   dic = [
     'email',
     'name',
@@ -45,8 +45,8 @@ export class LoginPageComponent implements OnInit {
     this._createLoginForm()
     this._createSignUpForm()
     this.authMode = true;
-   }
-  
+  }
+
   ngOnInit() {
     this.translate.locale.subscribe(
       lang => {
