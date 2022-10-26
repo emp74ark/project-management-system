@@ -1,16 +1,16 @@
-@import '../../shared/scss/shared';
+@import "../../shared/scss/shared";
 
 .task__container {
   display: flex;
   flex-direction: column;
-  margin: .5rem;
-  padding: .5rem;
-  border-radius: .3rem;
-  box-shadow: .1rem .1rem .3rem $background-dark;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 0.1rem 0.1rem 0.3rem $background-dark;
 }
 .task__container_drag {
-  border: .2rem dashed $border-editable;
-  border-radius: .3rem;
+  border: 0.2rem dashed $border-editable;
+  border-radius: 0.3rem;
 }
 .buttons {
   display: flex;
@@ -22,8 +22,8 @@
   color: $font-light;
   text-align: center;
   background: $background-dark;
-  padding: .5rem;
-  border-radius: .3rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
   margin-bottom: 1rem;
 }
 .task__description {

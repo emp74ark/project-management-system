@@ -1,4 +1,4 @@
-@import '../../shared/scss/shared';
+@import "../../shared/scss/shared";
 .auth__mode {
   margin: auto;
   width: 30rem;
@@ -16,10 +16,10 @@
   width: 50%;
 }
 .auth__left {
-  border-radius: .3rem 0 0 .3rem;
+  border-radius: 0.3rem 0 0 0.3rem;
 }
 .auth__right {
-  border-radius: 0 .3rem .3rem 0;
+  border-radius: 0 0.3rem 0.3rem 0;
 }
 form {
   margin: auto;

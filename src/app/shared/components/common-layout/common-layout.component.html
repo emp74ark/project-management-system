@@ -2,36 +2,40 @@
   <h1><a [routerLink]="['/']">PMA</a></h1>
   <nav>
     <ul>
-      <li><a 
-        [routerLink]="['/']"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}"
-        >{{i18n['common_home']}}</a></li>
-      <li><a 
-        [routerLink]="['/about']"
-        routerLinkActive="active"
-        >{{i18n['common_about']}}</a></li>
-      <li
-        *ngIf="!isAuthenticated()"
-        routerLinkActive="active">
-        <a [routerLink]="['/user/login']">{{i18n['common_login']}}</a></li>
-      <li *ngIf="isAuthenticated()"><a 
-        [routerLink]="['/user', 'dashboard']"
-        routerLinkActive="active"
-        >{{i18n['dashboard_title']}}</a></li>
-      <li *ngIf="isAuthenticated()"><a 
-        [routerLink]="['/user', 'profile']"
-        routerLinkActive="active"
-        >{{getLogin()}}</a></li>
-      <li *ngIf="isAuthenticated()"><a 
-        href="#" 
-        (click)="logout($event)"
-        >{{i18n['common_logout']}}</a></li>
       <li>
-        <select
-          [(ngModel)]="selectedLocale"
-          (change)="changeLocale()">
-          <option [value]="locale.code" *ngFor="let locale of locales">{{locale.label}}</option>
+        <a
+          [routerLink]="['/']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >{{ i18n["common_home"] }}</a
+        >
+      </li>
+      <li>
+        <a [routerLink]="['/about']" routerLinkActive="active">{{
+          i18n["common_about"]
+        }}</a>
+      </li>
+      <li *ngIf="!isAuthenticated()" routerLinkActive="active">
+        <a [routerLink]="['/user/login']">{{ i18n["common_login"] }}</a>
+      </li>
+      <li *ngIf="isAuthenticated()">
+        <a [routerLink]="['/user', 'dashboard']" routerLinkActive="active">{{
+          i18n["dashboard_title"]
+        }}</a>
+      </li>
+      <li *ngIf="isAuthenticated()">
+        <a [routerLink]="['/user', 'profile']" routerLinkActive="active">{{
+          getLogin()
+        }}</a>
+      </li>
+      <li *ngIf="isAuthenticated()">
+        <a href="#" (click)="logout($event)">{{ i18n["common_logout"] }}</a>
+      </li>
+      <li>
+        <select [(ngModel)]="selectedLocale" (change)="changeLocale()">
+          <option [value]="locale.code" *ngFor="let locale of locales">
+            {{ locale.label }}
+          </option>
         </select>
       </li>
     </ul>
@@ -41,6 +45,12 @@
   <router-outlet></router-outlet>
 </div>
 <footer>
-  <span class="footer__item"><a href="https://github.com/emp74ark" target="_blank">Github</a></span>
-  <span class="footer__item"><a href="https://learn.epam.com/start" target="_blank">UpSkill Me!</a></span>
+  <span class="footer__item"
+    ><a href="https://github.com/emp74ark" target="_blank">Github</a></span
+  >
+  <span class="footer__item"
+    ><a href="https://learn.epam.com/start" target="_blank"
+      >UpSkill Me!</a
+    ></span
+  >
 </footer>

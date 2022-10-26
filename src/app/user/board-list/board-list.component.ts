@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { Dictionary, List, Task } from 'src/app/shared/interfaces';
+import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
@@ -28,14 +29,15 @@ export class BoardListComponent implements OnInit {
   createFormVisibility = false
 
   dic = [
-    "task_new",
-    "title",
-    "description",
-    "edit",
-    "create",
-    "save",
-    "delete",
-    "cancel",
+    'task_new',
+    'title',
+    'description',
+    'edit',
+    'create',
+    'save',
+    'delete',
+    'cancel',
+    'modal_delete'
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 
@@ -44,7 +46,8 @@ export class BoardListComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private listService: ListService,
     private taskService: TaskService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modal: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -105,17 +108,21 @@ export class BoardListComponent implements OnInit {
       )
   }
 
-  deleteList() { // TODO: confirmation modal
+  prompt() {
+    this.modal.prompt(this.i18n['modal_delete'], this.delete);
+  }
+
+  delete = () => {
     this.listService.delete(this.boardId, this.list.id!)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
       .subscribe()
   }
 
-  editList() {
+  edit() {
     this.listEditable = true
   }
 
-  saveList(title: string, order: number) {
+  save(title: string, order: number) {
     const list: List = {
       id: this.list.id,
       order: order,

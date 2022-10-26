@@ -23,17 +23,17 @@ export class BoardPageComponent implements OnInit {
   lists$!: Observable<List[]>
 
   dic = [
-    "board_back",
-    "board_new",
-    "title",
-    "description",
-    "create",
-    "open",
-    "close",
-    "edit",
-    "save",
-    "delete",
-    "required",
+    'board_back',
+    'board_new',
+    'title',
+    'description',
+    'create',
+    'open',
+    'close',
+    'edit',
+    'save',
+    'delete',
+    'required'
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 

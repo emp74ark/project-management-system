@@ -74,7 +74,7 @@ export class LoginPageComponent implements OnInit {
     this.authMode = !this.authMode
   }
 
-  loginSubmit() {
+  login() {
     if (this.LogInForm.invalid) {
       return
     }
@@ -103,7 +103,7 @@ export class LoginPageComponent implements OnInit {
     this.router.navigate(['/user', 'login'])
   }
 
-  signUpSubmit() {
+  signup() {
     if (this.SignUpForm.invalid) {
       return
     }

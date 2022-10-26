@@ -75,11 +75,11 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  editProfile() {
+  edit() {
     this.profileEditable = true
   }
 
-  saveProfile() {
+  save() {
     if (this.profileForm.invalid) {
       return
     }
@@ -108,11 +108,11 @@ export class ProfileComponent implements OnInit {
     return value1 === value2 ? true : false
   }
 
-  deletePrompt() {
-    this.modal.prompt(this.i18n['modal_delete'], this.deleteProfile);
+  prompt() {
+    this.modal.prompt(this.i18n['modal_delete'], this.delete);
   }
 
-  deleteProfile = () => {
+  delete = () => {
     this.userService.delete(this.userId).subscribe()
     this.auth.logout()
     this.router.navigate(['/user', 'login'])

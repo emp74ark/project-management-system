@@ -1,60 +1,76 @@
-<h2>{{i18n['dashboard_title']}}</h2>
+<h2>{{ i18n["dashboard_title"] }}</h2>
 <form [formGroup]="DashboardForm" (ngSubmit)="create()">
   <div class="form-control">
-    <h3>{{i18n['dashboard_new']}}</h3>
+    <h3>{{ i18n["dashboard_new"] }}</h3>
     <label for="dashboard__new">
-      {{i18n['title']}}
+      {{ i18n["title"] }}
     </label>
-    <input 
-      type="text" 
-      id="dashboard__new-title" 
-      placeholder="{{i18n['dashboard_new']}}"
-      formControlName="title">
-    <small class="danger" *ngIf="DashboardForm.get('title')?.touched && DashboardForm.get('title')?.errors?.['required']">
-      {{i18n['title']}} {{i18n['required']}}
+    <input
+      type="text"
+      id="dashboard__new-title"
+      placeholder="{{ i18n['dashboard_new'] }}"
+      formControlName="title"
+    />
+    <small
+      class="danger"
+      *ngIf="DashboardForm.get('title')?.touched && DashboardForm.get('title')?.errors?.['required']"
+    >
+      {{ i18n["title"] }} {{ i18n["required"] }}
     </small>
   </div>
   <div class="form-control">
     <label for="dashboard__new-description">
-      {{i18n['description']}}
+      {{ i18n["description"] }}
     </label>
-    <input 
-      type="text" 
-      id="dashboard__new-description" 
-      placeholder="{{i18n['description']}}"
-      formControlName="description">
+    <input
+      type="text"
+      id="dashboard__new-description"
+      placeholder="{{ i18n['description'] }}"
+      formControlName="description"
+    />
   </div>
-  <button class="btn btn-create" type="submit" [disabled]="DashboardForm.invalid">{{i18n['create']}}</button>
+  <button
+    class="btn btn-create"
+    type="submit"
+    [disabled]="DashboardForm.invalid"
+  >
+    {{ i18n["create"] }}
+  </button>
 </form>
 <div class="dashboard">
   <div class="dashboard__item" *ngFor="let board of boardList$ | async">
     <div class="project__title">
-      <h3 [contentEditable]="checkEditableStatus(board.id!)" #title>{{board.title}}</h3>
+      <h3 [contentEditable]="checkEditableStatus(board.id!)" #title>
+        {{ board.title }}
+      </h3>
     </div>
-    <div class="project__description" [contentEditable]="checkEditableStatus(board.id!)" #description>
-      {{board.description}}
+    <div
+      class="project__description"
+      [contentEditable]="checkEditableStatus(board.id!)"
+      #description
+    >
+      {{ board.description }}
     </div>
     <div class="buttons">
-      <button class="btn"
-        (click)="open(board.id!)">
-        {{i18n['open']}}
+      <button class="btn" (click)="open(board.id!)">
+        {{ i18n["open"] }}
       </button>
       <button
         class="btn btn-edit"
         (click)="edit(board.id!)"
-        *ngIf="!checkEditableStatus(board.id!)">
-        {{i18n['edit']}}
+        *ngIf="!checkEditableStatus(board.id!)"
+      >
+        {{ i18n["edit"] }}
       </button>
       <button
         class="btn btn-save"
         (click)="save(board.id!, title.innerText, description.innerText)"
-        *ngIf="checkEditableStatus(board.id!)">
-        {{i18n['save']}}
+        *ngIf="checkEditableStatus(board.id!)"
+      >
+        {{ i18n["save"] }}
       </button>
-      <button
-        class="btn btn-delete"
-        (click)="deletePrompt()">
-        {{i18n['delete']}}
+      <button class="btn btn-delete" (click)="prompt()">
+        {{ i18n["delete"] }}
       </button>
     </div>
     <app-modal [id]="board.id!"></app-modal>

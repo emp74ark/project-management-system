@@ -1,113 +1,163 @@
-
 <div class="profile" *ngIf="user$ | async as user">
-  <h2>{{i18n['profile']}}</h2>
+  <h2>{{ i18n["profile"] }}</h2>
   <div *ngIf="!profileEditable">
-    <h4>{{i18n['name']}}: {{user.name}}</h4>
-    <h4>{{i18n['email']}}: {{user.login}}</h4>
+    <h4>{{ i18n["name"] }}: {{ user.name }}</h4>
+    <h4>{{ i18n["email"] }}: {{ user.login }}</h4>
   </div>
-  <button  *ngIf="!profileEditable" class="btn btn-edit" (click)="editProfile()">{{i18n['edit']}}</button>
+  <button *ngIf="!profileEditable" class="btn btn-edit" (click)="edit()">
+    {{ i18n["edit"] }}
+  </button>
   <div *ngIf="profileEditable">
-    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <form [formGroup]="profileForm" (ngSubmit)="save()">
       <div class="form-control">
         <label for="profile__name">
-          {{i18n['name']}}
+          {{ i18n["name"] }}
         </label>
         <input
-          type="text" 
-          id="profile__name" 
-          placeholder="{{i18n['name']}}"
-          formControlName="profileName">
+          type="text"
+          id="profile__name"
+          placeholder="{{ i18n['name'] }}"
+          formControlName="profileName"
+        />
         <div
-          *ngIf="profileForm.get('profileName')?.touched && profileForm.get('profileName')?.invalid"
-          class="validation">
-          <small class="danger" *ngIf="profileForm.get('profileName')?.errors?.['required']">
-            {{i18n['name']}}{{i18n['required']}}
+          *ngIf="
+            profileForm.get('profileName')?.touched &&
+            profileForm.get('profileName')?.invalid
+          "
+          class="validation"
+        >
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profileName')?.errors?.['required']"
+          >
+            {{ i18n["name"] }}{{ i18n["required"] }}
           </small>
-          <small class="danger" *ngIf="profileForm.get('profileName')?.errors?.['minlength']">
-            {{i18n['name']}} {{i18n['short']}}
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profileName')?.errors?.['minlength']"
+          >
+            {{ i18n["name"] }} {{ i18n["short"] }}
           </small>
         </div>
       </div>
       <div class="form-control">
         <label for="profile__email">
-          {{i18n['email']}}
+          {{ i18n["email"] }}
         </label>
         <input
-          type="email" 
-          id="profile__email" 
-          placeholder="{{i18n['email']}}"
-          formControlName="profileEmail">
+          type="email"
+          id="profile__email"
+          placeholder="{{ i18n['email'] }}"
+          formControlName="profileEmail"
+        />
         <div
-          *ngIf="profileForm.get('profileEmail')?.touched && profileForm.get('profileEmail')?.invalid"
-          class="validation">
-          <small class="danger" *ngIf="profileForm.get('profileEmail')?.errors?.['required']">
-            {{i18n['email']}} {{i18n['required']}}
+          *ngIf="
+            profileForm.get('profileEmail')?.touched &&
+            profileForm.get('profileEmail')?.invalid
+          "
+          class="validation"
+        >
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profileEmail')?.errors?.['required']"
+          >
+            {{ i18n["email"] }} {{ i18n["required"] }}
           </small>
-          <small class="danger" *ngIf="profileForm.get('profileEmail')?.errors?.['email']">
-            {{i18n['correct_email']}}
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profileEmail')?.errors?.['email']"
+          >
+            {{ i18n["correct_email"] }}
           </small>
         </div>
       </div>
       <div class="form-control">
         <label for="profile__password1">
-          {{i18n['password']}}
+          {{ i18n["password"] }}
         </label>
         <input
-          type="password" 
-          id="profile__password1" 
-          placeholder="{{i18n['password']}}"
-          formControlName="profilePassword1">
+          type="password"
+          id="profile__password1"
+          placeholder="{{ i18n['password'] }}"
+          formControlName="profilePassword1"
+        />
         <div
-          *ngIf="profileForm.get('profilePassword1')?.touched && profileForm.get('profilePassword1')?.invalid"
+          *ngIf="
+            profileForm.get('profilePassword1')?.touched &&
+            profileForm.get('profilePassword1')?.invalid
+          "
           class="validation"
+        >
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profilePassword1')?.errors?.['required']"
           >
-          <small class="danger" *ngIf="profileForm.get('profilePassword1')?.errors?.['required']">
-            {{i18n['password']}} {{i18n['required']}}
+            {{ i18n["password"] }} {{ i18n["required"] }}
           </small>
-          <small class="danger" *ngIf="profileForm.get('profilePassword1')?.errors?.['minlength']">
-            {{i18n['correct_password']}}
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profilePassword1')?.errors?.['minlength']"
+          >
+            {{ i18n["correct_password"] }}
           </small>
         </div>
       </div>
       <div class="form-control">
         <label for="profile__password2">
-          {{i18n['password']}} {{i18n['repeat']}}
+          {{ i18n["password"] }} {{ i18n["repeat"] }}
         </label>
         <input
           (change)="passwordValidator()"
           (blur)="passwordValidator()"
-          type="password" 
-          id="profile__password2" 
-          placeholder="{{i18n['password']}}  {{i18n['repeat']}}"
-          formControlName="profilePassword2">
+          type="password"
+          id="profile__password2"
+          placeholder="{{ i18n['password'] }}  {{ i18n['repeat'] }}"
+          formControlName="profilePassword2"
+        />
         <div
-          *ngIf="profileForm.get('profilePassword2')?.touched && profileForm.get('profilePassword2')?.invalid"
+          *ngIf="
+            profileForm.get('profilePassword2')?.touched &&
+            profileForm.get('profilePassword2')?.invalid
+          "
           class="validation"
+        >
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profilePassword2')?.errors?.['required']"
           >
-          <small class="danger" *ngIf="profileForm.get('profilePassword2')?.errors?.['required']">
-            {{i18n['password']}} {{i18n['required']}}
+            {{ i18n["password"] }} {{ i18n["required"] }}
           </small>
-          <small class="danger" *ngIf="profileForm.get('profilePassword2')?.errors?.['minlength']">
-            {{i18n['correct_password']}}
+          <small
+            class="danger"
+            *ngIf="profileForm.get('profilePassword2')?.errors?.['minlength']"
+          >
+            {{ i18n["correct_password"] }}
           </small>
         </div>
       </div>
       <div class="validation">
-        <small  class="danger" *ngIf="!passwordValidator()">
-          {{i18n['mismatch_passwords']}}
+        <small class="danger" *ngIf="!passwordValidator()">
+          {{ i18n["mismatch_passwords"] }}
         </small>
       </div>
-      <button 
+      <button
         class="btn"
         type="save"
         [disabled]="!passwordValidator() && this.profileForm.valid"
-        >{{i18n['save']}}
+      >
+        {{ i18n["save"] }}
       </button>
       <div class="form-control">
-        <small class="danger" *ngIf="auth.authErrorMessage$ | async as message">{{message}}</small>
+        <small
+          class="danger"
+          *ngIf="auth.authErrorMessage$ | async as message"
+          >{{ message }}</small
+        >
       </div>
     </form>
   </div>
-  <button class="btn btn-delete" (click)="deletePrompt()">{{i18n['delete']}}</button>
+  <button class="btn btn-delete" (click)="prompt()">
+    {{ i18n["delete"] }}
+  </button>
   <app-modal></app-modal>
 </div>

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { Dictionary, Task, User } from 'src/app/shared/interfaces';
+import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
@@ -25,10 +26,11 @@ export class BoardTasksComponent implements OnInit {
   boardId!: string
 
   dic = [
-    "edit",
-    "save",
-    "delete",
-    "user_select"
+    'edit',
+    'save',
+    'delete',
+    'user_select',
+    'modal_delete'
   ]
   i18n: Dictionary = this.translate.get(this.dic)
 
@@ -37,7 +39,8 @@ export class BoardTasksComponent implements OnInit {
     private taskService: TaskService,
     private userService: UserService,
     private activeRoute: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modal: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +61,11 @@ export class BoardTasksComponent implements OnInit {
     )
   }
 
-  delete() { // TODO: confirmation modal
+  prompt() {
+    this.modal.prompt(this.i18n['modal_delete'], this.delete);
+  }
+
+  delete = () => {
     this.taskService.delete(this.boardId, this.task)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
       .subscribe()

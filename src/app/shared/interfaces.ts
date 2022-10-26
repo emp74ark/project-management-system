@@ -31,7 +31,7 @@ export interface Task {
   columnId?: string,
 }
 
-export interface Dictionary {[index: string]: string}
+export interface Dictionary { [index: string]: string }
 
 export interface Modal {
   show: boolean,

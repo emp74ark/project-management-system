@@ -1,16 +1,15 @@
-@import '../../shared/scss/shared';
+@import "../../shared/scss/shared";
 
 .board__list {
   width: 20rem;
-  padding: 1rem .5rem;
-  border: .1rem dashed $border-dark;
-  border-radius: .3rem;
+  padding: 1rem 0.5rem;
+  border: 0.1rem dashed $border-dark;
+  border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 .board__list-items {
-  // height: 64rem;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -19,15 +18,15 @@
   color: $font-light;
   text-align: center;
   background: $background-dark;
-  padding: .5rem;
-  border-radius: .3rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
   margin-bottom: 1rem;
 }
 .buttons {
   display: flex;
   flex-direction: column;
   background: $background-middle;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 .form-control {
   display: flex;

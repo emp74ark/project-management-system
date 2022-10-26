@@ -1,4 +1,4 @@
-@import '../../scss/shared';
+@import "../../scss/shared";
 
 .modal__wrapper {
   position: fixed;
@@ -7,7 +7,7 @@
   top: 0;
   bottom: 0;
   background: $background-dark;
-  opacity: .5;
+  opacity: 0.5;
 }
 .modal__message {
   position: fixed;
@@ -18,7 +18,7 @@
   transform: translate(-50%, -50%);
   margin: auto;
   padding: 1rem 2rem;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
