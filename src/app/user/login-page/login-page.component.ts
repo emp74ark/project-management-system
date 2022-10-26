@@ -99,7 +99,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   successRegistration = () => {
-    console.log('callback works')
     this.authMode = true
     this.router.navigate(['/user', 'login'])
   }

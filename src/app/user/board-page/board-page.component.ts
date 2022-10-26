@@ -108,7 +108,6 @@ export class BoardPageComponent implements OnInit {
       .subscribe()
   }
   drop(event: CdkDragDrop<List[]>) {
-    console.log(event.previousContainer.data)
     const prev = event.previousContainer.data[event.previousIndex]
     const current: List = { ...prev, order: event.currentIndex + 1 }
     moveItemInArray(event.previousContainer.data, event.previousIndex, event.currentIndex)
