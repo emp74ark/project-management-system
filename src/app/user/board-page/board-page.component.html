@@ -1,4 +1,6 @@
-<div *ngIf="board$ | async as board" class="board">
+<div
+  *ngIf="board$ | async as board"
+  class="board">
   <h2 [contentEditable]="boardEditable" #title >{{board.title}}</h2>
   <h3 [contentEditable]="boardEditable" #description >{{board.description}}</h3>
   <div class="buttons">
@@ -12,12 +14,15 @@
     <button class="btn btn-create" type="submit" [disabled]="BoardForm.invalid">{{i18n['create']}}</button>
   </form>
   <div class="lists"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="lists"
+    (cdkDropListDropped)="drop($event)"
     cdkDropListGroup
     *ngIf="(lists$ | async) as lists">
-    <app-board-list
-      *ngFor="let list of lists" 
-      [list]="list"
-      >
-    </app-board-list>
+    <div cdkDrag *ngFor="let list of lists">
+      <div class="drop-placeholder-list" *cdkDragPlaceholder></div>
+      <app-board-list [list]="list"></app-board-list>
+    </div>
   </div>
 </div>

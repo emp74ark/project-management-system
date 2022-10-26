@@ -6,6 +6,7 @@ import { ListService } from '../shared/services/lists.service';
 import { BoardService } from '../shared/services/boards.service';
 import { Observable, switchMap } from 'rxjs';
 import { TranslateService } from 'src/app/shared/services/translate.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board-page',
@@ -18,7 +19,7 @@ export class BoardPageComponent implements OnInit {
   board$!: Observable<Board>
   boardEditable = false;
   boardId!: string
-  
+
   lists$!: Observable<List[]>
 
   dic = [
@@ -42,7 +43,7 @@ export class BoardPageComponent implements OnInit {
     private listService: ListService,
     private activeRoute: ActivatedRoute,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._createForm()
@@ -51,7 +52,7 @@ export class BoardPageComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => {
           return this.boardService.getById(params['id'])
-        })       
+        })
       )
 
     this.activeRoute.params.subscribe(
@@ -77,7 +78,7 @@ export class BoardPageComponent implements OnInit {
   }
 
   create() {
-    if(this.BoardForm.invalid) {
+    if (this.BoardForm.invalid) {
       return
     }
 
@@ -91,11 +92,11 @@ export class BoardPageComponent implements OnInit {
     this.BoardForm.reset()
   }
 
-  edit(){
+  edit() {
     this.boardEditable = true
   }
 
-  save(id: string, title: string, description: string){
+  save(id: string, title: string, description: string) {
     const board: Board = {
       id: id,
       title: title,
@@ -106,5 +107,11 @@ export class BoardPageComponent implements OnInit {
       .pipe(switchMap(() => this.boardService.getList()))
       .subscribe()
   }
-
+  drop(event: CdkDragDrop<List[]>) {
+    console.log(event.previousContainer.data)
+    const prev = event.previousContainer.data[event.previousIndex]
+    const current: List = { ...prev, order: event.currentIndex + 1 }
+    moveItemInArray(event.previousContainer.data, event.previousIndex, event.currentIndex)
+    this.listService.edit(this.boardId, current).subscribe()
+  }
 }

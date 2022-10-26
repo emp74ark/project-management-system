@@ -3,6 +3,7 @@
   cdkDropList
   (cdkDropListDropped)="drop($event)"
   id={{list.id}}
+  [ngStyle]="{order: list.order}"
   *ngIf="(tasks$ | async) as tasks">
   <div class="board__list-title" #title [contentEditable]="listEditable">{{list.title}}</div>
   <div class="buttons">
@@ -43,6 +44,7 @@
     cdkDrag
     *ngFor="let task of tasks"
     class="board__list-items">
+    <div class="drop-placeholder-task" *cdkDragPlaceholder></div>
     <app-board-tasks [task]="task"></app-board-tasks>
   </div>
 </div>
