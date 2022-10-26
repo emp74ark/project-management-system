@@ -41,4 +41,9 @@ input {
   border-radius: .3rem;
   padding: .1 .2rem;
 }
-//TODO: Adaptive layout with minimum page width 320px
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 8px;
+  }
+}

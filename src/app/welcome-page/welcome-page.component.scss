@@ -13,3 +13,11 @@
     max-width: 50%;
   }
 }
+
+@media (max-width: 480px) {
+  img {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+  }
+}

@@ -11,3 +11,12 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .about {
+    flex-direction: column;
+  }
+  .about__item {
+    width: auto;
+  }
+}
