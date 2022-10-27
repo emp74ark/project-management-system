@@ -15,14 +15,14 @@ export class AboutPageComponent implements OnInit {
   constructor(
     private translate: TranslateService
   ) {
+  }
+
+  ngOnInit(): void {
     this.translate.locale.subscribe(
       lang => {
         this.i18n = this.translate.get(this.dic, lang)
       }
     )
-  }
-
-  ngOnInit(): void {
   }
 
 }

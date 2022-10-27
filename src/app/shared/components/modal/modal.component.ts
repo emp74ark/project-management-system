@@ -9,7 +9,7 @@ import { TranslateService } from '../../services/translate.service';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-  
+
   @Input() id: string
 
   dic = [
