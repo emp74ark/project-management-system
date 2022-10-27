@@ -12,6 +12,8 @@ header {
 nav {
   font-size: 2rem;
   ul {
+    display: flex;
+    align-items: center;
     li {
       display: inline-block;
       margin: 1rem;
@@ -40,6 +42,23 @@ footer {
 }
 .active {
   font-weight: bold;
+}
+
+.nav-locale {
+  display: flex;
+  align-items: center;
+}
+
+mat-icon {
+  color: $font-accent;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+::ng-deep {
+  .mat-select-value {
+    color: $font-accent !important;
+  }
 }
 
 @media (max-width: 480px) {

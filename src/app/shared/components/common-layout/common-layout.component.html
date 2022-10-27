@@ -31,15 +31,15 @@
       <li *ngIf="isAuthenticated()">
         <a href="#" (click)="logout($event)">{{ i18n["common_logout"] }}</a>
       </li>
-      <li>
-        <select [(ngModel)]="selectedLocale" (change)="changeLocale()">
-          <option [value]="locale.code" *ngFor="let locale of locales">
-            {{ locale.label }}
-          </option>
-        </select>
-      </li>
     </ul>
   </nav>
+  <div class="nav-locale">
+    <mat-select [(ngModel)]="selectedLocale" (selectionChange)="changeLocale()">
+      <mat-option [value]="locale.code" *ngFor="let locale of locales">
+        {{ locale.label }}
+      </mat-option>
+    </mat-select>
+  </div>
 </header>
 <div class="container">
   <router-outlet></router-outlet>
