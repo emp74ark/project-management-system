@@ -4,9 +4,10 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 2.5rem !important;
   color: $font-dark;
   text-align: center;
+  margin: 0 !important;
 }
 
 h3 {

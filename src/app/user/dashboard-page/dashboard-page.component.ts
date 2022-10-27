@@ -89,7 +89,8 @@ export class DashboardPageComponent implements OnInit {
     this.router.navigate(['/user/board', id])
   }
 
-  prompt() {
+  prompt(event: MouseEvent, ) {
+    event.stopImmediatePropagation()
     this.modal.prompt(this.i18n['modal_delete'], this.delete);
   }
   
@@ -107,14 +108,16 @@ export class DashboardPageComponent implements OnInit {
     }
   }
 
-  edit(boardId: string){
+  edit(event: MouseEvent, boardId: string){
+    event.stopImmediatePropagation()
     this.boardEditable = {
       ...this.boardEditable,
       [boardId]: true
     }
   }
 
-  save(id: string, title: string, description: string){
+  save(event: MouseEvent, id: string, title: string, description: string){
+    event.stopImmediatePropagation()
     const board: Board = {
       id: id,
       title: title,

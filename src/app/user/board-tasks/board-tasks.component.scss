@@ -14,17 +14,15 @@
 }
 .buttons {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
+  justify-content: center;
 }
 
 .task__title {
   font-size: 2rem;
   color: $font-light;
   text-align: center;
-  background: $background-dark;
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  margin-bottom: 1rem;
+  
 }
 .task__description {
   text-align: center;
@@ -32,4 +30,17 @@
 .task__author {
   text-align: center;
   font-size: 1.3rem;
+}
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $background-dark;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+mat-icon {
+  color: $border-light;
 }

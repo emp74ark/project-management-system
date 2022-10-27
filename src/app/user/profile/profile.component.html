@@ -1,11 +1,16 @@
 <div class="profile" *ngIf="user$ | async as user">
-  <h2>{{ i18n["profile"] }}</h2>
+  <div class="title-container">
+    <h2>{{ i18n["profile"] }}</h2>
+    <button *ngIf="!profileEditable" class="btn icn-edit" (click)="edit()">
+      <mat-icon [attr.aria-label]="i18n['edit']" fontIcon="edit"></mat-icon>
+    </button>
+  </div>
   <div *ngIf="!profileEditable">
     <h4>{{ i18n["name"] }}: {{ user.name }}</h4>
     <h4>{{ i18n["email"] }}: {{ user.login }}</h4>
   </div>
-  <button *ngIf="!profileEditable" class="btn btn-edit" (click)="edit()">
-    {{ i18n["edit"] }}
+  <button class="btn btn-delete" (click)="prompt()">
+    {{ i18n["delete"] }}
   </button>
   <div *ngIf="profileEditable">
     <form [formGroup]="profileForm" (ngSubmit)="save()">
@@ -156,8 +161,6 @@
       </div>
     </form>
   </div>
-  <button class="btn btn-delete" (click)="prompt()">
-    {{ i18n["delete"] }}
-  </button>
+
   <app-modal></app-modal>
 </div>

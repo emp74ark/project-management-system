@@ -1,6 +1,34 @@
 <div [ngStyle]="{ order: task.order }" class="task__container">
-  <div class="task__title" [contentEditable]="taskEditable" #title>
-    {{ task.title }}
+  <div class="title-container">
+    <div class="task__title" [contentEditable]="taskEditable" #title>
+      {{ task.title }}
+    </div>
+    <div class="buttons">
+      <button class="btn icn-edit" (click)="edit()" *ngIf="!taskEditable">
+        <mat-icon [attr.aria-label]="i18n['edit']" fontIcon="edit"></mat-icon>
+      </button>
+      <button
+        class="btn icn-save"
+        (click)="
+          save(
+            task.id!,
+            task.order!,
+            title.innerText,
+            description.innerText,
+            userSelect
+          )
+        "
+        *ngIf="taskEditable"
+      >
+        <mat-icon [attr.aria-label]="i18n['save']" fontIcon="save"></mat-icon>
+      </button>
+      <button class="btn icn-delete" (click)="prompt()">
+        <mat-icon
+          [attr.aria-label]="i18n['delete']"
+          fontIcon="delete"
+        ></mat-icon>
+      </button>
+    </div>
   </div>
   <div class="task__description" #description>
     <p [contentEditable]="taskEditable">{{ task.description }}</p>
@@ -17,29 +45,6 @@
         {{ user.login }}
       </option>
     </select>
-  </div>
-  <div class="buttons">
-    <button class="btn btn-edit" (click)="edit()" *ngIf="!taskEditable">
-      {{ i18n["edit"] }}
-    </button>
-    <button
-      class="btn btn-save"
-      (click)="
-        save(
-          task.id!,
-          task.order!,
-          title.innerText,
-          description.innerText,
-          userSelect
-        )
-      "
-      *ngIf="taskEditable"
-    >
-      {{ i18n["save"] }}
-    </button>
-    <button class="btn btn-delete" (click)="prompt()">
-      {{ i18n["delete"] }}
-    </button>
   </div>
   <app-modal></app-modal>
 </div>

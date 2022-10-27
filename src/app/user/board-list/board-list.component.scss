@@ -1,7 +1,7 @@
 @import "../../shared/scss/shared";
 
 .board__list {
-  width: 20rem;
+  width: 25rem;
   padding: 1rem 0.5rem;
   border: 0.1rem dashed $border-dark;
   border-radius: 0.3rem;
@@ -15,20 +15,23 @@
 }
 .board__list-title {
   font-size: 2rem;
-  color: $font-light;
+  color: $font-dark;
   text-align: center;
-  background: $background-dark;
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  margin-bottom: 1rem;
 }
 .buttons {
   display: flex;
-  flex-direction: column;
-  background: $background-middle;
-  border-radius: 0.3rem;
+  justify-content: center;
 }
 .form-control {
   display: flex;
   flex-direction: column;
+}
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $background-accent;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
 }

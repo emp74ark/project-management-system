@@ -20,3 +20,18 @@
 .btn-cancel {
   background: $background-danger;
 }
+
+.icn-edit,
+.icn-save,
+.icn-delete,
+.icn-cancel,
+.icn-new {
+  margin: .2rem;
+  padding: .2rem;
+  background: none;
+  cursor: pointer;
+}
+
+mat-icon {
+  color: $border-dark;
+}

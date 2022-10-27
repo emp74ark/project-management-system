@@ -9,6 +9,7 @@ import { CommonLayoutComponent } from './shared/components/common-layout/common-
 import { AuthGuard } from './shared/services/auth.guard';
 import { SharedModule } from './shared/shared.module';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,

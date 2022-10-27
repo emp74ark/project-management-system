@@ -1,23 +1,22 @@
 <div *ngIf="board$ | async as board" class="board">
-  <h2 [contentEditable]="boardEditable" #title>{{ board.title }}</h2>
+  <div class="title-container">
+    <h2 [contentEditable]="boardEditable" #title>{{ board.title }}</h2>
+    <div class="buttons">
+      <button class="btn icn-edit" (click)="edit()" *ngIf="!boardEditable">
+        <mat-icon [attr.aria-label]="i18n['edit']" fontIcon="edit"></mat-icon>
+      </button>
+      <button
+        class="btn icn-save"
+        (click)="save(board.id!, title.innerText, description.innerText)"
+        *ngIf="boardEditable"
+      >
+        <mat-icon [attr.aria-label]="i18n['save']" fontIcon="save"></mat-icon>
+      </button>
+    </div>
+  </div>
   <h3 [contentEditable]="boardEditable" #description>
     {{ board.description }}
   </h3>
-  <div class="buttons">
-    <button class="btn btn-edit" (click)="edit()" *ngIf="!boardEditable">
-      {{ i18n["edit"] }}
-    </button>
-    <button
-      class="btn btn-save"
-      (click)="save(board.id!, title.innerText, description.innerText)"
-      *ngIf="boardEditable"
-    >
-      {{ i18n["save"] }}
-    </button>
-    <button class="btn" [routerLink]="['../../dashboard']">
-      {{ i18n["board_back"] }}
-    </button>
-  </div>
   <form [formGroup]="BoardForm" (ngSubmit)="create()">
     <label for="board__list">{{ i18n["board_new"] }}</label>
     <input

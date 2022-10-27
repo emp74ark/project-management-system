@@ -12,6 +12,7 @@
 .modal__message {
   position: fixed;
   width: 20rem;
+  min-height: 15rem;
   background: $background-light;
   left: 50%;
   top: 50%;
@@ -23,4 +24,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }

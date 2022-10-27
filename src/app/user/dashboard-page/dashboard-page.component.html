@@ -43,6 +43,30 @@
       <h3 [contentEditable]="checkEditableStatus(board.id!)" #title>
         {{ board.title }}
       </h3>
+      <div class="buttons">
+        <button
+          class="btn icn-edit"
+          (click)="edit($event, board.id!)"
+          *ngIf="!checkEditableStatus(board.id!)"
+        >
+          <mat-icon [attr.aria-label]="i18n['edit']" fontIcon="edit"></mat-icon>
+        </button>
+        <button
+          class="btn icn-save"
+          (click)="
+            save($event, board.id!, title.innerText, description.innerText)
+          "
+          *ngIf="checkEditableStatus(board.id!)"
+        >
+          <mat-icon [attr.aria-label]="i18n['save']" fontIcon="save"></mat-icon>
+        </button>
+        <button class="btn icn-delete" (click)="prompt($event)">
+          <mat-icon
+            [attr.aria-label]="i18n['delete']"
+            fontIcon="delete"
+          ></mat-icon>
+        </button>
+      </div>
     </div>
     <div
       class="project__description"
@@ -51,28 +75,9 @@
     >
       {{ board.description }}
     </div>
-    <div class="buttons">
-      <button class="btn" (click)="open(board.id!)">
-        {{ i18n["open"] }}
-      </button>
-      <button
-        class="btn btn-edit"
-        (click)="edit(board.id!)"
-        *ngIf="!checkEditableStatus(board.id!)"
-      >
-        {{ i18n["edit"] }}
-      </button>
-      <button
-        class="btn btn-save"
-        (click)="save(board.id!, title.innerText, description.innerText)"
-        *ngIf="checkEditableStatus(board.id!)"
-      >
-        {{ i18n["save"] }}
-      </button>
-      <button class="btn btn-delete" (click)="prompt()">
-        {{ i18n["delete"] }}
-      </button>
-    </div>
+    <button class="btn" (click)="open(board.id!)">
+      {{ i18n["open"] }}
+    </button>
     <app-modal [id]="board.id!"></app-modal>
   </div>
 </div>

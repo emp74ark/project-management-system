@@ -1,13 +1,15 @@
-import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { ModalComponent } from './components/modal/modal.component';
+import { NgModule } from "@angular/core";
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   exports: [
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   declarations: [
   ]

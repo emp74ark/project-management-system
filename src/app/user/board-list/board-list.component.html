@@ -7,30 +7,38 @@
   [ngStyle]="{ order: list.order }"
   *ngIf="tasks$ | async as tasks"
 >
-  <div class="board__list-title" #title [contentEditable]="listEditable">
-    {{ list.title }}
-  </div>
-  <div class="buttons">
-    <button class="btn btn-edit" (click)="edit()" *ngIf="!listEditable">
-      {{ i18n["edit"] }}
-    </button>
-    <button
-      class="btn btn-save"
-      (click)="save(title.innerText, list.order!)"
-      *ngIf="listEditable"
-    >
-      {{ i18n["save"] }}
-    </button>
-    <button class="btn btn-delete" (click)="prompt()">
-      {{ i18n["delete"] }}
-    </button>
-    <button
-      class="btn btn-create"
-      (click)="createFormOpen()"
-      *ngIf="!createFormVisibility"
-    >
-      {{ i18n["task_new"] }}
-    </button>
+  <div class="title-container">
+    <div class="board__list-title" #title [contentEditable]="listEditable">
+      {{ list.title }}
+    </div>
+    <div class="buttons">
+      <button class="btn icn-edit" (click)="edit()" *ngIf="!listEditable">
+        <mat-icon [attr.aria-label]="i18n['edit']" fontIcon="edit"></mat-icon>
+      </button>
+      <button
+        class="btn icn-save"
+        (click)="save(title.innerText, list.order!)"
+        *ngIf="listEditable"
+      >
+        <mat-icon [attr.aria-label]="i18n['save']" fontIcon="save"></mat-icon>
+      </button>
+      <button class="btn icn-delete" (click)="prompt()">
+        <mat-icon
+          [attr.aria-label]="i18n['delete']"
+          fontIcon="delete"
+        ></mat-icon>
+      </button>
+      <button
+        class="btn icn-new"
+        (click)="createFormOpen()"
+        *ngIf="!createFormVisibility"
+      >
+        <mat-icon
+          [attr.aria-label]="i18n['task_new']"
+          fontIcon="add_circle"
+        ></mat-icon>
+      </button>
+    </div>
   </div>
   <form
     *ngIf="createFormVisibility"
