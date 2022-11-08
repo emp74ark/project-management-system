@@ -7,6 +7,7 @@ import { Observable, switchMap } from 'rxjs';
 import { UserService } from '../shared/services/users.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { dic } from './dashboard-page.props';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -19,22 +20,7 @@ export class DashboardPageComponent implements OnInit {
   boardList$!: Observable<Board[]>
   boardEditable: {[index: string]: boolean} = {};
 
-  dic = [
-    'dashboard_title',
-    'dashboard_new',
-    'title',
-    'description',
-    'create',
-    'open',
-    'close',
-    'edit',
-    'save',
-    'delete',
-    'cancel',
-    'required',
-    'modal_delete'
-  ]
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     private fb: FormBuilder,
@@ -56,7 +42,7 @@ export class DashboardPageComponent implements OnInit {
     )
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
   }

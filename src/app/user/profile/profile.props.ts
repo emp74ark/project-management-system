@@ -1,0 +1,19 @@
+export const dic = [
+  'profile',
+  'name',
+  'short',
+  'email',
+  'required',
+  'correct_email',
+  'password',
+  'correct_password',
+  'mismatch_passwords',
+  'edit',
+  'save',
+  'close',
+  'delete',
+  'cancel',
+  'repeat',
+  'modal_saved',
+  'modal_delete'
+]

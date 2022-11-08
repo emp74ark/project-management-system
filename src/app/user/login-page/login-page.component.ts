@@ -5,6 +5,7 @@ import { Dictionary, User } from 'src/app/shared/interfaces';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { AuthService } from '../../shared/services/auth.service';
+import { dic } from './login-page.props';
 
 @Component({
   selector: 'app-login-page',
@@ -18,22 +19,7 @@ export class LoginPageComponent implements OnInit {
   LogInForm!: FormGroup
   SignUpForm!: FormGroup;
 
-  dic = [
-    'email',
-    'name',
-    'password',
-    'login',
-    'signup',
-    'required',
-    'short',
-    'correct_email',
-    'correct_password',
-    'close',
-    'modal_registration',
-    'modal_loading',
-  ]
-
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     private fb: FormBuilder,
@@ -50,7 +36,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
   }

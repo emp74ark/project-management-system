@@ -7,6 +7,7 @@ import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
+import { dic } from './board-tasks.props';
 
 @Component({
   selector: 'app-board-tasks',
@@ -25,14 +26,7 @@ export class BoardTasksComponent implements OnInit {
 
   boardId!: string
 
-  dic = [
-    'edit',
-    'save',
-    'delete',
-    'user_select',
-    'modal_delete'
-  ]
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     private listService: ListService,
@@ -56,7 +50,7 @@ export class BoardTasksComponent implements OnInit {
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
   }

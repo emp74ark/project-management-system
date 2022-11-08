@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { UserService } from '../shared/services/users.service';
+import { dic } from './profile.props';
 
 @Component({
   selector: 'app-profile',
@@ -20,26 +21,7 @@ export class ProfileComponent implements OnInit {
   profileEditable = false
   profileForm!: FormGroup
 
-  dic = [
-    'profile',
-    'name',
-    'short',
-    'email',
-    'required',
-    'correct_email',
-    'password',
-    'correct_password',
-    'mismatch_passwords',
-    'edit',
-    'save',
-    'close',
-    'delete',
-    'cancel',
-    'repeat',
-    'modal_saved',
-    'modal_delete'
-  ]
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     public auth: AuthService,
@@ -55,7 +37,7 @@ export class ProfileComponent implements OnInit {
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
 

@@ -8,6 +8,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
+import { dic } from './board-list.props';
 
 @Component({
   selector: 'app-board-list',
@@ -28,18 +29,7 @@ export class BoardListComponent implements OnInit {
 
   createFormVisibility = false
 
-  dic = [
-    'task_new',
-    'title',
-    'description',
-    'edit',
-    'create',
-    'save',
-    'delete',
-    'cancel',
-    'modal_delete'
-  ]
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     private fb: FormBuilder,
@@ -63,7 +53,7 @@ export class BoardListComponent implements OnInit {
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
   }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Dictionary } from '../../interfaces';
 import { TranslateService } from '../../services/translate.service';
+import { dic } from './common-layout.props';
 
 @Component({
   selector: 'app-common-layout',
@@ -22,13 +23,12 @@ export class CommonLayoutComponent implements OnInit {
   
   selectedLocale = this.translate.currentLocale
 
-  dic = ['common_home', 'common_about', 'common_login', 'common_logout', 'dashboard_title']
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   ngOnInit(): void {
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
   }

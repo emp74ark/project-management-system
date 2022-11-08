@@ -7,6 +7,7 @@ import { Board, Dictionary, List } from 'src/app/shared/interfaces';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 import { BoardService } from '../shared/services/boards.service';
 import { ListService } from '../shared/services/lists.service';
+import { dic } from './board-page.props';
 
 @Component({
   selector: 'app-board-page',
@@ -22,20 +23,7 @@ export class BoardPageComponent implements OnInit {
 
   lists$!: Observable<List[]>
 
-  dic = [
-    'board_back',
-    'board_new',
-    'title',
-    'description',
-    'create',
-    'open',
-    'close',
-    'edit',
-    'save',
-    'delete',
-    'required'
-  ]
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     private fb: FormBuilder,
@@ -66,7 +54,7 @@ export class BoardPageComponent implements OnInit {
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang)
       }
     )
   }
