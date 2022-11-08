@@ -35,3 +35,10 @@
 mat-icon {
   color: $border-dark;
 }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

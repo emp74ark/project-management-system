@@ -45,20 +45,27 @@ export class ProfileComponent implements OnInit {
   }
 
   private _createProfileForm() {
-    this.user$.subscribe(
-      user => {
-        this.profileForm = this.fb.group({
-          profileName: [user.name, [Validators.required, Validators.minLength(2)]],
-          profileEmail: [user.login, [Validators.required, Validators.email]],
-          profilePassword1: [null, [Validators.required, Validators.minLength(6)]],
-          profilePassword2: [null, [Validators.required]]
-        });
-      }
-    );
+    this.profileForm = this.fb.group({
+      profileName: [null, [Validators.required, Validators.minLength(2)]],
+      profileEmail: [null, [Validators.required, Validators.email]],
+      profilePassword1: [null, [Validators.required, Validators.minLength(6)]],
+      profilePassword2: [null, [Validators.required]]
+    });
   }
 
   edit() {
     this.profileEditable = true;
+    this.user$.subscribe(
+      user => {
+        console.log(user);
+        this.profileForm.patchValue({ 'profileName': user.name });
+        this.profileForm.patchValue({ 'profileEmail': user.login });
+      }
+    );
+  }
+
+  cancel() {
+    this.profileEditable = false;
   }
 
   save() {
