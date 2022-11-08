@@ -19,8 +19,8 @@ export class TranslateService {
   public locale = new Subject<string>();
 
   public locales = [
-    {label: 'English', code: 'en'},
-    {label: 'Русский', code: 'ru'}
+    { label: 'English', code: 'en' },
+    { label: 'Русский', code: 'ru' }
   ];
 
   constructor(

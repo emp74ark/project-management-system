@@ -1,11 +1,11 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, Subject, tap, throwError} from "rxjs";
+import { catchError, Observable, Subject, tap, throwError } from "rxjs";
 import { AuthResponse, Dictionary, User } from "src/app/shared/interfaces";
 import { environment } from "src/environments/environment";
 import { TranslateService } from "./translate.service";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   dic = ['auth_403', 'auth_409'];
   i18n: Dictionary = this.translate.get(this.dic);
