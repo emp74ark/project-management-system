@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { User } from "src/app/shared/interfaces";
 import { environment } from "src/environments/environment";
 
@@ -19,10 +19,10 @@ export class UserService {
   }
 
   getByLogin(login: string) {
-    return this.http.get<User>(`${environment.base_url}/users`)
+    return this.http.get<User[]>(`${environment.base_url}/users`)
       .pipe(
-        map<any, User>(
-          (response: User[]) => response.filter(user => user.login === login)[0]
+        map<User[], User>(
+          (response) => response.filter(user => user.login === login)[0]
         )
       )
   }

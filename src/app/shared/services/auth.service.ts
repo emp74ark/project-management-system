@@ -43,9 +43,9 @@ export class AuthService {
   }
 
   login(user: User): Observable<AuthResponse> {
-    return this.http.post(`${environment.base_url}/signin`, user)
+    return this.http.post<AuthResponse>(`${environment.base_url}/signin`, user)
       .pipe(
-        tap<any>(
+        tap(
           response => {
             this.authenticated = true
             localStorage.setItem('login', user.login)
@@ -53,7 +53,7 @@ export class AuthService {
             localStorage.setItem('exp', this.calcTokenExpireDate().toString())
           }
         ),
-        catchError<any, any>(this.errorHandle.bind(this)),
+        catchError(this.errorHandle.bind(this)),
       )
    }
 
@@ -62,10 +62,10 @@ export class AuthService {
     this.authenticated = false
   }
 
-  signup(user: User): Observable<any> {
+  signup(user: User): Observable<unknown> {
     return this.http.post(`${environment.base_url}/signup`, user)
       .pipe(
-        catchError<any, any>(this.errorHandle.bind(this))
+        catchError(this.errorHandle.bind(this))
       )
   }
 }
