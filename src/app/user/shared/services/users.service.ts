@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
 export class UserService {
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${environment.base_url}/users/${id}`)

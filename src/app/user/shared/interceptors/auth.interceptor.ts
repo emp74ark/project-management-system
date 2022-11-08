@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private auth: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   intercept(req: HttpRequest<HttpHeaders>, next: HttpHandler): Observable<HttpEvent<HttpHeaders>> {
     if (this.auth.authenticated) {

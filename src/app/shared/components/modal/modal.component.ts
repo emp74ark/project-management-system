@@ -11,17 +11,15 @@ import { dic } from './modal.props';
 })
 export class ModalComponent implements OnInit {
 
-  @Input() id: string
+  @Input() id = '';
 
   i18n: Dictionary = this.translate.get(dic)
 
   constructor(
     private translate: TranslateService,
     public modal: ModalService
-  ) {
-    this.id = ''
-  }
-
+  ) {}
+  
   ngOnInit(): void {
     this.translate.locale.subscribe(
       lang => {

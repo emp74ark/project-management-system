@@ -12,7 +12,7 @@ export class BoardService {
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {}
 
   create(board: Board) {
     return this.http.post<Board>(`${environment.base_url}/boards`, board)

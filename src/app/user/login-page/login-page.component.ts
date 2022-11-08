@@ -27,13 +27,12 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private modal: ModalService
-  ) {
+  ) {}
+  
+  ngOnInit() {
     this._createLoginForm()
     this._createSignUpForm()
     this.authMode = true;
-  }
-
-  ngOnInit() {
     this.translate.locale.subscribe(
       lang => {
         this.i18n = this.translate.get(dic, lang)

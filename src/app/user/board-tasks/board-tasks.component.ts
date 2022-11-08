@@ -35,7 +35,7 @@ export class BoardTasksComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private translate: TranslateService,
     private modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.users$ = this.userService.getAll()

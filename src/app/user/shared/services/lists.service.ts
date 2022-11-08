@@ -11,7 +11,7 @@ export class ListService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   create(boardId: string, list: List): Observable<List> {
     return this.http.post<List>(`${environment.base_url}/boards/${boardId}/columns`, list)

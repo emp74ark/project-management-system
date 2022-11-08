@@ -38,7 +38,7 @@ export class BoardListComponent implements OnInit {
     private taskService: TaskService,
     private translate: TranslateService,
     private modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._createForm()

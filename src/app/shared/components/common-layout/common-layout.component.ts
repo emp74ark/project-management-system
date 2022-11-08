@@ -17,7 +17,7 @@ export class CommonLayoutComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private translate: TranslateService
-  ) { }
+  ) {}
   
   locales = this.translate.locales
   

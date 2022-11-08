@@ -9,7 +9,7 @@ export class TaskService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   create(boardId: string, task: Task) {
     return this.http.post<Task>(

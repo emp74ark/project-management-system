@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user$ = this.userService.getUserById(this.userId)

@@ -31,7 +31,7 @@ export class BoardPageComponent implements OnInit {
     private listService: ListService,
     private activeRoute: ActivatedRoute,
     private translate: TranslateService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._createForm()

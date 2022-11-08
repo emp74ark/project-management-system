@@ -25,7 +25,7 @@ export class TranslateService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   get(dict: string[], lang=this.currentLocale) {
     const result: Dictionary = {}

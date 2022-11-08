@@ -12,7 +12,7 @@ export class WelcomePageComponent implements OnInit {
 
   i18n: Dictionary = this.translate.get(dic)
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.translate.locale.subscribe(

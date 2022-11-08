@@ -59,5 +59,5 @@ import { UserService } from "./shared/services/users.service";
 })
 
 export class UserModule {
-  constructor() { }
+  constructor() {}
 }

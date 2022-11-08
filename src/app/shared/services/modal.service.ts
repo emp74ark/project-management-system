@@ -8,8 +8,7 @@ import { Modal } from '../interfaces';
 export class ModalService {
   public displayModal$: Subject<Modal> = new Subject<Modal>()
 
-  constructor() {
-   }
+  constructor() {}
 
   close() {
     this.displayModal$.next({show: false, type: null, message: null})
