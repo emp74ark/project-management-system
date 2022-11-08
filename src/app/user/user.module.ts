@@ -55,7 +55,7 @@ import { UserService } from "./shared/services/users.service";
     ListService,
     TaskService,
     UserService
-  ],
+  ]
 })
 
 export class UserModule {

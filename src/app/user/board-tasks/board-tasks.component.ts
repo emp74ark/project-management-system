@@ -16,17 +16,17 @@ import { dic } from './board-tasks.props';
 })
 export class BoardTasksComponent implements OnInit {
 
-  @Input() task!: Task
+  @Input() task!: Task;
 
   taskEditable = false;
 
-  users$!: Observable<User[]>
-  user$!: Observable<User>
-  userSelect = 'none'
+  users$!: Observable<User[]>;
+  user$!: Observable<User>;
+  userSelect = 'none';
 
-  boardId!: string
+  boardId!: string;
 
-  i18n: Dictionary = this.translate.get(dic)
+  i18n: Dictionary = this.translate.get(dic);
 
   constructor(
     private listService: ListService,
@@ -38,21 +38,21 @@ export class BoardTasksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.users$ = this.userService.getAll()
+    this.users$ = this.userService.getAll();
 
     this.activeRoute.params.subscribe(
       (params: Params) => {
-        this.boardId = params['id']
+        this.boardId = params['id'];
       }
-    )
+    );
 
-    this.user$ = this.userService.getUserById(this.task.userId)
+    this.user$ = this.userService.getUserById(this.task.userId);
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(dic, lang)
+        this.i18n = this.translate.get(dic, lang);
       }
-    )
+    );
   }
 
   prompt() {
@@ -62,11 +62,11 @@ export class BoardTasksComponent implements OnInit {
   delete = () => {
     this.taskService.delete(this.boardId, this.task)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
-      .subscribe()
-  }
+      .subscribe();
+  };
 
   edit() {
-    this.taskEditable = true
+    this.taskEditable = true;
   }
 
   save(id: string, order: number, title: string, description: string, user: string) {
@@ -77,13 +77,13 @@ export class BoardTasksComponent implements OnInit {
       description: description,
       userId: user,
       columnId: this.task.columnId
-    }
-    this.taskEditable = false
+    };
+    this.taskEditable = false;
     this.taskService.edit(this.boardId, task)
       .pipe(
         switchMap(() => this.taskService.getAll(this.boardId, task.columnId!)),
         switchMap(() => this.user$ = this.userService.getUserById(this.userSelect))
       )
-      .subscribe()
+      .subscribe();
   }
 }

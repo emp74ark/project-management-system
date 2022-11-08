@@ -6,8 +6,8 @@ import { environment } from "src/environments/environment";
 
 @Injectable()
 export class ListService {
-  private listSubject: BehaviorSubject<List[]> = new BehaviorSubject([] as List[])
-  listStream: Observable<List[]> = this.listSubject.asObservable()
+  private listSubject: BehaviorSubject<List[]> = new BehaviorSubject([] as List[]);
+  listStream: Observable<List[]> = this.listSubject.asObservable();
 
   constructor(
     private http: HttpClient
@@ -20,13 +20,13 @@ export class ListService {
           return {
             ...list,
             id: response.id
-          }
+          };
         })
-      )
+      );
   }
 
   delete(boardId: string, listId: string) {
-    return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/columns/${listId}`)
+    return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/columns/${listId}`);
   }
 
   edit(boardId: string, list: List) {
@@ -34,20 +34,20 @@ export class ListService {
       {
         title: list.title,
         order: list.order
-      })
+      });
   }
 
   getById(boardId: string, listId: string): Observable<List> {
-    return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/${listId}`)
+    return this.http.delete<List>(`${environment.base_url}/boards/${boardId}/${listId}`);
   }
 
   getAll(boardId: string): Observable<List[]> {
     return this.http.get<List[]>(`${environment.base_url}/boards/${boardId}/columns`)
       .pipe(
-        tap(list => { list.sort((a, b) => a.order! - b.order!) }),
+        tap(list => { list.sort((a, b) => a.order! - b.order!); }),
         tap(
           response => this.listSubject.next(response)
         )
-      )
+      );
   }
 }

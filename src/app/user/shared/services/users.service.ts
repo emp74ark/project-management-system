@@ -11,11 +11,11 @@ export class UserService {
   ) {}
 
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(`${environment.base_url}/users/${id}`)
+    return this.http.get<User>(`${environment.base_url}/users/${id}`);
   }
 
   getAll() {
-    return this.http.get<User[]>(`${environment.base_url}/users`)
+    return this.http.get<User[]>(`${environment.base_url}/users`);
   }
 
   getByLogin(login: string) {
@@ -24,14 +24,14 @@ export class UserService {
         map<User[], User>(
           (response) => response.filter(user => user.login === login)[0]
         )
-      )
+      );
   }
 
   edit(id: string, user: User): Observable<User> {
-    return this.http.put<User>(`${environment.base_url}/users/${id}`, user)
+    return this.http.put<User>(`${environment.base_url}/users/${id}`, user);
   }
 
   delete(id: string) {
-    return this.http.delete(`${environment.base_url}/users/${id}`)
+    return this.http.delete(`${environment.base_url}/users/${id}`);
   }
 }

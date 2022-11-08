@@ -6,4 +6,4 @@ export const AUTH_INTERCEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
   multi: true,
   useClass: AuthInterceptor
-}
+};

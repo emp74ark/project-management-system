@@ -14,15 +14,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<HttpHeaders>, next: HttpHandler): Observable<HttpEvent<HttpHeaders>> {
     if (this.auth.authenticated) {
-      const authToken = `Bearer ${localStorage.getItem('token')}`
-      const authExp = localStorage.getItem('exp')!
+      const authToken = `Bearer ${localStorage.getItem('token')}`;
+      const authExp = localStorage.getItem('exp')!;
       if (Date.now() > Number(authExp)) {
-        this.auth.logout()
-        this.router.navigate(['/user', 'login'])
+        this.auth.logout();
+        this.router.navigate(['/user', 'login']);
       }
-      req = req.clone({ setHeaders: { Authorization: authToken } })
+      req = req.clone({ setHeaders: { Authorization: authToken } });
     }
-    return next.handle(req)
+    return next.handle(req);
   }
 
 }

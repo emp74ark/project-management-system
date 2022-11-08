@@ -10,7 +10,7 @@ import { dic } from './about-page.props';
 })
 export class AboutPageComponent implements OnInit {
 
-  i18n: Dictionary = this.translate.get(dic)
+  i18n: Dictionary = this.translate.get(dic);
 
   constructor(
     private translate: TranslateService
@@ -19,9 +19,9 @@ export class AboutPageComponent implements OnInit {
   ngOnInit(): void {
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(dic, lang)
+        this.i18n = this.translate.get(dic, lang);
       }
-    )
+    );
   }
 
 }

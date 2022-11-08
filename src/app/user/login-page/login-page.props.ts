@@ -10,5 +10,5 @@ export const dic = [
   'correct_password',
   'close',
   'modal_registration',
-  'modal_loading',
-]
+  'modal_loading'
+];

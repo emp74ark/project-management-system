@@ -19,13 +19,13 @@ export class TaskService {
         description: task.description,
         userId: task.userId
       }
-    )
+    );
   }
 
   delete(boardId: string, task: Task) {
     return this.http.delete(
       `${environment.base_url}/boards/${boardId}/columns/${task.columnId}/tasks/${task.id}`
-    )
+    );
   }
 
   edit(boardId: string, task: Task) {
@@ -39,13 +39,13 @@ export class TaskService {
         boardId: boardId,
         columnId: task.columnId
       }
-    )
+    );
   }
 
   getById(boardId: string, task: Task) {
     return this.http.delete<Task>(
       `${environment.base_url}/boards/${boardId}/columns/${task.columnId}/tasks/${task.id}`
-    )
+    );
   }
 
   getAll(boardId: string, listId: string): Observable<Task[]> {
@@ -53,7 +53,7 @@ export class TaskService {
       `${environment.base_url}/boards/${boardId}/columns/${listId}/tasks`
     )
       .pipe(
-        tap(list => { list.sort((a, b) => a.order! - b.order!) })
-      )
+        tap(list => { list.sort((a, b) => a.order! - b.order!); })
+      );
   }
 }

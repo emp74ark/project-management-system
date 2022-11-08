@@ -12,4 +12,4 @@ export const dic = [
   'cancel',
   'required',
   'modal_delete'
-]
+];

@@ -15,13 +15,13 @@ import { dic } from './profile.props';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  userId = localStorage.getItem('userId')!
-  user$!: Observable<User>
+  userId = localStorage.getItem('userId')!;
+  user$!: Observable<User>;
 
-  profileEditable = false
-  profileForm!: FormGroup
+  profileEditable = false;
+  profileForm!: FormGroup;
 
-  i18n: Dictionary = this.translate.get(dic)
+  i18n: Dictionary = this.translate.get(dic);
 
   constructor(
     public auth: AuthService,
@@ -33,15 +33,15 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user$ = this.userService.getUserById(this.userId)
+    this.user$ = this.userService.getUserById(this.userId);
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(dic, lang)
+        this.i18n = this.translate.get(dic, lang);
       }
-    )
+    );
 
-    this._createProfileForm()
+    this._createProfileForm();
   }
 
   private _createProfileForm() {
@@ -52,27 +52,27 @@ export class ProfileComponent implements OnInit {
           profileEmail: [user.login, [Validators.required, Validators.email]],
           profilePassword1: [null, [Validators.required, Validators.minLength(6)]],
           profilePassword2: [null, [Validators.required]]
-        })
+        });
       }
-    )
+    );
   }
 
   edit() {
-    this.profileEditable = true
+    this.profileEditable = true;
   }
 
   save() {
     if (this.profileForm.invalid) {
-      return
+      return;
     }
 
-    this.modal.info(this.i18n['modal_saved'])
+    this.modal.info(this.i18n['modal_saved']);
 
     const user: User = {
       name: this.profileForm.value.profileName,
       login: this.profileForm.value.profileEmail,
       password: this.profileForm.value.profilePassword1
-    }
+    };
 
     this.userService.edit(this.userId, user)
       .pipe(switchMap(
@@ -80,14 +80,14 @@ export class ProfileComponent implements OnInit {
       ))
       .subscribe(() => {
         this.profileEditable = false;
-        this.modal.close()
-      })
+        this.modal.close();
+      });
   }
 
   passwordValidator() {
-    const value1 = this.profileForm.get('profilePassword1')?.value
-    const value2 = this.profileForm.get('profilePassword2')?.value
-    return value1 === value2 ? true : false
+    const value1 = this.profileForm.get('profilePassword1')?.value;
+    const value2 = this.profileForm.get('profilePassword2')?.value;
+    return value1 === value2 ? true : false;
   }
 
   prompt() {
@@ -95,8 +95,8 @@ export class ProfileComponent implements OnInit {
   }
 
   delete = () => {
-    this.userService.delete(this.userId).subscribe()
-    this.auth.logout()
-    this.router.navigate(['/user', 'login'])
-  }
+    this.userService.delete(this.userId).subscribe();
+    this.auth.logout();
+    this.router.navigate(['/user', 'login']);
+  };
 }

@@ -4,4 +4,4 @@ export const dic = [
   'common_login',
   'common_logout',
   'dashboard_title'
-]
+];

@@ -16,4 +16,4 @@ export const dic = [
   'repeat',
   'modal_saved',
   'modal_delete'
-]
+];
