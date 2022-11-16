@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dictionary } from '../shared/interfaces';
 import { TranslateService } from '../shared/services/translate.service';
+import { dic } from './about-page.props';
 
 @Component({
   selector: 'app-about-page',
@@ -9,20 +10,18 @@ import { TranslateService } from '../shared/services/translate.service';
 })
 export class AboutPageComponent implements OnInit {
 
-  dic = ['about_title', 'about_text1', 'about_text2', 'about_text3', 'about_text4', 'about_text5']
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic);
 
   constructor(
     private translate: TranslateService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang);
       }
-    )
+    );
   }
 
 }

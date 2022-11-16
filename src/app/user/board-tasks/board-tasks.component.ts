@@ -7,6 +7,7 @@ import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ListService } from '../shared/services/lists.service';
 import { TaskService } from '../shared/services/tasks.service';
 import { UserService } from '../shared/services/users.service';
+import { dic } from './board-tasks.props';
 
 @Component({
   selector: 'app-board-tasks',
@@ -15,24 +16,17 @@ import { UserService } from '../shared/services/users.service';
 })
 export class BoardTasksComponent implements OnInit {
 
-  @Input() task!: Task
+  @Input() task!: Task;
 
   taskEditable = false;
 
-  users$!: Observable<User[]>
-  user$!: Observable<User>
-  userSelect = 'none'
+  users$!: Observable<User[]>;
+  user$!: Observable<User>;
+  userSelect = 'none';
 
-  boardId!: string
+  boardId!: string;
 
-  dic = [
-    'edit',
-    'save',
-    'delete',
-    'user_select',
-    'modal_delete'
-  ]
-  i18n: Dictionary = this.translate.get(this.dic)
+  i18n: Dictionary = this.translate.get(dic);
 
   constructor(
     private listService: ListService,
@@ -41,24 +35,24 @@ export class BoardTasksComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private translate: TranslateService,
     private modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.users$ = this.userService.getAll()
+    this.users$ = this.userService.getAll();
 
     this.activeRoute.params.subscribe(
       (params: Params) => {
-        this.boardId = params['id']
+        this.boardId = params['id'];
       }
-    )
+    );
 
-    this.user$ = this.userService.getUserById(this.task.userId)
+    this.user$ = this.userService.getUserById(this.task.userId);
 
     this.translate.locale.subscribe(
       lang => {
-        this.i18n = this.translate.get(this.dic, lang)
+        this.i18n = this.translate.get(dic, lang);
       }
-    )
+    );
   }
 
   prompt() {
@@ -68,11 +62,11 @@ export class BoardTasksComponent implements OnInit {
   delete = () => {
     this.taskService.delete(this.boardId, this.task)
       .pipe(switchMap(() => this.listService.getAll(this.boardId)))
-      .subscribe()
-  }
+      .subscribe();
+  };
 
   edit() {
-    this.taskEditable = true
+    this.taskEditable = true;
   }
 
   save(id: string, order: number, title: string, description: string, user: string) {
@@ -83,13 +77,13 @@ export class BoardTasksComponent implements OnInit {
       description: description,
       userId: user,
       columnId: this.task.columnId
-    }
-    this.taskEditable = false
+    };
+    this.taskEditable = false;
     this.taskService.edit(this.boardId, task)
       .pipe(
         switchMap(() => this.taskService.getAll(this.boardId, task.columnId!)),
         switchMap(() => this.user$ = this.userService.getUserById(this.userSelect))
       )
-      .subscribe()
+      .subscribe();
   }
 }

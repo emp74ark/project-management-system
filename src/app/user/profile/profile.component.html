@@ -145,19 +145,24 @@
           {{ i18n["mismatch_passwords"] }}
         </small>
       </div>
-      <button
-        class="btn"
-        type="save"
-        [disabled]="!passwordValidator() && this.profileForm.valid"
-      >
-        {{ i18n["save"] }}
-      </button>
       <div class="form-control">
         <small
           class="danger"
           *ngIf="auth.authErrorMessage$ | async as message"
           >{{ message }}</small
         >
+      </div>
+      <div class="buttons">
+        <button
+        class="btn"
+        type="save"
+        [disabled]="!passwordValidator() && this.profileForm.valid"
+      >
+        {{ i18n["save"] }}
+      </button>
+      <button class="btn btn-edit" (click)="cancel()">
+        {{ i18n["cancel"] }}
+      </button>
       </div>
     </form>
   </div>

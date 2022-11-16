@@ -11,27 +11,27 @@ import { Dictionary } from '../interfaces';
 
 export class TranslateService {
   
-  private en: Dictionary = english
-  private ru: Dictionary = russian
+  private en: Dictionary = english;
+  private ru: Dictionary = russian;
 
-  public currentLocale = 'en'
+  public currentLocale = 'en';
 
-  public locale = new Subject<string>()
+  public locale = new Subject<string>();
 
   public locales = [
-    {label: 'English', code: 'en'},
-    {label: 'Русский', code: 'ru'}
-  ]
+    { label: 'English', code: 'en' },
+    { label: 'Русский', code: 'ru' }
+  ];
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   get(dict: string[], lang=this.currentLocale) {
-    const result: Dictionary = {}
+    const result: Dictionary = {};
     for (const phrase of dict) {
-      result[phrase] = lang === 'ru' ? this.ru[phrase] : this.en[phrase]
+      result[phrase] = lang === 'ru' ? this.ru[phrase] : this.en[phrase];
     }
-    return result
+    return result;
   }
 }

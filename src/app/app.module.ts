@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
-    AuthGuard,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

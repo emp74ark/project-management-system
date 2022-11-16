@@ -5,6 +5,15 @@ export interface User {
   password: string
 }
 
+export interface HttpHeaders {
+  url: string,
+  headers: {
+      normalizedNames: Record<string, string>,
+      headers: Record<string, string>
+  },
+  urlWithParams: string,
+}
+
 export interface AuthResponse {
   token: string,
 }
@@ -37,6 +46,6 @@ export interface Modal {
   show: boolean,
   type: 'info' | 'alert' | 'prompt' | null,
   message: string | null,
-  callback: any,
+  callback?: (id: string) => void,
   parameter?: string
 };
